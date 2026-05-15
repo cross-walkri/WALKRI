@@ -1,0 +1,228 @@
+---
+title: WALKRI Assessment Rubric
+version: 0.1.0
+date: 2026-05-15
+license: CC0
+status: Working draft. Companion to WALKRI-standard-0_1_0.md.
+---
+
+# WALKRI Assessment Rubric
+
+Version 0.1.0 | 2026-05-15 | CC0
+
+---
+
+## Part 1: How to Use This Rubric
+
+This rubric is the assessment instrument for WALKRI (Working Architecture for Legible, Knowledge-Ready Intake). It translates the standard's requirements into specific questions with pass/fail/override logic. Three categories of users apply it: WALKRI auditors conducting formal certification assessments, self-assessment practitioners reviewing their own forms before seeking certification, and AI-assisted audit tools implementing the WALKRI Audit Tool described in Part IX of the standard.
+
+The rubric is organized around two assessment contexts. The distinction between them determines what an auditor does with findings, not how the findings are generated.
+
+**Pre-publication audit** assesses fields before they are shown to applicants. This is the pre-publishing quality gate described in Part IV of the standard. The auditor applies Parts 2 and 3 of this rubric to each field specification before the form is published. Findings at this stage are actionable: a blocking failure must be resolved or overridden before the form is published. An advisory failure should be resolved but does not prevent publication if documented. Pre-publication audit is the primary use case for this rubric; it is when findings can still change the instrument.
+
+**Post-publication audit** assesses fields retrospectively to produce a conformance record. This is the audit conducted when seeking WALKRI certification for a form that was already published and used. The auditor applies the same questions, but the findings inform the conformance record rather than the form design. Blocking failures in a post-publication audit are recorded as unresolved conformance gaps; they downgrade or preclude certification at the relevant tier. The findings also feed the remediation plan for the next form version.
+
+In both contexts, the auditor works field by field. Each field receives an independent assessment. A field that passes all requirements does not carry any other field's failures; a field that fails does not contaminate the assessment of adjacent fields.
+
+---
+
+## Part 2: Criterion Specification Assessment
+
+Part 2 covers the five criterion specification requirements from Part III of the standard. These requirements apply at the field design stage and are assessed by the auditor against the field specification document, not against applicant responses. The auditor is asking: is this field specification complete enough to support consistent interpretation by applicants and reviewers?
+
+The requirements must be assessed in the order presented. Criterion intent is assessed first because its absence makes all subsequent assessments meaningless: without a criterion intent, there is no basis for evaluating whether the operational definition, response form, evidence form, or compliance threshold are appropriate.
+
+### 2.1 Criterion Intent
+
+**Assessment question:** Is there a plain-language statement of what this field measures that is distinct from the field label?
+
+| Outcome | Description |
+|---|---|
+| Pass | The criterion intent names the specific condition, behavior, or fact being measured. It is written in terms different from the label. A reviewer who only read the criterion intent statement could describe what would constitute a true response without referring to the label. |
+| Fail | The criterion intent is absent, or it restates the label in different words without adding specificity. Example of a failing criterion intent for a field labeled "Community Engagement": "This field measures the organization's community engagement activities." This restates the label; it adds no measurement specificity. |
+
+**Override condition:** Not applicable. Criterion intent is always blocking. A field without a criterion intent cannot be assessed on any other dimension because there is no measurement claim against which to evaluate the remaining elements. If criterion intent is absent, the auditor stops the assessment for that field and returns it for remediation before continuing.
+
+**Status:** Blocking. No override is available.
+
+---
+
+### 2.2 Operational Definition
+
+**Assessment question:** Does the operational definition contain inclusion criteria, exclusion criteria, a unit of analysis, and at least one edge case determination?
+
+| Outcome | Description |
+|---|---|
+| Pass | All four elements are present. Inclusion criteria specify what qualifies as a valid response. Exclusion criteria specify what does not qualify, with enough specificity that a reviewer could classify an ambiguous response without seeking additional guidance. The unit of analysis is stated (e.g., "one instance equals one unique community member, not one interaction"). At least one edge case is named and resolved. |
+| Fail | Any one of the four elements is absent. The most common failure: inclusion criteria are present but exclusion criteria are absent. Without exclusion criteria, the boundary of what counts is undefined; all ambiguous responses default to inclusion, which inflates the field's apparent coverage and makes responses across applicants non-comparable. |
+
+**Override conditions, by element:**
+
+Exclusion criteria may be documented as intentionally empty where the auditor and field designer agree that genuinely nothing could fail to qualify as a response. This is rare. When claimed, the auditor records the design reasoning (not merely the assertion) in the conformance record. The absence of exclusion criteria is not self-evidently an intentional design choice; it must be argued and documented.
+
+Edge case determination is advisory when the field has low ambiguity by design, meaning the inclusion and exclusion criteria together leave no plausible response in an undecided state. The auditor assesses whether this condition is met; they do not accept the designer's characterization without applying their own judgment.
+
+**Status:** Blocking for criterion intent and inclusion criteria. Advisory for edge case determination where low-ambiguity conditions are documented.
+
+---
+
+### 2.3 Response Form
+
+**Assessment question:** Is the response form specified, and is the justification for that form documented?
+
+| Outcome | Description |
+|---|---|
+| Pass | The response form is named using one of the recognized response types: single-select, multi-select, binary, numeric, text, URL, or composite. A written justification is given explaining why this form was chosen over the natural alternatives. The justification addresses whether the response type can capture the variance in the underlying construct that the criterion intent requires. |
+| Fail | The response form is not specified, or it is specified without justification. Justification that only restates the form type ("we used single-select because respondents select one option") does not count; justification must address the measurement rationale. |
+
+**A failure the auditor must specifically flag:** Single-select response form applied to a criterion where the operational definition's inclusion criteria naturally admit more than one simultaneously true answer. This is a design error that produces artificially imprecise data by forcing respondents to compress multi-valued reality into a single option. It must be flagged with a description of which inclusion criteria produce the multi-value problem.
+
+**Override condition:** A mismatch between the preferred response form and the implemented form may be overridden where technical constraints of the form rendering platform prevent implementation of the preferred form. The constraint must be documented specifically: which platform, which constraint, which preferred form could not be used. A general claim that "the platform does not support it" without specificity is not sufficient for override.
+
+**Status:** Response form name is blocking. Justification is advisory but should be flagged as a deficiency if absent, because an unjustified form choice cannot be audited for correctness.
+
+---
+
+### 2.4 Evidence Form
+
+**Assessment question:** Does the evidence form name a specific artifact or data point that satisfies the criterion?
+
+| Outcome | Description |
+|---|---|
+| Pass | The evidence form names a concrete artifact that an independent reviewer could locate and assess without additional guidance from the respondent. Examples of passing evidence form specifications: "A LICENSE file at the root of the project repository containing an OSI-approved SPDX license identifier"; "An on-chain transaction hash resolving to a completed transfer on a named public ledger"; "A signed attestation document from a named third-party auditor conforming to the attestation template at [URL]." |
+| Fail | The evidence form delegates verification to reviewer judgment without naming the artifact. Examples: "proof of open source license" without naming where the proof must appear or what form it must take; "documentation of impact" without specifying the document type, required content, or submission format; absent evidence form entirely. |
+
+**Override condition:** For qualitative or narrative fields where no artifact-based evidence is structurally possible, the auditor documents the verification method in lieu of an evidence form. The documentation must name the assessment criteria reviewers apply, the minimum threshold for a passing reviewer assessment, and whether the assessment is conducted by one or multiple reviewers. This override converts a nominally absent evidence form into a documented verification methodology. It is not a waiver of the verification requirement; it is a documented alternative implementation.
+
+**Status:** Blocking for fields configured at third-party verifiable strength or above, as classified in the field specification. Advisory for fields configured at self-report level, where the absence of an independent artifact is an acknowledged design condition rather than an oversight.
+
+---
+
+### 2.5 Compliance Threshold (for fields referencing external standards)
+
+**Assessment question:** For each external standard referenced, does the field specification enumerate which components are required, what evidence satisfies each, and the minimum threshold for passage?
+
+| Outcome | Description |
+|---|---|
+| Pass | All three elements are present for each external standard referenced: component enumeration, evidence specification per component, and minimum threshold for passage. The threshold is stated explicitly enough that two reviewers who had never discussed it would apply it consistently. |
+| Fail | An external standard is named without component enumeration, or components are enumerated without evidence specification per component, or the minimum threshold is not stated. The most common failure: citing a multi-indicator external standard by name and treating the citation as a sufficient specification. Example: "Must qualify as a Digital Public Good" with no enumeration of which of the nine DPG Standard indicators apply, no evidence specification per indicator, and no minimum passage threshold. This is a label, not a criterion specification. |
+
+**Override condition:** Where an external standard has no published component structure (it is a genuinely binary pass/fail determination with no sub-indicators), the compliance threshold requirement is satisfied by specifying the evidence form for the binary determination. The auditor must verify that the standard is in fact binary with no sub-indicators, not merely that the field designer has treated it as binary for convenience.
+
+**Status:** Blocking when any external standard is referenced in the field specification. Not applicable when no external standard is referenced, because this requirement does not apply to self-standing field specifications.
+
+---
+
+### Part 2 Summary Table
+
+| Requirement | Assessment Question | Fail Threshold | Override Available | Status |
+|---|---|---|---|---|
+| Criterion intent | Is there a plain-language statement distinct from the label? | Absent or restates label | No | Blocking |
+| Operational definition | Are all four elements present? | Any element absent | Yes, for exclusion criteria where intentionally empty; advisory waiver for edge case in low-ambiguity fields | Blocking (inclusion criteria); Advisory (edge case) |
+| Response form | Is the form named and justified? | Form absent or unjustified | Yes, for platform constraint on preferred form | Blocking (form name); Advisory (justification) |
+| Evidence form | Does it name a specific verifiable artifact? | Absent or delegates to reviewer judgment | Yes, for qualitative fields; documented verification method required | Blocking (third-party verifiable fields); Advisory (self-report fields) |
+| Compliance threshold | Are components, evidence, and threshold specified per external standard? | Any element absent when external standard referenced | Yes, for binary-only standards | Blocking (when external standard referenced) |
+
+---
+
+## Part 3: Data Quality Standards Assessment
+
+Part 3 covers the five data quality standards from Part V of the standard. These standards apply at two moments: as design requirements (the field specification should satisfy them before publication) and as reviewer-facing assessment questions (applied during gate review of submitted data). The assessment questions in this Part are framed for gate reviewers assessing whether submitted data meets the quality level the field specification claimed to establish. Pre-publication auditors apply the same questions prospectively, asking whether the field specification as designed would produce data that could pass these assessments.
+
+A finding in Part 3 does not by itself fail a field at the specification stage, but recurring patterns across findings diagnose systematic gaps in the field specification. The connection between each data quality standard and the criterion specification requirement it most directly enforces is noted for each.
+
+### 3.1 Validity
+
+**Assessment question:** Could an independent reviewer, given the stated source and construction methodology, confirm that this field measures what it claims to measure?
+
+**Validity finding:** The reported data is downstream of unmeasured confounders that were not disclosed in the evidence form or methodology. Alternatively, the completion criteria are insufficient to determine whether the stated obligation was met. Alternatively, the measurement instrument does not reach the granularity required by the claimed result (e.g., a field claiming to measure "depth of community co-design" via a single binary yes/no response).
+
+**Connection to specification:** A validity finding traces back to criterion intent (2.1). The logical chain from the evidence form to the result claimed in the criterion intent is missing or broken.
+
+---
+
+### 3.2 Integrity
+
+**Assessment question:** Does any evidence for this field's data originate from a source independent of the respondent?
+
+**Integrity finding:** All evidence originates from respondent-controlled systems with no independent corroboration. For fields specified at self-report level, this is an expected and documented design condition; the finding is informational, not disqualifying. For fields specified at third-party verifiable level or above, this is a gate failure: the evidence form required independent verification, and the submitted evidence does not provide it.
+
+**Connection to specification:** An integrity finding traces back to evidence form (2.4). The evidence form is where the source and verification pathway are specified; if the form specified independent verification and the submitted evidence bypasses it, the submitted evidence does not satisfy the field's requirements.
+
+---
+
+### 3.3 Precision
+
+**Assessment question:** Is the measurement or verification instrument precise enough to support the claimed result?
+
+**Precision finding:** Completion criteria are so vague that any response satisfies them, making it impossible to distinguish between respondents with meaningfully different characteristics. Alternatively, a quantitative claim is smaller than the variance of the measurement instrument (the claimed difference cannot be attributed to real differences given the instrument's resolution). Alternatively, a single-select categorical response is used to report a phenomenon the operational definition suggests is multi-valued, compressing real differences into artificial uniformity.
+
+**Connection to specification:** A precision finding traces back to response form (2.3). The response form determines the resolution of the measurement instrument; a precision failure is most often a response form mismatch that was not caught at the specification stage.
+
+---
+
+### 3.4 Reliability
+
+**Assessment question:** If this respondent submitted prior data for the same field using a different operational definition, measurement form, or completion criteria, is the change documented and the comparability of prior periods determined?
+
+**Reliability finding:** Different criteria or response forms were used in different reporting periods without documentation. The change may be visible (a new option was added to a dropdown) or invisible (the operational definition was updated without changing the field label). In either case, if the change is not documented with an assessment of its comparability implications, longitudinal comparison of the data is unreliable: apparent changes over time may reflect definition changes rather than real changes in the underlying population.
+
+**Connection to specification:** A reliability finding traces back to operational definition (2.2) and to the schema requirements in Part VII of the standard, specifically the comparability documentation obligation.
+
+---
+
+### 3.5 Timeliness
+
+**Assessment question:** Is the evidence current to the period being assessed?
+
+**Timeliness finding:** Evidence from a prior period is presented as current without a documented rationale for why prior-period evidence is representative of the current period. The field's evidence form specified a recency requirement and the submitted evidence does not meet it. Alternatively, the evidence form did not specify a recency requirement, and the submitted evidence is dated far enough before the assessment period that its currency is in reasonable doubt.
+
+**Connection to specification:** A timeliness finding traces back to evidence form (2.4). The evidence form is where recency requirements and time-period coverage must be specified; a timeliness failure at the data assessment stage is typically a design gap in the evidence form rather than a data submission error.
+
+---
+
+## Part 4: Certification Thresholds
+
+### WALKRI Certification (Standard)
+
+A form achieves Standard certification when all of the following conditions are met:
+
+All blocking criterion specification requirements in Part 2 pass or have documented overrides for every field in the form. No field has an unresolved, undocumented blocking failure. Override documentation meets the requirements specified in Part 5 of this rubric.
+
+No Integrity findings at third-party verifiable strength or above. A field configured at third-party verifiable level whose submitted evidence is entirely respondent-controlled, with no independent corroboration, is a gate failure for Standard certification.
+
+Compliance threshold is specified for every external standard referenced across all fields in the form. A referenced external standard without a compliance threshold is a blocking failure under 2.5.
+
+A form certified at Standard level is suitable for human-reviewed evaluation. Reviewers can apply the field specifications consistently, and the resulting data is attributable to real differences in the applicant population rather than to definitional ambiguity.
+
+### WALKRI Certification (Enhanced)
+
+A form achieves Enhanced certification when all Standard conditions are met, plus the following:
+
+All five data quality standards from Part 3 are documented in the field specification itself, not only assessed at gate review time. The field specification for each field includes a prospective validity chain, an integrity disclosure (naming the evidence source and its relationship to the respondent), a precision assessment (justifying the response form's resolution against the decision the field is designed to inform), a reliability protocol (stating how changes to the field will be documented across reporting periods), and a timeliness specification (naming the recency requirement for evidence).
+
+Provenance fields are complete per Part VII of the standard for every field in the form. This includes field creator identity, specification timestamps, WALKRI version, form tool identifier, and field specification version.
+
+Downstream interface requirements are met: the field specifications produce output aligned with Croissant, FAIR, and W3C PROV as specified in Part VII of the standard and detailed in WALKRI-interface-specification-0_1_0.md.
+
+A form certified at Enhanced level is suitable for AI-assisted evaluation and for ingestion by machine learning pipelines. Downstream data consumers can process the data without manual metadata reconstruction.
+
+---
+
+## Part 5: Override Documentation Requirements
+
+An override converts a blocking failure into a documented conformance choice. An override is not a waiver: it does not eliminate the requirement or excuse the gap. It is a recorded decision that the certifying organization accepts responsibility for, with the reasoning and compensating approach visible in the conformance record.
+
+Overrides are not available for all blocking failures. Part 2 of this rubric specifies which requirements admit overrides and under what conditions. An auditor may not authorize an override for a requirement marked as having no override available.
+
+Override documentation must contain four elements. If any element is absent, the override is not valid and the underlying failure remains unresolved.
+
+**The requirement that was not met.** State the specific requirement from Part 2 (e.g., "Operational definition: exclusion criteria absent") and the field to which it applies. A general statement that "the field does not fully meet the operational definition requirement" is insufficient; the specific missing element must be named.
+
+**The reason it was not met.** State the category of reason: technical constraint, intentional design choice, or genuine impossibility. Then describe the specific circumstance. "Technical constraint" requires naming the constraint and the platform or system that imposes it. "Intentional design choice" requires stating the design reasoning, not merely asserting that a choice was made. "Genuine impossibility" requires a brief argument for why the requirement is structurally impossible for this field type.
+
+**The compensating control or alternative approach taken.** State what has been done in lieu of meeting the requirement. The compensating control must address the same risk that the requirement was designed to address. An override with no compensating control is a documented gap, not a documented conformance choice; it may be recorded as such but does not achieve the same conformance status.
+
+**The name or role of the person or organization making the override decision.** The override is a decision, and decisions have authors. An override without an identified decision-maker cannot be held accountable and is treated as unsigned.
+
+Overrides are part of the conformance record and are visible to every party that receives the conformance record. A certifying organization that grants overrides liberally will produce a conformance record that reflects that pattern. Downstream data consumers and external auditors can assess the quality of a form's certification by reviewing the override record alongside the pass/fail record.
