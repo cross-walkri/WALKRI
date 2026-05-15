@@ -1,0 +1,496 @@
+---
+title: WALKRI Templates
+version: 0.1.0
+date: 2026-05-15
+license: CC0
+status: Working draft. Companion to WALKRI-standard-0_1_0.md.
+---
+
+# WALKRI Templates
+
+Version 0.1.0 | 2026-05-15 | CC0
+
+These templates correspond to the four artifacts produced by the WALKRI three-stage process: the Ideation Record (Stage 1), the WALKRI Field Specification (Stage 2), the Applicant Guidance Document (Stage 3), and the WALKRI Audit Report (conformance record). Each template includes a brief description and field-by-field instructions. Placeholder text appears in [brackets].
+
+These templates are companions to WALKRI-standard-0_1_0.md. Practitioners should read the standard before using the templates; the templates do not repeat the rationale for each requirement.
+
+---
+
+## Template 1: Ideation Record
+
+### What it is and when it is used
+
+The Ideation Record is the Stage 1 output. It is an internal document, not shared with applicants, that captures the question-holder's information needs before any field is designed. Each entry in the record names one information need, traces it to a specific decision, and states the failure mode if the data turns out to be missing or imprecise.
+
+Each entry in the Ideation Record becomes the source for one field specification in Stage 2. A Stage 2 field that cannot be traced to an Ideation Record entry lacks a documented rationale and cannot be certified.
+
+Produce one Ideation Record per program or form version. Add entries until every decision the form is meant to support has at least one corresponding information need.
+
+---
+
+```
+IDEATION RECORD
+
+Program or round name: [Full name of the program, grant round, or intake process]
+
+Ideation date: [YYYY-MM-DD]
+
+Completed by: [Name or role of the question-holder]
+
+---
+
+INFORMATION NEED [Repeat this block for each information need]
+
+Information need:
+  We need to know: [Plain language statement of what the program needs to know.
+  Example: "We need to know whether the applicant's project repository is publicly
+  accessible under an approved open license at the time of application."]
+
+Decision this data will inform:
+  This tells us whether to: [Plain language statement of the decision.
+  Example: "This tells us whether to advance the applicant past the open licensing
+  gate criterion or to flag the application for remediation."]
+
+Failure mode if data is missing or imprecise:
+  Without this, we will: [Plain language statement of the consequence.
+  Example: "Without this, we will have no consistent basis for distinguishing
+  applicants who hold qualifying licenses from those who do not, and reviewers
+  will make the determination based on personal familiarity with license names
+  rather than on verified evidence."]
+
+Draft field label: [A working title for the field this information need will become.
+  This is not the final label; it is a handle for use during Stage 2 specification.
+  Example: "Open License Status"]
+
+Notes on known complexity or edge cases: [Optional. Record anything that may
+  complicate the field design: ambiguous cases, populations that don't fit the
+  expected pattern, prior versions of this field that caused problems, or
+  dependencies on other fields in the form.
+  Example: "Projects that are transitioning from a proprietary license may have
+  mixed licensing across repositories. We need to decide in Stage 2 whether the
+  gate criterion applies to the primary repository only or to all repositories
+  listed in the application."]
+
+---
+
+[Repeat INFORMATION NEED block as needed]
+```
+
+---
+
+## Template 2: WALKRI Field Specification
+
+### What it is and when it is used
+
+The WALKRI Field Specification is the Stage 2 output and the central artifact of the entire process. One specification is produced per field. The specification contains all five criterion specification requirements from Part III of the WALKRI standard: criterion intent, operational definition, response form, evidence form, and compliance threshold.
+
+The field specification governs everything downstream: it is the source for the Stage 3 applicant guidance, the artifact the WALKRI Audit Tool assesses, and the machine-readable definition that travels with the collected data. A field cannot be certified without a complete specification.
+
+Produce one Field Specification for each information need in the Ideation Record. The criterion intent in Section B should be traceable directly to the corresponding Ideation Record entry.
+
+---
+
+```
+WALKRI FIELD SPECIFICATION
+
+=== SECTION A: IDENTITY ===
+
+Field label: [The label applicants will see. Should be plain, direct, and consistent
+  with the draft label from the Ideation Record unless the Stage 2 process produced
+  a clearer formulation. Example: "Open License"]
+
+Field version: [Increment each time this specification changes. Start at 1.0.
+  Example: "1.0"]
+
+Specification date: [YYYY-MM-DD]
+
+Derived from ideation record: [Reference to the information need this field addresses.
+  Include the program name, ideation date, and the plain language statement of the
+  information need. Example: "Ideation Record, [Program Name], [YYYY-MM-DD]:
+  'We need to know whether the applicant's project repository is publicly accessible
+  under an approved open license at the time of application.'"]
+
+=== SECTION B: CRITERION SPECIFICATION ===
+
+--- B1: Criterion Intent ---
+
+Criterion intent: [A written statement of what this field measures, distinct from
+  its label. Answers the question: what does a true response to this field tell us
+  about the applicant or subject? This is a measurement claim, not a label.
+  Example: "This field measures whether the applicant's primary project repository
+  carries a valid open license from the approved list at the time of submission.
+  A passing response indicates that the code base is legally available for use,
+  modification, and distribution by third parties under terms consistent with the
+  program's open-source requirements."]
+
+--- B2: Operational Definition ---
+
+Inclusion criteria: [What counts as a valid response. Be specific enough that two
+  independent reviewers would reach the same conclusion given the same evidence.
+  Example: "A valid response is an SPDX license identifier (e.g., MIT, Apache-2.0,
+  GPL-3.0-only) present in either a root-level LICENSE file or a clearly labeled
+  license section of the README in the primary repository. The license must be
+  listed on the approved license list at [URL], accessed [YYYY-MM-DD]."]
+
+Exclusion criteria: [What explicitly does not count. List the most common
+  near-misses and incorrect interpretations.
+  Example: "The following do not satisfy this criterion: a license mentioned only
+  in prose without an SPDX identifier; a license present only in a sub-directory
+  or secondary repository; a license that is on the approved list but is applied
+  to documentation only and not to the source code; a pending license application
+  or statement of intent to apply a license."]
+
+Unit of analysis: [What entity the response describes. Select: person / organization
+  / repository / project / event / other. Example: "Repository (primary repository
+  as identified in the application's project URL field)."]
+
+Edge case determination: [At least one example of how an ambiguous case is handled.
+  The resolution must be specified here, not left to reviewer discretion.
+  Example: "If the applicant lists multiple repositories and only one carries a
+  qualifying license, the response is 'No' unless the program has designated a
+  single primary repository and that repository carries a qualifying license.
+  Reviewers must not average or weight across repositories."]
+
+--- B3: Response Form ---
+
+Response form: [Select: single-select / multi-select / binary / numeric / text /
+  URL / composite. Example: "binary"]
+
+Response form justification: [Why this response type is appropriate for the
+  criterion intent. The justification must address whether the response type
+  can capture the variance in the underlying construct that the criterion intent
+  requires. Example: "Binary is appropriate because the criterion intent is a
+  gate criterion with two outcomes: the license criterion is satisfied or it is
+  not. The decision the data informs (gate passage) requires only this distinction.
+  A single-select with more options would imply gradations that this criterion
+  does not actually assess."]
+
+Options: [For single-select or multi-select fields only. List each option with its
+  definition. Do not list options without definitions; undefined options are the
+  primary source of operational definition failures in categorical fields.
+  For binary fields, define the conditions for Yes and No instead.
+
+  Yes: [Condition for Yes. Example: "The primary repository carries a valid
+  SPDX-identified license from the approved list, present in a root-level LICENSE
+  file or README license section, at the time of submission."]
+
+  No: [Condition for No. Example: "The primary repository does not carry a
+  qualifying license, or carries a license that is not on the approved list, or
+  the license cannot be independently verified from the provided URL."]]
+
+--- B4: Evidence Form ---
+
+Evidence form: [The specific artifact that satisfies this criterion. For
+  document-based evidence: document type, required content, and whether a link
+  or upload is required. For quantitative evidence: data source, methodology,
+  and time period. For external verification: verifying party, scope, and form
+  of verification. Example: "A direct URL to the root-level LICENSE file or the
+  README section containing the license text in the primary project repository.
+  The URL must resolve to a publicly accessible page at the time of review.
+  A screenshot or copy-paste of license text is not acceptable in place of a
+  live URL."]
+
+--- B5: Compliance Threshold (complete this section only if this field references
+  an external standard) ---
+
+External standard: [Name of the standard and its canonical URL.
+  Example: "Digital Public Goods Standard, https://digitalpublicgoods.net/standard/"]
+
+Version anchor: [Dated access record, version number, or content hash identifying
+  the exact version consulted. Example: "DPG Standard v1.1.9, accessed 2025-11-01"]
+
+Required components: [List each required sub-indicator or component of the external
+  standard that applies to this field. Do not summarize; list each component
+  separately so that the compliance threshold can be audited component by component.
+  Example:
+    Component 1: Indicator 2 - Use of Approved Open License
+    Component 2: Indicator 3 - Clear Ownership (if applicable to this criterion)]
+
+Evidence per component: [For each component listed above, state what specific
+  evidence satisfies it.
+  Example:
+    Component 1 evidence: A clearly stated SPDX license identifier in the project
+    repository's root-level LICENSE file or README. A reference to a license in
+    prose text without an SPDX identifier does not satisfy this component.
+    Component 2 evidence: A named entity (individual or organization) identified
+    as the copyright holder in the LICENSE file or repository documentation.]
+
+Minimum threshold: [State which components must be satisfied for passage, and
+  whether any components may be satisfied via documented mitigation plans.
+  Example: "Both components must be satisfied for gate passage. Neither is
+  waivable. No mitigation pathway applies to this criterion."]
+
+=== SECTION C: DATA QUALITY ASSESSMENT ===
+
+Validity note: [How a reviewer confirms this field measures what the criterion
+  intent claims it measures. Identify the logical chain from the evidence form
+  to the result claimed in the criterion intent, and note any points where the
+  chain could break.
+  Example: "A URL pointing to a root-level LICENSE file with a valid SPDX
+  identifier confirms that the license is applied to the repository's source code
+  and is publicly visible. The chain breaks if the URL resolves but the file
+  content has changed since submission; reviewers should check the URL at review
+  time, not rely on the applicant's characterization of its contents."]
+
+Integrity note: [The independent verification mechanism for this field. State
+  whether this field relies on self-report, third-party verification, or an
+  automatically verifiable artifact, and what the verification pathway is.
+  Example: "This field is independently verifiable: the provided URL either
+  resolves to a qualifying license or it does not. Reviewers do not depend on
+  the applicant's characterization of the license. The only integrity risk is
+  an applicant who applies a license after submission; timestamp comparison
+  with the application date can mitigate this if repository commit history is
+  available."]
+
+Precision note: [The level of specificity required in a valid response, and
+  whether the response form is fine-grained enough to support the decision
+  this data informs.
+  Example: "Binary precision is sufficient for a gate criterion. The decision
+  (advance or flag) requires only a pass/fail determination. If the program were
+  to introduce tiered licensing requirements in a future version (e.g., preferred
+  licenses vs. acceptable licenses), the response form would need to be upgraded
+  to single-select with defined tiers."]
+
+=== SECTION D: APPLICANT GUIDANCE SUMMARY ===
+
+[This section is the source material for the Stage 3 Applicant Guidance Document.
+Derive the Stage 3 document from this section; do not introduce new definitional
+content in Stage 3.]
+
+Plain language explanation: [One sentence explaining what the field asks, written
+  for an applicant who has not read the criterion specification.
+  Example: "This field asks you to confirm that your primary project repository
+  uses an approved open license and to provide a direct link to that license."]
+
+Complete response example: [One example of a complete answer that satisfies the
+  criterion. Make the example specific enough to be instructive, not just
+  illustrative.
+  Example: "Yes. Primary repository: https://github.com/example-org/example-project.
+  License URL: https://github.com/example-org/example-project/blob/main/LICENSE.
+  License: Apache-2.0."]
+
+Incomplete response example: [One example of a common incomplete answer, with a
+  brief note on why it fails.
+  Example: "Yes, we use an open source license. [Fails because no SPDX identifier
+  is given, no URL is provided, and 'open source' is not a license specification.
+  A reviewer cannot independently verify this response.]"]
+```
+
+---
+
+## Template 3: Applicant Guidance Document
+
+### What it is and when it is used
+
+The Applicant Guidance Document is the Stage 3 output. It is the applicant-facing document that accompanies the form. It is derived entirely from Section D of the WALKRI Field Specifications; no new definitional content is introduced here.
+
+The Applicant Guidance Document does not expose the Ideation Record, the criterion specification language, or the internal data quality notes from the Field Specification. Its purpose is to help applicants produce complete, verifiable responses. The document explains what each field is asking, what a complete response looks like, and what mistakes to avoid.
+
+Produce one Applicant Guidance Document per form version. Update it whenever a Field Specification changes and the change affects what applicants need to know.
+
+---
+
+```
+APPLICANT GUIDANCE DOCUMENT
+
+Program name: [Full program name]
+Round: [Round identifier or reporting period]
+Form version: [Version number this guidance corresponds to]
+Guidance date: [YYYY-MM-DD]
+
+---
+
+INTRODUCTION
+
+[Briefly explain why this form exists and how responses will be used, written for
+applicants. Do not expose evaluation criteria, scoring weights, or the decisions
+the data informs. Focus on what the applicant needs to understand to complete the
+form accurately. Keep this section to two to four sentences.
+
+Example: "This form collects structured information about your project to support
+[Program Name]'s review process. Each field has a specific definition; please read
+the guidance for each field before responding. Incomplete or unverifiable responses
+may delay review or result in a request for clarification. If you are unsure how
+to respond to any field, contact [contact information] before the submission
+deadline."]
+
+---
+
+FIELD GUIDANCE
+
+[Repeat this block for each field in the form, in the order the fields appear.
+Derive all content directly from Section D of the corresponding WALKRI Field
+Specification. Do not introduce new definitions or requirements here.]
+
+---
+
+Field: [Field label as it appears in the form]
+
+What this field is asking:
+  [Plain language criterion intent from Field Specification Section D.
+  One to three sentences. Example: "This field asks whether your primary project
+  repository carries an approved open license. We are looking for a specific,
+  verifiable license, not a general statement of your project's values around
+  openness."]
+
+What a complete response looks like:
+  [Complete response example from Field Specification Section D, presented as a
+  model for the applicant.
+  Example: "A complete response includes three things: a 'Yes' or 'No' answer,
+  the URL of your primary repository, and the direct URL of your LICENSE file or
+  README section where the license text appears. For example:
+  Yes. Repository: https://github.com/example-org/example-project.
+  License: https://github.com/example-org/example-project/blob/main/LICENSE (Apache-2.0)."]
+
+Common errors to avoid:
+  [Incomplete response example from Field Specification Section D, reframed as
+  guidance rather than as a failure description.
+  Example: "Do not respond with a general statement such as 'Yes, we use an open
+  source license' without providing a URL. Reviewers cannot verify a license
+  without a direct link, and responses without URLs are considered incomplete.
+  Also, make sure the URL you provide is publicly accessible; links that require
+  login or organizational membership cannot be reviewed."]
+
+Why this matters (optional):
+  [A brief, plain language statement of why this field is in the form, written
+  without exposing the internal decision logic from the Ideation Record. Include
+  only if it will genuinely help applicants complete the field more accurately.
+  Omit if it would expose evaluation criteria or create strategic incentives to
+  tailor responses.
+  Example: "Open licensing is a core requirement of this program. This field
+  confirms that reviewers can verify your project's licensing status independently
+  before the review begins."]
+
+---
+
+[Repeat FIELD GUIDANCE block for each field]
+```
+
+---
+
+## Template 4: WALKRI Audit Report
+
+### What it is and when it is used
+
+The WALKRI Audit Report is the conformance record produced by a WALKRI audit. It documents, for each field in the form, whether the five criterion specification requirements are satisfied (Pass), not satisfied (Fail), or satisfied by a documented override (Override-documented). It is the artifact a certified program presents to downstream data consumers, funders, or research partners as evidence that the form was designed to a known standard.
+
+Produce one Audit Report per form version audited. A change to any field definition triggers re-audit for that field; unchanged fields retain their prior certification status. The Audit Report documents which fields were audited in which cycle.
+
+The Audit Report may be produced by the WALKRI Audit Tool, by a manual audit, or by a combination. The format is the same in all cases; the auditor field identifies whether a tool or a person performed the assessment.
+
+---
+
+```
+WALKRI AUDIT REPORT
+
+=== HEADER ===
+
+Program or form name: [Full name of the program or form audited]
+
+Form version audited: [Version number of the form. Must correspond to a specific,
+  dated release of the form, not a draft or working copy.]
+
+WALKRI version applied: [0.1.0]
+
+Audit date: [YYYY-MM-DD]
+
+Auditor: [Organization name, practitioner name, or tool identifier.
+  Example: "WALKRI Audit Tool v0.1.0" or "Independent Review, [Org Name]"]
+
+---
+
+=== FIELD-BY-FIELD ASSESSMENT ===
+
+[Repeat this block for each field audited. Fields not audited in this cycle
+(because they were unchanged from a prior certified version) are noted in
+the summary but do not require a full block entry.]
+
+---
+
+Field label: [As it appears in the form]
+
+Field version: [Version number of the Field Specification assessed]
+
+Criterion intent: [Pass / Fail / Override-documented]
+
+Operational definition: [Pass / Fail / Override-documented]
+
+Response form: [Pass / Fail / Override-documented]
+
+Evidence form: [Pass / Fail / Override-documented]
+
+Compliance threshold: [Pass / Fail / Override-documented / N/A]
+  [Mark N/A if this field does not reference an external standard.]
+
+Data quality notes: [Record any Validity, Integrity, or Precision flags raised
+  during the audit. If none, write "None." Reliability and Timeliness flags may
+  also be recorded here.
+  Example: "Integrity: This field relies entirely on self-report. No independent
+  verification pathway is specified in the evidence form. This is flagged but
+  not overridden; the question-holder has acknowledged the limitation and will
+  add a third-party verification option in the next form version."]
+
+Override justification: [If any requirement above is marked Override-documented,
+  state the justification here. The justification must explain why the flag does
+  not apply to this field's context, or why the field meets the requirement's
+  intent even if it does not meet its standard form. Overrides are conformance
+  choices, not failures, but they are disclosed in this record.
+  Example: "Response form override: This qualitative narrative field does not have
+  a formal response form justification as required by 3.3 because the field is
+  intentionally open-ended and the value of the field depends on not constraining
+  the response type. The question-holder has documented this as an inherently
+  qualitative field per WALKRI Appendix A, Question 2. The override is authorized
+  by [Name/Role], [YYYY-MM-DD]."]
+
+---
+
+[Repeat FIELD ASSESSMENT block for each field audited]
+
+---
+
+=== SUMMARY ===
+
+Fields audited this cycle: [N]
+
+Fields carrying forward certification from prior cycle (unchanged): [N]
+
+Total fields in form: [N]
+
+Fields passing all requirements: [N]
+
+Fields with documented overrides: [N]
+
+Fields failing without override: [N]
+
+Overall status: [Select one:
+  Certified - All fields pass all requirements with no overrides.
+  Certified with overrides - All fields pass or have documented overrides.
+    No unresolved failures.
+  Not certified - One or more fields have unresolved failures without documented
+    overrides. List the affected fields below.]
+
+Unresolved failures (if Not certified): [List each field with an unresolved
+  failure and the specific requirement that failed. Example:
+  - Field "Community Reach": Operational definition - Fail. No option definitions
+    provided for single-select field.
+  - Field "Open License": Compliance threshold - Fail. References DPG Standard
+    without enumerating applicable indicators or minimum threshold.]
+
+Certification expiry: [Date of next required re-audit. Re-audit is required at
+  the next form version change. If no version change is anticipated within
+  12 months, record the date 12 months from the audit date as a recommended
+  review date. Example: "Re-audit required at next form version change.
+  Recommended review date if no change occurs: [YYYY-MM-DD]."]
+```
+
+---
+
+## Notes on Using These Templates
+
+These templates are designed to be used in sequence. The Ideation Record produces the inputs for the Field Specification. The Field Specification Section D produces the inputs for the Applicant Guidance Document. The Field Specification Sections A through C produce the inputs for the Audit Report.
+
+Information flows in one direction through the process: from ideation to specification to applicant guidance. No new definitional content is introduced in Stage 3. If the Applicant Guidance Document needs to say something that is not in the Field Specification, the specification is incomplete and should be revised before Stage 3 begins.
+
+The Audit Report is a conformance record, not a quality judgment. A field with a documented override is not a worse field than one without; the override system exists precisely to allow context-specific decisions to be made transparently rather than forcing false conformance or leaving decisions undocumented. The distinction that matters for certification is between overrides (documented and authorized) and failures (unresolved and undisclosed).
+
+For worked examples of these templates applied to specific field types, see WALKRI-worked-examples-0_1_0.md.
