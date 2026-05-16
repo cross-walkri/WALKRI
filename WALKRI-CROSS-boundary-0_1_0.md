@@ -26,12 +26,12 @@ WALKRI operates independently of CROSS. Any program that collects structured dat
 
 The table below maps every current CROSS v0.2.4 Part and subsection to one of four statuses.
 
-**Status definitions:**
+**Status Definitions:**
 
-- **CROSS:** CROSS is the governing authority; WALKRI has no role in this requirement.
-- **WALKRI:** WALKRI is the governing authority; CROSS references WALKRI for this requirement.
-- **CROSS, REFERENCES WALKRI:** CROSS sets the obligation; WALKRI governs how it is implemented at the field level.
-- **SPLIT:** The obligation (what must be demonstrated) is governed by CROSS; the specification quality requirements (how fields and criteria must be defined to meet that obligation) are governed by WALKRI.
+- **Cross:** CROSS is the governing authority; WALKRI has no role in this requirement.
+- **Walkri:** WALKRI is the governing authority; CROSS references WALKRI for this requirement.
+- **Cross, References Walkri:** CROSS sets the obligation; WALKRI governs how it is implemented at the field level.
+- **Split:** The obligation (what must be demonstrated) is governed by CROSS; the specification quality requirements (how fields and criteria must be defined to meet that obligation) are governed by WALKRI.
 
 | Part / Subsection | Status | Notes |
 |---|---|---|

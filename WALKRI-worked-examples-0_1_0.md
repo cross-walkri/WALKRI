@@ -40,19 +40,19 @@ Evaluators could not consistently assess DPG eligibility because the field did n
 
 ### WALKRI-conformant specification
 
-**Criterion intent:** Whether the project satisfies the Digital Public Goods Standard as an alternative to the Ethereum pathway, assessed against the nine DPG Standard indicators, for purposes of determining pathway eligibility at time of application.
+**Criterion Intent:** Whether the project satisfies the Digital Public Goods Standard as an alternative to the Ethereum pathway, assessed against the nine DPG Standard indicators, for purposes of determining pathway eligibility at time of application.
 
-**Operational definition:**
+**Operational Definition:**
 - Inclusion: a project qualifies if it satisfies the required DPG Standard indicators as specified in the compliance threshold below.
 - Exclusion: registry membership alone does not qualify a project; the current state of the project must satisfy the indicators at the time of evaluation.
 - Unit of analysis: the applying project, not the organization.
 - Edge case: a project in the DPG registry that has changed substantially since registry assessment is evaluated against current indicators, not registry status. Substantial change is defined as a change in license, a change in core functionality, or a change in technical dependencies that affects platform independence.
 
-**Response form:** Multi-select. Applicants select the pathway that applies: Ethereum mainnet, Ethereum Layer 2, or DPG Standard. Multi-select because some projects may qualify under both pathways.
+**Response Form:** Multi-select. Applicants select the pathway that applies: Ethereum mainnet, Ethereum Layer 2, or DPG Standard. Multi-select because some projects may qualify under both pathways.
 
-**Response form justification:** The original single free-text framing required applicants to argue for whichever pathway they believed applied, without a structured mechanism to indicate that both pathways applied. Projects that qualified on both grounds were recorded inconsistently, producing artificial distinctions in pathway distribution across the cohort. A multi-select resolves this and produces a cleaner dataset for cross-project analysis.
+**Response Form Justification:** The original single free-text framing required applicants to argue for whichever pathway they believed applied, without a structured mechanism to indicate that both pathways applied. Projects that qualified on both grounds were recorded inconsistently, producing artificial distinctions in pathway distribution across the cohort. A multi-select resolves this and produces a cleaner dataset for cross-project analysis.
 
-**Evidence form:** For the DPG pathway, a completed DPG self-assessment form or a link to the project's evidence for each required indicator. Evidence must be accessible from public sources without authentication.
+**Evidence Form:** For the DPG pathway, a completed DPG self-assessment form or a link to the project's evidence for each required indicator. Evidence must be accessible from public sources without authentication.
 
 **Compliance threshold** (DPG Standard, https://digitalpublicgoods.net/standard/, accessed 2026-05-15):
 
@@ -76,8 +76,8 @@ Minimum threshold: all four required indicators must pass. Failure on any requir
 | Evidence form | Absent | Pass |
 | Compliance threshold | Absent | Pass |
 
-**Original field:** Not certifiable. Five unresolved flags.
-**Conformant specification:** Certified at Standard level.
+**Original Field:** Not certifiable. Five unresolved flags.
+**Conformant Specification:** Certified at Standard level.
 
 ---
 
@@ -101,9 +101,9 @@ A second failure compounded the first: none of the five options carried a defini
 
 ### WALKRI-conformant specification
 
-**Criterion intent:** The primary types of contribution the project makes to the ecosystem, for purposes of understanding the project's public goods pathway and enabling cross-project comparison by contribution type.
+**Criterion Intent:** The primary types of contribution the project makes to the ecosystem, for purposes of understanding the project's public goods pathway and enabling cross-project comparison by contribution type.
 
-**Operational definition:**
+**Operational Definition:**
 - Inclusion: any contribution type that the project has demonstrably produced in the prior 12 months with evidence accessible from public sources.
 - Exclusion: aspirational contributions not yet produced; contributions produced by other projects that the applying project only coordinates or funds.
 - Unit of analysis: the applying project's outputs.
@@ -116,11 +116,11 @@ A second failure compounded the first: none of the five options carried a defini
 - Infrastructure: operational systems with verifiable uptime records, including nodes, relays, bridges, oracles, and indexers.
 - Governance: participation in on-chain or structured off-chain governance with verifiable records, including proposal authorship, protocol design contributions, and governance tooling development.
 
-**Response form:** Multi-select. Applicants may select all contribution types that apply.
+**Response Form:** Multi-select. Applicants may select all contribution types that apply.
 
-**Response form justification:** Most projects contribute across multiple types. A single-select forces artificial categorization that distorts evaluation and reduces data quality for cross-project analysis. The original single-select also had no option definitions, meaning the categorical distortion was compounded by interpretation variance within each category.
+**Response Form Justification:** Most projects contribute across multiple types. A single-select forces artificial categorization that distorts evaluation and reduces data quality for cross-project analysis. The original single-select also had no option definitions, meaning the categorical distortion was compounded by interpretation variance within each category.
 
-**Evidence form:** For each selected contribution type, a URL to a public artifact demonstrating that contribution type within the prior 12 months. A project selecting three contribution types must submit at least one URL per type.
+**Evidence Form:** For each selected contribution type, a URL to a public artifact demonstrating that contribution type within the prior 12 months. A project selecting three contribution types must submit at least one URL per type.
 
 ### WALKRI audit result
 
@@ -132,8 +132,8 @@ A second failure compounded the first: none of the five options carried a defini
 | Evidence form | Absent | Pass |
 | Compliance threshold | N/A (no external standard) | N/A |
 
-**Original field:** Not certifiable. Four flags, including a response form design error.
-**Conformant specification:** Certified at Standard level.
+**Original Field:** Not certifiable. Four flags, including a response form design error.
+**Conformant Specification:** Certified at Standard level.
 
 Note on response form design errors: a design error differs from a missing element. A missing element is an absence; a design error is an active structural choice that produces systematic measurement error. The single-select on a multi-value construct is a design error because it cannot be fixed by adding a definition. The response type itself must change.
 
@@ -147,9 +147,9 @@ This example shows a field that passes WALKRI audit without modification. It is 
 
 **Label:** Prior grant funding received in the past 24 months
 
-**Criterion intent:** The total amount of grant funding received by the applying project from external funders in the 24-month period ending on the application deadline, for purposes of assessing funding concentration and evaluating the marginal impact of the requested grant.
+**Criterion Intent:** The total amount of grant funding received by the applying project from external funders in the 24-month period ending on the application deadline, for purposes of assessing funding concentration and evaluating the marginal impact of the requested grant.
 
-**Operational definition:**
+**Operational Definition:**
 - Inclusion: any grant, award, or non-dilutive funding received by the project or its operating entity from an external funder, including retroactive public goods funding rounds, foundation grants, and program awards.
 - Exclusion: investment (equity, token, or convertible note); revenue from products or services; funding received by a parent organization that was not specifically designated for this project; in-kind contributions.
 - Unit of measurement: USD equivalent at the time of receipt, using the exchange rate on the date of receipt for non-USD denominations.
@@ -157,15 +157,15 @@ This example shows a field that passes WALKRI audit without modification. It is 
 - Boundary condition: funding received on the application deadline date is included; funding received after the deadline is excluded regardless of when it was announced.
 - Edge case: if the project is incorporated in multiple legal entities and the grant was received by a sister entity that shares operational infrastructure, include it and note the entity relationship.
 
-**Response form:** Numeric (USD equivalent, integer, no decimals), followed by a multi-field structured input listing each grant by funder name, amount, date, and grant program name.
+**Response Form:** Numeric (USD equivalent, integer, no decimals), followed by a multi-field structured input listing each grant by funder name, amount, date, and grant program name.
 
-**Response form justification:** A numeric field captures the aggregate for analysis; the structured list captures the provenance of each component for reviewer verification. A single text field would produce responses in inconsistent formats that are not machine-readable.
+**Response Form Justification:** A numeric field captures the aggregate for analysis; the structured list captures the provenance of each component for reviewer verification. A single text field would produce responses in inconsistent formats that are not machine-readable.
 
-**Evidence form:** For each grant listed, a publicly accessible announcement URL or award letter. Self-reported totals without supporting URLs are not accepted. If no public announcement exists, a redacted award letter or a letter of attestation from the funder is acceptable.
+**Evidence Form:** For each grant listed, a publicly accessible announcement URL or award letter. Self-reported totals without supporting URLs are not accepted. If no public announcement exists, a redacted award letter or a letter of attestation from the funder is acceptable.
 
-**Compliance threshold:** Not applicable. This field does not reference an external standard. The operational definition above is the compliance specification.
+**Compliance Threshold:** Not applicable. This field does not reference an external standard. The operational definition above is the compliance specification.
 
-**Timeliness note:** Evidence must reflect the 24-month window ending on the application deadline. Evidence from outside this window should not be submitted and will not be considered.
+**Timeliness Note:** Evidence must reflect the 24-month window ending on the application deadline. Evidence from outside this window should not be submitted and will not be considered.
 
 ### WALKRI audit result
 
@@ -189,13 +189,13 @@ The cost of underspecified fields is not primarily a data quality cost. It is an
 
 The Epoch 12 evaluation record supports the following observations.
 
-**Eligibility judgment calls:** The DPG eligibility field, as published, required at least one substantive judgment call per application that cited DPG status as a basis for eligibility. Across 29 applications, at least 8 required extended researcher investigation to determine whether the project's claimed DPG status was current and applicable. A WALKRI-conformant DPG field, with its four required indicators and specified evidence form, would have resolved those 8 cases at application time by requiring applicants to submit indicator-level evidence with their application. The evaluator time cost of post-submission investigation is conservatively estimated at 30 to 45 minutes per case, totaling 4 to 6 hours of evaluation time that a conformant field would have eliminated.
+**Eligibility Judgment Calls:** The DPG eligibility field, as published, required at least one substantive judgment call per application that cited DPG status as a basis for eligibility. Across 29 applications, at least 8 required extended researcher investigation to determine whether the project's claimed DPG status was current and applicable. A WALKRI-conformant DPG field, with its four required indicators and specified evidence form, would have resolved those 8 cases at application time by requiring applicants to submit indicator-level evidence with their application. The evaluator time cost of post-submission investigation is conservatively estimated at 30 to 45 minutes per case, totaling 4 to 6 hours of evaluation time that a conformant field would have eliminated.
 
-**Unverifiable public claims:** Across the 29 applications, at least 12 produced findings of "cannot be confirmed from any public source" on claims that were material to eligibility or impact assessment. A properly specified evidence form requirement, applied at the point of submission, would have surfaced these gaps before any evaluation began. Applicants who cannot satisfy an evidence form requirement at submission time either strengthen their submission or are flagged immediately, rather than passing initial review and requiring intensive investigative work later.
+**Unverifiable Public Claims:** Across the 29 applications, at least 12 produced findings of "cannot be confirmed from any public source" on claims that were material to eligibility or impact assessment. A properly specified evidence form requirement, applied at the point of submission, would have surfaced these gaps before any evaluation began. Applicants who cannot satisfy an evidence form requirement at submission time either strengthen their submission or are flagged immediately, rather than passing initial review and requiring intensive investigative work later.
 
-**Contribution type distortion:** The single-select Contributions field produced at least 6 cases where the selected category visibly understated the project's actual contribution profile, based on reviewer notes cross-referenced against the applicant's supporting materials. These 6 cases required qualitative adjustment during evaluation. A multi-select field with defined options would have captured the full profile at the application stage.
+**Contribution Type Distortion:** The single-select Contributions field produced at least 6 cases where the selected category visibly understated the project's actual contribution profile, based on reviewer notes cross-referenced against the applicant's supporting materials. These 6 cases required qualitative adjustment during evaluation. A multi-select field with defined options would have captured the full profile at the application stage.
 
-**Specification cost vs. evaluation cost:** Specifying the DPG eligibility field and the Contributions field to WALKRI conformance would have required approximately 2 to 4 hours of design time before the round opened. The evaluation time cost attributable to those two underspecified fields alone is estimated at 8 to 12 hours across the full Epoch 12 cohort. The ratio is not favorable to the "we'll figure it out in evaluation" approach. That ratio holds across every round the form is reused in its current state.
+**Specification Cost Vs. Evaluation Cost:** Specifying the DPG eligibility field and the Contributions field to WALKRI conformance would have required approximately 2 to 4 hours of design time before the round opened. The evaluation time cost attributable to those two underspecified fields alone is estimated at 8 to 12 hours across the full Epoch 12 cohort. The ratio is not favorable to the "we'll figure it out in evaluation" approach. That ratio holds across every round the form is reused in its current state.
 
 These numbers are drawn from the Epoch 12 evaluation record and are reported using "at least" framing where exact counts are uncertain. They are not projections or models; they reflect documented judgment calls and researcher findings from the evaluation cycle.
 

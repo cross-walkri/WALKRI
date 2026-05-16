@@ -34,14 +34,14 @@ The requirements must be assessed in the order presented. Criterion intent is as
 
 ### 2.1 Criterion Intent
 
-**Assessment question:** Is there a plain-language statement of what this field measures that is distinct from the field label?
+**Assessment Question:** Is there a plain-language statement of what this field measures that is distinct from the field label?
 
 | Outcome | Description |
 |---|---|
 | Pass | The criterion intent names the specific condition, behavior, or fact being measured. It is written in terms different from the label. A reviewer who only read the criterion intent statement could describe what would constitute a true response without referring to the label. |
 | Fail | The criterion intent is absent, or it restates the label in different words without adding specificity. Example of a failing criterion intent for a field labeled "Community Engagement": "This field measures the organization's community engagement activities." This restates the label; it adds no measurement specificity. |
 
-**Override condition:** Not applicable. Criterion intent is always blocking. A field without a criterion intent cannot be assessed on any other dimension because there is no measurement claim against which to evaluate the remaining elements. If criterion intent is absent, the auditor stops the assessment for that field and returns it for remediation before continuing.
+**Override Condition:** Not applicable. Criterion intent is always blocking. A field without a criterion intent cannot be assessed on any other dimension because there is no measurement claim against which to evaluate the remaining elements. If criterion intent is absent, the auditor stops the assessment for that field and returns it for remediation before continuing.
 
 **Status:** Blocking. No override is available.
 
@@ -49,14 +49,14 @@ The requirements must be assessed in the order presented. Criterion intent is as
 
 ### 2.2 Operational Definition
 
-**Assessment question:** Does the operational definition contain inclusion criteria, exclusion criteria, a unit of analysis, and at least one edge case determination?
+**Assessment Question:** Does the operational definition contain inclusion criteria, exclusion criteria, a unit of analysis, and at least one edge case determination?
 
 | Outcome | Description |
 |---|---|
 | Pass | All four elements are present. Inclusion criteria specify what qualifies as a valid response. Exclusion criteria specify what does not qualify, with enough specificity that a reviewer could classify an ambiguous response without seeking additional guidance. The unit of analysis is stated (e.g., "one instance equals one unique community member, not one interaction"). At least one edge case is named and resolved. |
 | Fail | Any one of the four elements is absent. The most common failure: inclusion criteria are present but exclusion criteria are absent. Without exclusion criteria, the boundary of what counts is undefined; all ambiguous responses default to inclusion, which inflates the field's apparent coverage and makes responses across applicants non-comparable. |
 
-**Override conditions, by element:**
+**Override Conditions, By Element:**
 
 Exclusion criteria may be documented as intentionally empty where the auditor and field designer agree that genuinely nothing could fail to qualify as a response. This is rare. When claimed, the auditor records the design reasoning (not merely the assertion) in the conformance record. The absence of exclusion criteria is not self-evidently an intentional design choice; it must be argued and documented.
 
@@ -68,16 +68,16 @@ Edge case determination is advisory when the field has low ambiguity by design, 
 
 ### 2.3 Response Form
 
-**Assessment question:** Is the response form specified, and is the justification for that form documented?
+**Assessment Question:** Is the response form specified, and is the justification for that form documented?
 
 | Outcome | Description |
 |---|---|
 | Pass | The response form is named using one of the recognized response types: single-select, multi-select, binary, numeric, text, URL, or composite. A written justification is given explaining why this form was chosen over the natural alternatives. The justification addresses whether the response type can capture the variance in the underlying construct that the criterion intent requires. |
 | Fail | The response form is not specified, or it is specified without justification. Justification that only restates the form type ("we used single-select because respondents select one option") does not count; justification must address the measurement rationale. |
 
-**A failure the auditor must specifically flag:** Single-select response form applied to a criterion where the operational definition's inclusion criteria naturally admit more than one simultaneously true answer. This is a design error that produces artificially imprecise data by forcing respondents to compress multi-valued reality into a single option. It must be flagged with a description of which inclusion criteria produce the multi-value problem.
+**A Failure The Auditor Must Specifically Flag:** Single-select response form applied to a criterion where the operational definition's inclusion criteria naturally admit more than one simultaneously true answer. This is a design error that produces artificially imprecise data by forcing respondents to compress multi-valued reality into a single option. It must be flagged with a description of which inclusion criteria produce the multi-value problem.
 
-**Override condition:** A mismatch between the preferred response form and the implemented form may be overridden where technical constraints of the form rendering platform prevent implementation of the preferred form. The constraint must be documented specifically: which platform, which constraint, which preferred form could not be used. A general claim that "the platform does not support it" without specificity is not sufficient for override.
+**Override Condition:** A mismatch between the preferred response form and the implemented form may be overridden where technical constraints of the form rendering platform prevent implementation of the preferred form. The constraint must be documented specifically: which platform, which constraint, which preferred form could not be used. A general claim that "the platform does not support it" without specificity is not sufficient for override.
 
 **Status:** Response form name is blocking. Justification is advisory but should be flagged as a deficiency if absent, because an unjustified form choice cannot be audited for correctness.
 
@@ -85,14 +85,14 @@ Edge case determination is advisory when the field has low ambiguity by design, 
 
 ### 2.4 Evidence Form
 
-**Assessment question:** Does the evidence form name a specific artifact or data point that satisfies the criterion?
+**Assessment Question:** Does the evidence form name a specific artifact or data point that satisfies the criterion?
 
 | Outcome | Description |
 |---|---|
 | Pass | The evidence form names a concrete artifact that an independent reviewer could locate and assess without additional guidance from the respondent. Examples of passing evidence form specifications: "A LICENSE file at the root of the project repository containing an OSI-approved SPDX license identifier"; "An on-chain transaction hash resolving to a completed transfer on a named public ledger"; "A signed attestation document from a named third-party auditor conforming to the attestation template at [URL]." |
 | Fail | The evidence form delegates verification to reviewer judgment without naming the artifact. Examples: "proof of open source license" without naming where the proof must appear or what form it must take; "documentation of impact" without specifying the document type, required content, or submission format; absent evidence form entirely. |
 
-**Override condition:** For qualitative or narrative fields where no artifact-based evidence is structurally possible, the auditor documents the verification method in lieu of an evidence form. The documentation must name the assessment criteria reviewers apply, the minimum threshold for a passing reviewer assessment, and whether the assessment is conducted by one or multiple reviewers. This override converts a nominally absent evidence form into a documented verification methodology. It is not a waiver of the verification requirement; it is a documented alternative implementation.
+**Override Condition:** For qualitative or narrative fields where no artifact-based evidence is structurally possible, the auditor documents the verification method in lieu of an evidence form. The documentation must name the assessment criteria reviewers apply, the minimum threshold for a passing reviewer assessment, and whether the assessment is conducted by one or multiple reviewers. This override converts a nominally absent evidence form into a documented verification methodology. It is not a waiver of the verification requirement; it is a documented alternative implementation.
 
 **Status:** Blocking for fields configured at third-party verifiable strength or above, as classified in the field specification. Advisory for fields configured at self-report level, where the absence of an independent artifact is an acknowledged design condition rather than an oversight.
 
@@ -100,14 +100,14 @@ Edge case determination is advisory when the field has low ambiguity by design, 
 
 ### 2.5 Compliance Threshold (for fields referencing external standards)
 
-**Assessment question:** For each external standard referenced, does the field specification enumerate which components are required, what evidence satisfies each, and the minimum threshold for passage?
+**Assessment Question:** For each external standard referenced, does the field specification enumerate which components are required, what evidence satisfies each, and the minimum threshold for passage?
 
 | Outcome | Description |
 |---|---|
 | Pass | All three elements are present for each external standard referenced: component enumeration, evidence specification per component, and minimum threshold for passage. The threshold is stated explicitly enough that two reviewers who had never discussed it would apply it consistently. |
 | Fail | An external standard is named without component enumeration, or components are enumerated without evidence specification per component, or the minimum threshold is not stated. The most common failure: citing a multi-indicator external standard by name and treating the citation as a sufficient specification. Example: "Must qualify as a Digital Public Good" with no enumeration of which of the nine DPG Standard indicators apply, no evidence specification per indicator, and no minimum passage threshold. This is a label, not a criterion specification. |
 
-**Override condition:** Where an external standard has no published component structure (it is a genuinely binary pass/fail determination with no sub-indicators), the compliance threshold requirement is satisfied by specifying the evidence form for the binary determination. The auditor must verify that the standard is in fact binary with no sub-indicators, not merely that the field designer has treated it as binary for convenience.
+**Override Condition:** Where an external standard has no published component structure (it is a genuinely binary pass/fail determination with no sub-indicators), the compliance threshold requirement is satisfied by specifying the evidence form for the binary determination. The auditor must verify that the standard is in fact binary with no sub-indicators, not merely that the field designer has treated it as binary for convenience.
 
 **Status:** Blocking when any external standard is referenced in the field specification. Not applicable when no external standard is referenced, because this requirement does not apply to self-standing field specifications.
 
@@ -133,51 +133,51 @@ A finding in Part 3 does not by itself fail a field at the specification stage, 
 
 ### 3.1 Validity
 
-**Assessment question:** Could an independent reviewer, given the stated source and construction methodology, confirm that this field measures what it claims to measure?
+**Assessment Question:** Could an independent reviewer, given the stated source and construction methodology, confirm that this field measures what it claims to measure?
 
-**Validity finding:** The reported data is downstream of unmeasured confounders that were not disclosed in the evidence form or methodology. Alternatively, the completion criteria are insufficient to determine whether the stated obligation was met. Alternatively, the measurement instrument does not reach the granularity required by the claimed result (e.g., a field claiming to measure "depth of community co-design" via a single binary yes/no response).
+**Validity Finding:** The reported data is downstream of unmeasured confounders that were not disclosed in the evidence form or methodology. Alternatively, the completion criteria are insufficient to determine whether the stated obligation was met. Alternatively, the measurement instrument does not reach the granularity required by the claimed result (e.g., a field claiming to measure "depth of community co-design" via a single binary yes/no response).
 
-**Connection to specification:** A validity finding traces back to criterion intent (2.1). The logical chain from the evidence form to the result claimed in the criterion intent is missing or broken.
+**Connection To Specification:** A validity finding traces back to criterion intent (2.1). The logical chain from the evidence form to the result claimed in the criterion intent is missing or broken.
 
 ---
 
 ### 3.2 Integrity
 
-**Assessment question:** Does any evidence for this field's data originate from a source independent of the respondent?
+**Assessment Question:** Does any evidence for this field's data originate from a source independent of the respondent?
 
-**Integrity finding:** All evidence originates from respondent-controlled systems with no independent corroboration. For fields specified at self-report level, this is an expected and documented design condition; the finding is informational, not disqualifying. For fields specified at third-party verifiable level or above, this is a gate failure: the evidence form required independent verification, and the submitted evidence does not provide it.
+**Integrity Finding:** All evidence originates from respondent-controlled systems with no independent corroboration. For fields specified at self-report level, this is an expected and documented design condition; the finding is informational, not disqualifying. For fields specified at third-party verifiable level or above, this is a gate failure: the evidence form required independent verification, and the submitted evidence does not provide it.
 
-**Connection to specification:** An integrity finding traces back to evidence form (2.4). The evidence form is where the source and verification pathway are specified; if the form specified independent verification and the submitted evidence bypasses it, the submitted evidence does not satisfy the field's requirements.
+**Connection To Specification:** An integrity finding traces back to evidence form (2.4). The evidence form is where the source and verification pathway are specified; if the form specified independent verification and the submitted evidence bypasses it, the submitted evidence does not satisfy the field's requirements.
 
 ---
 
 ### 3.3 Precision
 
-**Assessment question:** Is the measurement or verification instrument precise enough to support the claimed result?
+**Assessment Question:** Is the measurement or verification instrument precise enough to support the claimed result?
 
-**Precision finding:** Completion criteria are so vague that any response satisfies them, making it impossible to distinguish between respondents with meaningfully different characteristics. Alternatively, a quantitative claim is smaller than the variance of the measurement instrument (the claimed difference cannot be attributed to real differences given the instrument's resolution). Alternatively, a single-select categorical response is used to report a phenomenon the operational definition suggests is multi-valued, compressing real differences into artificial uniformity.
+**Precision Finding:** Completion criteria are so vague that any response satisfies them, making it impossible to distinguish between respondents with meaningfully different characteristics. Alternatively, a quantitative claim is smaller than the variance of the measurement instrument (the claimed difference cannot be attributed to real differences given the instrument's resolution). Alternatively, a single-select categorical response is used to report a phenomenon the operational definition suggests is multi-valued, compressing real differences into artificial uniformity.
 
-**Connection to specification:** A precision finding traces back to response form (2.3). The response form determines the resolution of the measurement instrument; a precision failure is most often a response form mismatch that was not caught at the specification stage.
+**Connection To Specification:** A precision finding traces back to response form (2.3). The response form determines the resolution of the measurement instrument; a precision failure is most often a response form mismatch that was not caught at the specification stage.
 
 ---
 
 ### 3.4 Reliability
 
-**Assessment question:** If this respondent submitted prior data for the same field using a different operational definition, measurement form, or completion criteria, is the change documented and the comparability of prior periods determined?
+**Assessment Question:** If this respondent submitted prior data for the same field using a different operational definition, measurement form, or completion criteria, is the change documented and the comparability of prior periods determined?
 
-**Reliability finding:** Different criteria or response forms were used in different reporting periods without documentation. The change may be visible (a new option was added to a dropdown) or invisible (the operational definition was updated without changing the field label). In either case, if the change is not documented with an assessment of its comparability implications, longitudinal comparison of the data is unreliable: apparent changes over time may reflect definition changes rather than real changes in the underlying population.
+**Reliability Finding:** Different criteria or response forms were used in different reporting periods without documentation. The change may be visible (a new option was added to a dropdown) or invisible (the operational definition was updated without changing the field label). In either case, if the change is not documented with an assessment of its comparability implications, longitudinal comparison of the data is unreliable: apparent changes over time may reflect definition changes rather than real changes in the underlying population.
 
-**Connection to specification:** A reliability finding traces back to operational definition (2.2) and to the schema requirements in Part VII of the standard, specifically the comparability documentation obligation.
+**Connection To Specification:** A reliability finding traces back to operational definition (2.2) and to the schema requirements in Part VII of the standard, specifically the comparability documentation obligation.
 
 ---
 
 ### 3.5 Timeliness
 
-**Assessment question:** Is the evidence current to the period being assessed?
+**Assessment Question:** Is the evidence current to the period being assessed?
 
-**Timeliness finding:** Evidence from a prior period is presented as current without a documented rationale for why prior-period evidence is representative of the current period. The field's evidence form specified a recency requirement and the submitted evidence does not meet it. Alternatively, the evidence form did not specify a recency requirement, and the submitted evidence is dated far enough before the assessment period that its currency is in reasonable doubt.
+**Timeliness Finding:** Evidence from a prior period is presented as current without a documented rationale for why prior-period evidence is representative of the current period. The field's evidence form specified a recency requirement and the submitted evidence does not meet it. Alternatively, the evidence form did not specify a recency requirement, and the submitted evidence is dated far enough before the assessment period that its currency is in reasonable doubt.
 
-**Connection to specification:** A timeliness finding traces back to evidence form (2.4). A timeliness failure at the data assessment stage is typically a design gap in the evidence form rather than a data submission error.
+**Connection To Specification:** A timeliness finding traces back to evidence form (2.4). A timeliness failure at the data assessment stage is typically a design gap in the evidence form rather than a data submission error.
 
 ---
 

@@ -80,61 +80,61 @@ WALKRI's enrichment layer produces output aligned with three external standards:
 
 **Croissant** (ML-ready dataset metadata): A WALKRI-enriched dataset includes field-level metadata sufficient for automated ingestion by machine learning pipelines, including option definitions, evidence form specifications, and version anchors for any referenced external standards.
 
-**FAIR principles** (Findable, Accessible, Interoperable, Reusable): WALKRI-enriched output carries the provenance fields and schema version information required for FAIR compliance. The interoperability requirement is met by JSON Schema as the native format; the reusability requirement is met by the operational definitions that travel with each field.
+**FAIR principles** (Findable, Accessible, Interoperable, Reusable): WALKRI-enriched output carries the provenance fields and schema version information required for FAIR compliance. The interoperability requirement is met by using JSON Schema as the native format; the reusability requirement is met by the operational definitions that accompany each field.
 
-**W3C PROV** (provenance data model): WALKRI's provenance fields map to the W3C PROV data model's core entities (Entity, Activity, Agent) so that the collection history of any data element can be expressed in a standard provenance graph. The detailed alignment specifications for all three targets are in WALKRI-interface-specification-0_1_0.md.
+**W3C PROV** (provenance data model): WALKRI's provenance fields map to the W3C PROV data model's core entities (Entity, Activity, Agent), enabling the collection history of any data element to be expressed in a standard provenance graph. The detailed alignment specifications for all three targets are in WALKRI-interface-specification-0_1_0.md.
 
 ---
 
 ## Part III: Field Specification Requirements
 
-A WALKRI-conformant field must satisfy five criterion specification requirements. These requirements apply to funders specifying gate criteria, to researchers designing survey fields, to organizations building intake forms, and to any other entity using WALKRI to govern data collection. A field that does not satisfy all five requirements is not WALKRI-conformant, regardless of how it is labeled or where it appears in a form.
+A WALKRI-conformant field must satisfy five criterion specification requirements. These requirements apply to funders specifying gate criteria, researchers designing survey fields, organizations building intake forms, and any other entity using WALKRI to govern data collection. A field that does not satisfy all five requirements is not WALKRI-conformant, regardless of its label or where it appears in a form.
 
 The five requirements are: criterion intent, operational definition, response form, evidence form, and compliance threshold.
 
 ### 3.1 Criterion Intent
 
-**What it requires:** A written statement of what the field measures, distinct from its label. The criterion intent answers: what does a true response to this field tell us about the applicant or subject?
+**What It Requires:** A written statement of what the field measures, distinct from its label. The criterion intent answers: what does a true response to this field tell us about the applicant or subject?
 
-**Why it is required:** A label is a name. An intent is a measurement claim. The label "Community Engagement" can mean the number of community members reached, the depth of co-design processes, the geographic distribution of engagement, or the frequency of contact. Each is a different measurement instrument. Without a written criterion intent, the field designer cannot assess whether the response form is capable of capturing what they intended, and reviewers cannot assess responses against a consistent standard.
+**Why It Is Required:** A label is a name. An intent is a measurement claim. The label "Community Engagement" can mean the number of community members reached, the depth of co-design processes, the geographic distribution of engagement, or the frequency of contact. Each is a different measurement instrument. Without a written criterion intent, the field designer cannot assess whether the response form can capture what they intended, and reviewers cannot assess responses against a consistent standard.
 
-**Failure mode when absent:** Different reviewers interpret the same label differently. Applicants optimize for the interpretation they believe their reviewer holds, producing responses that are locally rational and globally inconsistent. Downstream analysis treats the field as if it measured a single thing when it measured several different things across the cohort.
+**Failure Mode When Absent:** Different reviewers interpret the same label differently. Applicants optimize for the interpretation they believe their reviewer holds, producing responses that are locally rational and globally inconsistent. Downstream analysis treats the field as if it measured a single thing, even though it measured several different things across the cohort.
 
 ### 3.2 Operational Definition
 
-**What it requires:** A complete definition of each option or response category in the field, with qualifying examples and non-qualifying examples for each. For binary fields: what conditions produce a "yes" and what conditions produce a "no," with at least one edge case determination. For numeric fields: the unit of measurement, the counting rule, and the boundary conditions. For text fields: the scope of acceptable response content and the minimum content that constitutes a complete response.
+**What It Requires:** A complete definition of each option or response category in the field, with qualifying examples and non-qualifying examples for each. For binary fields: what conditions produce a "yes" and what conditions produce a "no," with at least one edge case determination. For numeric fields: the unit of measurement, the counting rule, and the boundary conditions. For text fields: the scope of acceptable response content and the minimum content that constitutes a complete response.
 
-**Why it is required:** An option without a definition delegates interpretation to applicants. Two applicants with identical circumstances will select different options if their interpretation of the option labels diverges. The resulting data is not comparable; it reflects applicant interpretation variance rather than actual differences in the applicant population.
+**Why It Is Required:** An option without a definition delegates interpretation to applicants. Two applicants with identical circumstances will select different options if their interpretation of the option labels diverges. The resulting data is not comparable; it reflects variation in applicants' interpretations rather than actual differences in the applicant population.
 
-**Failure mode when absent:** Nominal consistency (all applicants chose from the same options) conceals actual definitional variance. Analysis of the resulting data produces conclusions that are artifacts of the interpretation distribution, not of the underlying population.
+**Failure Mode When Absent:** Nominal consistency (all applicants chose from the same options) conceals actual definitional variance. Analysis of the resulting data yields conclusions that are artifacts of the distribution of interpretations, not of the underlying population.
 
-For text fields and qualitative narrative responses, the operational definition specifies the scope and minimum content requirements rather than exhaustive option definitions. The additional design challenges posed by inherently qualitative fields are addressed in Appendix A.
+For text fields and qualitative narrative responses, the operational definition specifies the scope and minimum content requirements rather than exhaustive definitions of options. The additional design challenges posed by inherently qualitative fields are addressed in Appendix A.
 
 ### 3.3 Response Form
 
-**What it requires:** The response type for the field (single-select, multi-select, binary, numeric, text, URL, or composite), with a written justification for why that response type is appropriate for the criterion intent. The justification must address whether the response type is capable of capturing the variance in the underlying construct that the criterion intent requires.
+**What It Requires:** The response type for the field (single-select, multi-select, binary, numeric, text, URL, or composite), with a written justification for why that response type is appropriate for the criterion intent. The justification must address whether the response type can capture the variance in the underlying construct required by the criterion intent.
 
-**Why it is required:** Response type is not a formatting decision; it is a measurement decision. A single-select response form assumes the construct is categorical with mutually exclusive categories. A numeric response form assumes the construct is quantifiable on a common scale. Using the wrong response form for a construct produces systematic measurement error that cannot be corrected in analysis.
+**Why It Is Required:** Response type is not a formatting decision; it is a measurement decision. A single-select response form assumes that the construct is categorical and has mutually exclusive categories. A numeric response form assumes the construct is quantifiable on a common scale. Using the wrong response form for a construct produces systematic measurement error that cannot be corrected in the analysis.
 
-**Failure mode when absent:** Fields are designed for administrative convenience rather than measurement accuracy. The resulting data has bounded variance by construction, masking real differences in the population.
+**Failure Mode When Absent:** Fields are designed for administrative convenience rather than measurement accuracy. The resulting data has bounded variance by construction, masking real differences in the population.
 
 ### 3.4 Evidence Form
 
-**What it requires:** A specification of the artifact that satisfies the criterion. For document-based evidence: the document type, the required content, and whether a link or upload is required. For quantitative evidence: the data source, the collection methodology at a level of detail sufficient for independent replication, and the time period the evidence must cover. For external verification evidence: the verifying party, the scope of what they verified, and what form their verification must take.
+**What It Requires:** A specification of the artifact that satisfies the criterion. For document-based evidence: the document type, the required content, and whether a link or upload is required. For quantitative evidence: the data source, the collection methodology at a level of detail sufficient for independent replication, and the time period the evidence must cover. For external verification evidence: the verifying party, the scope of what they verified, and what form their verification must take.
 
-**Why it is required:** A criterion without an evidence form is an assertion without a verification path. Reviewers cannot assess evidence they cannot locate, and applicants cannot produce evidence they have not been told to collect. The evidence form closes the loop between the measurement claim in the criterion intent and the data that supports it.
+**Why It Is Required: A criterion without evidence is an assertion without a verification path. Reviewers cannot assess evidence they cannot locate, and applicants cannot produce evidence they have not been told to collect. The evidence form closes the loop between the measurement claim in the criterion intent and the data that supports it.
 
-**Failure mode when absent:** Applicants submit diverse artifact types in response to the same criterion, some of which satisfy the measurement intent and some of which do not. Reviewers make implicit artifact quality judgments that are inconsistent across the cohort. The resulting data cannot be audited because there is no specification against which to audit it.
+**Failure Mode When Absent:** Applicants submit diverse artifact types in response to the same criterion, some of which satisfy the measurement intent and some of which do not. Reviewers make implicit artifact quality judgments that are inconsistent across the cohort. The resulting data cannot be audited because there is no specification against which to audit it.
 
 ### 3.5 Compliance Threshold
 
-**What it requires:** For any field or criterion that references an external standard, the referencing party must specify: which components of the external standard apply to this criterion; what evidence satisfies each component; and what the minimum threshold for passage is (e.g., all nine indicators must be met, or at least six of nine indicators must be met with the remaining three requiring documented mitigation plans).
+**What It Requires:** For any field or criterion that references an external standard, the referencing party must specify: which components of the external standard apply to this criterion; what evidence satisfies each component; and what the minimum threshold for passage is (e.g., all nine indicators must be met, or at least six of nine indicators must be met with the remaining three requiring documented mitigation plans).
 
-**Why it is required:** External standards are rarely binary. The Digital Public Goods Standard has nine indicators, each with multiple sub-requirements. A criterion that says "Qualifies as DPG" without a compliance threshold delegates interpretation to reviewers: one reviewer may require all nine indicators; another may require six; a third may accept a DPG nomination as sufficient evidence regardless of indicator status. The compliance threshold eliminates this variance by specifying what passage means before any application is reviewed.
+**Why It Is Required:** External standards are rarely binary. The Digital Public Goods Standard has nine indicators, each with multiple sub-requirements. A criterion that says "Qualifies as DPG" without a compliance threshold delegates interpretation to reviewers: one reviewer may require all nine indicators; another may require six; a third may accept a DPG nomination as sufficient evidence regardless of indicator status. The compliance threshold eliminates this variance by specifying what passage means before any application is reviewed.
 
-**Failure mode when absent:** Reviewer-level interpretation variance becomes the de facto standard. Outcomes are determined partly by which reviewer a given application receives. The data cannot support cross-cohort comparison because the threshold was not held constant.
+**Failure Mode When Absent:** Reviewer-level interpretation variance becomes the de facto standard. Outcomes are determined partly by which reviewer a given application receives. The data cannot support cross-cohort comparison because the threshold was not held constant.
 
-**Worked illustration (DPG Standard):** A program requiring Digital Public Good status as a gate criterion must specify a compliance threshold that enumerates all nine indicators of the DPG Standard (relevance to a Sustainable Development Goal; use of approved open licenses; clear ownership; platform independence; documentation; non-extraction of data; adherence to privacy and applicable laws; adherence to standards and best practices; and responsible data use policies), states which evidence satisfies each indicator (e.g., "Indicator 2 requires a clearly stated SPDX license identifier in the project repository"), and names the minimum threshold for passage (e.g., "All nine indicators must be satisfied; indicators 1, 2, and 3 are non-waivable"). The compliance threshold must also address the registry question explicitly: the Digital Public Goods Alliance maintains a registry of projects that have previously been assessed against the standard. Registry membership is a record of past assessment, not a guarantee of current qualification. A project in the registry may have changed substantially since assessment; a project not in the registry may currently satisfy all nine indicators. The compliance threshold must state whether registry membership is accepted as sufficient evidence of current qualification, or whether independent indicator assessment is required regardless of registry status. Leaving this unstated produces the most common DPG evaluation failure: reviewers who check the registry as a proxy for indicator assessment, applying a standard the funder did not actually specify. A reference that says "the project must meet the DPG Standard" without this compliance threshold is not a criterion specification; it is a label.
+**Worked Illustration (dpg Standard):** A program requiring Digital Public Good status as a gate criterion must specify a compliance threshold that enumerates all nine indicators of the DPG Standard (relevance to a Sustainable Development Goal; use of approved open licenses; clear ownership; platform independence; documentation; non-extraction of data; adherence to privacy and applicable laws; adherence to standards and best practices; and responsible data use policies), states which evidence satisfies each indicator (e.g., "Indicator 2 requires a clearly stated SPDX license identifier in the project repository"), and names the minimum threshold for passage (e.g., "All nine indicators must be satisfied; indicators 1, 2, and 3 are non-waivable"). The compliance threshold must also address the registry question explicitly: the Digital Public Goods Alliance maintains a registry of projects that have previously been assessed against the standard. Registry membership is a record of past assessment, not a guarantee of current qualification. A project in the registry may have changed substantially since assessment; a project not in the registry may currently satisfy all nine indicators. The compliance threshold must state whether registry membership is accepted as sufficient evidence of current qualification, or whether independent indicator assessment is required regardless of registry status. Leaving this unstated produces the most common DPG evaluation failure: reviewers who check the registry as a proxy for indicator assessment, applying a standard the funder did not actually specify. A reference that says "the project must meet the DPG Standard" without this compliance threshold is not a criterion specification; it is a label.
 
 ---
 
@@ -144,35 +144,35 @@ WALKRI specifies a three-stage process for producing WALKRI-conformant fields. T
 
 ### 4.1 Stage 1: Ideation
 
-**What the stage produces:** An ideation record: a structured document that names each information need the form is intended to satisfy, the decision that each piece of information will inform, and the failure mode if that information is missing or imprecise. The ideation record is not published to applicants; it governs the field design process in Stage 2.
+**What The Stage Produces:** An ideation record: a structured document that names each information need the form is intended to satisfy, the decision that each piece of information will inform, and the failure mode if that information is missing or imprecise. The ideation record is not published to applicants; it governs the field design process in Stage 2.
 
-**Who performs it:** The question-holder: the funder, program, organization, or researcher who will use the collected data to make decisions.
+**Who Performs It:** The question-holder: the funder, program, organization, or researcher who will use the collected data to make decisions.
 
-**How it connects to Stage 2:** Each information need in the ideation record becomes the input for one field specification in Stage 2. The criterion intent for each Stage 2 field is derived directly from the ideation record's description of what the information need actually is. If a Stage 2 field cannot be traced to an ideation record entry, that field lacks a documented rationale and cannot be certified.
+**How It Connects To Stage 2:** Each information need in the ideation record becomes the input for one field specification in Stage 2. The criterion intent for each Stage 2 field is derived directly from the ideation record's description of what the information need actually is. If a Stage 2 field cannot be traced to an ideation record entry, that field lacks a documented rationale and cannot be certified.
 
-**Failure mode when skipped:** Fields created without an ideation record tend to be labels rather than instruments. The creator encodes what they assumed the question was rather than what they actually needed to know. When the data fails to support the decision it was collected for, there is no ideation record to diagnose where the design broke down.
+**Failure Mode When Skipped:** Fields created without an ideation record tend to be labels rather than instruments. The creator encodes what they assumed the question was rather than what they actually needed to know. When the data fails to support the decision it was collected for, there is no ideation record to diagnose where the design broke down.
 
 ### 4.2 Stage 2: Specification
 
-**What the stage produces:** A WALKRI field specification: a structured document for each field containing all five criterion specification requirements from Part III. The field specification is the artifact that form tools render and that the WALKRI Audit Tool assesses.
+**What The Stage Produces:** A WALKRI field specification: a structured document for each field containing all five criterion specification requirements from Part III. The field specification is the artifact that form tools render and that the WALKRI Audit Tool assesses.
 
-**Who performs it:** The question-holder, working from the ideation record, or a field specification practitioner working from a brief provided by the question-holder. The WALKRI Ideation Tool and the WALKRI Audit Tool (described in Part IX) support this stage.
+**Who Performs It:** The question-holder, working from the ideation record, or a field specification practitioner working from a brief provided by the question-holder. The WALKRI Ideation Tool and the WALKRI Audit Tool (described in Part IX) support this stage.
 
-**How it connects to Stage 3:** The operational definition and examples in the Stage 2 specification are the source material for Stage 3 applicant guidance. Stage 3 does not add new definitional content; it translates the Stage 2 specification into applicant-facing language. If the Stage 2 specification is incomplete, the Stage 3 guidance will be incomplete.
+**How It Connects To Stage 3:** The operational definition and examples in the Stage 2 specification are the source material for Stage 3 applicant guidance. Stage 3 does not add new definitional content; it translates the Stage 2 specification into applicant-facing language. If the Stage 2 specification is incomplete, the Stage 3 guidance will be incomplete.
 
-**The pre-publishing quality gate:** Before any field is shown to applicants, it must pass an AI-assisted review that assesses the field specification against Parts III through VII of this standard. The review flags any of the five criterion specification requirements that are absent or insufficient. Flags are either resolved (the specification is revised to address the flag) or overridden. An override requires a documented justification explaining why the flag does not apply to this field's context. Overrides are recorded in the conformance record produced at certification; they are not failures, but they are disclosed. A field with unresolved and undocumented flags is not eligible for certification.
+**The Pre-publishing Quality Gate:** Before any field is shown to applicants, it must pass an AI-assisted review that assesses the field specification against Parts III through VII of this standard. The review flags any of the five criterion specification requirements that are absent or insufficient. Flags are either resolved (the specification is revised to address the flag) or overridden. An override requires a documented justification explaining why the flag does not apply to this field's context. Overrides are recorded in the conformance record produced at certification; they are not failures, but they are disclosed. A field with unresolved and undocumented flags is not eligible for certification.
 
-**Failure mode when skipped:** Fields are built directly from the ideation record without passing through formal specification. The intent is embedded in the question-holder's head rather than in a document. Reviewer inconsistency emerges because there is no specification to adjudicate disputes. Downstream data consumers inherit a dataset with no machine-readable field definitions.
+**Failure Mode When Skipped:** Fields are built directly from the ideation record without passing through formal specification. The intent is embedded in the question-holder's head rather than in a document. Reviewer inconsistency emerges because there is no specification to adjudicate disputes. Downstream data consumers inherit a dataset with no machine-readable field definitions.
 
 ### 4.3 Stage 3: Applicant Guidance
 
-**What the stage produces:** Applicant-facing documentation accompanying each field. This documentation explains: what the field is asking; what a complete response looks like (with at least one positive example); what common incomplete or incorrect responses look like (with at least one negative example); and why the field exists (briefly, as context, not as justification).
+**What The Stage Produces:** Applicant-facing documentation accompanying each field. This documentation explains: what the field is asking; what a complete response looks like (with at least one positive example); what common incomplete or incorrect responses look like (with at least one negative example); and why the field exists (briefly, as context, not as justification).
 
-**Who performs it:** The question-holder or a communications practitioner working from the Stage 2 field specification. The WALKRI Guidance companion document (WALKRI-guidance-0_1_0.md) provides templates and worked examples.
+**Who Performs It:** The question-holder or a communications practitioner working from the Stage 2 field specification. The WALKRI Guidance companion document (WALKRI-guidance-0_1_0.md) provides templates and worked examples.
 
-**How it connects to Stage 2:** Stage 3 documentation is derived from Stage 2's operational definition and examples. No new definitional content is introduced in Stage 3. The translation from specification language (designed for precision) to applicant language (designed for comprehension) is the core work of this stage.
+**How It Connects To Stage 2:** Stage 3 documentation is derived from Stage 2's operational definition and examples. No new definitional content is introduced in Stage 3. The translation from specification language (designed for precision) to applicant language (designed for comprehension) is the core work of this stage.
 
-**Failure mode when skipped:** Even a precisely specified field produces inconsistent responses if applicants cannot interpret it correctly. The failure mode is structurally identical to the failure mode of an underspecified field: interpretation variance in the applicant population produces nominally consistent data with hidden definitional variance.
+**Failure Mode When Skipped:** Even a precisely specified field produces inconsistent responses if applicants cannot interpret it correctly. The failure mode is structurally identical to the failure mode of an underspecified field: interpretation variance in the applicant population produces nominally consistent data with hidden definitional variance.
 
 ---
 
@@ -184,53 +184,53 @@ For each standard, the assessment question is what an auditor asks when evaluati
 
 ### 5.1 Validity
 
-**Assessment question:** Does the measurement instrument have a documented logical chain from the evidence specified in the evidence form to the result claimed in the criterion intent?
+**Assessment Question:** Does the measurement instrument have a documented logical chain from the evidence specified in the evidence form to the result claimed in the criterion intent?
 
-**Failure mode:** The field measures a proxy for the intended construct rather than the construct itself, but the proxy relationship is undocumented. Analysis treats the measurement as a direct observation of the construct and reaches conclusions that are valid for the proxy but not for the construct. The error is invisible because there is no criterion intent statement against which to test the logical chain.
+**Failure Mode:** The field measures a proxy for the intended construct rather than the construct itself, but the proxy relationship is undocumented. Analysis treats the measurement as a direct observation of the construct and reaches conclusions that are valid for the proxy but not for the construct. The error is invisible because there is no criterion intent statement against which to test the logical chain.
 
-**Application across field types:** For quantitative indicators, validity requires that the construction methodology produces a number that logically represents the criterion intent's measurement claim. For binary completion criteria, validity requires that the evidence form specifies an artifact whose presence or absence logically indicates the criterion. For qualitative narrative fields, validity requires that the scope defined in the operational definition logically captures the dimension the criterion intent claims to measure.
+**Application Across Field Types:** For quantitative indicators, validity requires that the construction methodology produces a number that logically represents the criterion intent's measurement claim. For binary completion criteria, validity requires that the evidence form specifies an artifact whose presence or absence logically indicates the criterion. For qualitative narrative fields, validity requires that the scope defined in the operational definition logically captures the dimension the criterion intent claims to measure.
 
-**Connection to Part III:** Validity most directly enforces the criterion intent requirement (3.1), because a validity failure is a failure to connect the evidence form to the criterion intent through a logical chain.
+**Connection To Part Iii:** Validity most directly enforces the criterion intent requirement (3.1), because a validity failure is a failure to connect the evidence form to the criterion intent through a logical chain.
 
 ### 5.2 Integrity
 
-**Assessment question:** Is evidence collection separated from the actor who benefits from a favorable outcome?
+**Assessment Question:** Is evidence collection separated from the actor who benefits from a favorable outcome?
 
-**Failure mode:** Self-reported evidence with no third-party verification produces data whose accuracy is systematically biased toward favorable outcomes. The bias is not necessarily dishonest; actors rationally interpret ambiguous situations in ways that favor their position. Without separation between the evidence collector and the beneficiary, the data reflects this rational bias and cannot be used to compare actors on a common scale.
+**Failure Mode:** Self-reported evidence with no third-party verification produces data whose accuracy is systematically biased toward favorable outcomes. The bias is not necessarily dishonest; actors rationally interpret ambiguous situations in ways that favor their position. Without separation between the evidence collector and the beneficiary, the data reflects this rational bias and cannot be used to compare actors on a common scale.
 
-**Application across field types:** For quantitative indicators, integrity requires an independent data source or a verification pathway that separates the reporting actor from the data. For binary completion criteria, integrity requires that the specified artifact can be verified by a reviewer without relying on the applicant's characterization of it. For qualitative narrative fields, integrity is structurally harder to enforce; the standard applies as a design aspiration and a disclosure requirement (the reviewer must know that the field relies on self-report).
+**Application Across Field Types:** For quantitative indicators, integrity requires an independent data source or a verification pathway that separates the reporting actor from the data. For binary completion criteria, integrity requires that the specified artifact can be verified by a reviewer without relying on the applicant's characterization of it. For qualitative narrative fields, integrity is structurally harder to enforce; the standard applies as a design aspiration and a disclosure requirement (the reviewer must know that the field relies on self-report).
 
-**Connection to Part III:** Integrity most directly enforces the evidence form requirement (3.4), because the evidence form is where the source and verification pathway of the evidence are specified.
+**Connection To Part Iii:** Integrity most directly enforces the evidence form requirement (3.4), because the evidence form is where the source and verification pathway of the evidence are specified.
 
 ### 5.3 Precision
 
-**Assessment question:** Is the measurement instrument capable of detecting differences at the magnitude relevant to the decisions the data will inform?
+**Assessment Question:** Is the measurement instrument capable of detecting differences at the magnitude relevant to the decisions the data will inform?
 
-**Failure mode:** A single-select field with three options (low, medium, high) cannot detect the difference between a program that reached 10 people and a program that reached 100 people if both fall into the "low" bucket. If the decision requires distinguishing between these programs, the instrument is too coarse to support it. The failure produces a dataset that appears complete but is informationally insufficient for its stated purpose.
+**Failure Mode:** A single-select field with three options (low, medium, high) cannot detect the difference between a program that reached 10 people and a program that reached 100 people if both fall into the "low" bucket. If the decision requires distinguishing between these programs, the instrument is too coarse to support it. The failure produces a dataset that appears complete but is informationally insufficient for its stated purpose.
 
-**Application across field types:** For quantitative indicators, precision requires that the unit and counting rule are fine-grained enough to detect the relevant differences. For binary completion criteria, precision is binary by construction; the precision question is whether the binary distinction is the right one or whether the decision requires a more granular assessment. For qualitative narrative fields, precision requires that the scope defined in the operational definition is narrow enough to produce responses that are meaningfully comparable.
+**Application Across Field Types:** For quantitative indicators, precision requires that the unit and counting rule are fine-grained enough to detect the relevant differences. For binary completion criteria, precision is binary by construction; the precision question is whether the binary distinction is the right one or whether the decision requires a more granular assessment. For qualitative narrative fields, precision requires that the scope defined in the operational definition is narrow enough to produce responses that are meaningfully comparable.
 
-**Connection to Part III:** Precision most directly enforces the response form requirement (3.3), because the response form determines the resolution of the measurement instrument.
+**Connection To Part Iii:** Precision most directly enforces the response form requirement (3.3), because the response form determines the resolution of the measurement instrument.
 
 ### 5.4 Reliability
 
-**Assessment question:** Is the methodology for collecting and interpreting this field consistent across reporting periods and across reviewers within a single reporting period?
+**Assessment Question:** Is the methodology for collecting and interpreting this field consistent across reporting periods and across reviewers within a single reporting period?
 
-**Failure mode:** A field whose interpretation changes across reporting periods produces data that cannot be compared over time. A field whose interpretation varies across reviewers within a reporting period produces data that reflects reviewer assignment rather than applicant characteristics. Both failures produce longitudinal or cross-sectional analysis whose conclusions cannot be attributed to changes in the underlying population.
+**Failure Mode:** A field whose interpretation changes across reporting periods produces data that cannot be compared over time. A field whose interpretation varies across reviewers within a reporting period produces data that reflects reviewer assignment rather than applicant characteristics. Both failures produce longitudinal or cross-sectional analysis whose conclusions cannot be attributed to changes in the underlying population.
 
-**Application across field types:** For quantitative indicators, reliability requires that the construction methodology is documented in enough detail that it can be applied consistently across periods without re-interpretation. For binary completion criteria, reliability requires that the evidence form specifies a verifiable artifact rather than a judgment call. For qualitative narrative fields, reliability requires a scoring rubric or codebook that reviewers apply consistently; a field without a rubric is inherently unreliable.
+**Application Across Field Types:** For quantitative indicators, reliability requires that the construction methodology is documented in enough detail that it can be applied consistently across periods without re-interpretation. For binary completion criteria, reliability requires that the evidence form specifies a verifiable artifact rather than a judgment call. For qualitative narrative fields, reliability requires a scoring rubric or codebook that reviewers apply consistently; a field without a rubric is inherently unreliable.
 
-**Connection to Part III:** Reliability most directly enforces the operational definition requirement (3.2), because consistency of interpretation across periods and reviewers depends on the definition being precise enough to constrain interpretation.
+**Connection To Part Iii:** Reliability most directly enforces the operational definition requirement (3.2), because consistency of interpretation across periods and reviewers depends on the definition being precise enough to constrain interpretation.
 
 ### 5.5 Timeliness
 
-**Assessment question:** Is the evidence specified in the evidence form current to the decision cycle for which the data is being collected?
+**Assessment Question:** Is the evidence specified in the evidence form current to the decision cycle for which the data is being collected?
 
-**Failure mode:** Evidence that is technically present but outdated misleads decisions that depend on the current state of the applicant. A three-year-old impact assessment submitted as evidence of current reach produces a favorable data point for a decision that should have been made on current information. The decision is made on stale data and the failure is invisible because the evidence form did not specify a recency requirement.
+**Failure Mode:** Evidence that is technically present but outdated misleads decisions that depend on the current state of the applicant. A three-year-old impact assessment submitted as evidence of current reach produces a favorable data point for a decision that should have been made on current information. The decision is made on stale data and the failure is invisible because the evidence form did not specify a recency requirement.
 
-**Application across field types:** For quantitative indicators, timeliness requires that the evidence form specifies the time period the data must cover relative to the submission date. For binary completion criteria, timeliness requires that the artifact attesting to completion is recent enough to be probative. For qualitative narrative fields, timeliness requires that the scope in the operational definition specifies whether responses must reflect current practice or may reflect historical practice.
+**Application Across Field Types:** For quantitative indicators, timeliness requires that the evidence form specifies the time period the data must cover relative to the submission date. For binary completion criteria, timeliness requires that the artifact attesting to completion is recent enough to be probative. For qualitative narrative fields, timeliness requires that the scope in the operational definition specifies whether responses must reflect current practice or may reflect historical practice.
 
-**Connection to Part III:** Timeliness most directly enforces the evidence form requirement (3.4), because the evidence form is where recency requirements and time-period specifications must appear.
+**Connection To Part Iii:** Timeliness most directly enforces the evidence form requirement (3.4), because the evidence form is where recency requirements and time-period specifications must appear.
 
 ---
 
@@ -242,13 +242,13 @@ Any field or criterion that references an external standard must follow the Exte
 
 A conformant external standard reference must include four elements:
 
-**URL:** The canonical URL of the external standard being referenced. The URL must resolve to the standard document itself, not to a landing page or organizational homepage.
+**Url:** The canonical URL of the external standard being referenced. The URL must resolve to the standard document itself, not to a landing page or organizational homepage.
 
-**Version anchor:** A date-stamped access record, a version number, or a content hash sufficient to identify the exact version of the external standard that was consulted. External standards evolve; a reference without a version anchor cannot be audited because the auditor cannot determine which version of the standard was in effect when the field was designed. For standards that use dated versions (e.g., "DPG Standard v1.1.9, accessed 2025-11-01"), the access date is the version anchor. For standards that use semantic versioning, the version number is the anchor. For standards without formal versioning, a content hash (SHA-256) of the document as accessed is the anchor.
+**Version Anchor:** A date-stamped access record, a version number, or a content hash sufficient to identify the exact version of the external standard that was consulted. External standards evolve; a reference without a version anchor cannot be audited because the auditor cannot determine which version of the standard was in effect when the field was designed. For standards that use dated versions (e.g., "DPG Standard v1.1.9, accessed 2025-11-01"), the access date is the version anchor. For standards that use semantic versioning, the version number is the anchor. For standards without formal versioning, a content hash (SHA-256) of the document as accessed is the anchor.
 
 **Scope:** A statement of what part of the external standard applies to this criterion. Many external standards are multi-part documents; the scope statement identifies which indicators, sections, or requirements are germane.
 
-**Compliance threshold:** The enumeration of which components of the external standard must be satisfied for passage, what evidence satisfies each component, and the minimum threshold for passage. The compliance threshold is the mechanism that prevents reviewer-level interpretation variance from determining outcomes.
+**Compliance Threshold:** The enumeration of which components of the external standard must be satisfied for passage, what evidence satisfies each component, and the minimum threshold for passage. The compliance threshold is the mechanism that prevents reviewer-level interpretation variance from determining outcomes.
 
 ### 6.2 The Compliance Threshold Requirement
 
@@ -282,25 +282,25 @@ WALKRI-conformant data collection produces two categories of obligations: proven
 
 Every WALKRI-enriched dataset must include the following provenance fields at the dataset level and, where technically feasible, at the field level:
 
-**Field creator identity:** An organizational identifier or practitioner identifier for the entity that designed the field specification. This field enables downstream consumers to contact the specifying entity for definitional clarification and supports accountability for data quality decisions.
+**Field Creator Identity:** An organizational identifier or practitioner identifier for the entity that designed the field specification. This field enables downstream consumers to contact the specifying entity for definitional clarification and supports accountability for data quality decisions.
 
-**Specification timestamps:** ISO 8601 timestamps for when the field specification was created and last modified. These timestamps are distinct from the timestamps on the collected data; they record the history of the instrument, not the history of responses to it.
+**Specification Timestamps:** ISO 8601 timestamps for when the field specification was created and last modified. These timestamps are distinct from the timestamps on the collected data; they record the history of the instrument, not the history of responses to it.
 
-**WALKRI version:** The version of this standard that governs the field specification. Version differences in the standard may affect the interpretation of conformance; downstream consumers need this information to assess whether a field specification meets the version of the standard they are using.
+**Walkri Version:** The version of this standard that governs the field specification. Version differences in the standard may affect the interpretation of conformance; downstream consumers need this information to assess whether a field specification meets the version of the standard they are using.
 
-**Form tool identifier:** The class of form tool used to render the field (e.g., "KoBoToolbox," "REDCap," "Fillout"), not the specific instance or deployment. This supports reproducibility assessment: a downstream consumer can determine whether the rendering tool class imposes any known constraints on response capture.
+**Form Tool Identifier:** The class of form tool used to render the field (e.g., "KoBoToolbox," "REDCap," "Fillout"), not the specific instance or deployment. This supports reproducibility assessment: a downstream consumer can determine whether the rendering tool class imposes any known constraints on response capture.
 
-**Field specification version:** The version of the field specification itself, distinct from the WALKRI version. Field specifications evolve independently of the standard; the field specification version tracks changes to the definition of a specific field.
+**Field Specification Version:** The version of the field specification itself, distinct from the WALKRI version. Field specifications evolve independently of the standard; the field specification version tracks changes to the definition of a specific field.
 
 ### 7.2 Schema Requirements
 
 WALKRI imposes three schema requirements on organizations that collect data under WALKRI-conformant fields:
 
-**Consistency across reporting periods:** Field names and their associated definitions must remain consistent across reporting periods unless a versioned change is documented. A field name that appears in two consecutive reporting periods is assumed to refer to the same construct; if the construct has changed, the field must be versioned rather than silently redefined.
+**Consistency Across Reporting Periods:** Field names and their associated definitions must remain consistent across reporting periods unless a versioned change is documented. A field name that appears in two consecutive reporting periods is assumed to refer to the same construct; if the construct has changed, the field must be versioned rather than silently redefined.
 
-**Versioning of changes:** Any change to a field definition produces a new field specification version. The prior definition is retained in the specification record and remains accessible. A downstream consumer aggregating data across reporting periods must be able to access the definition that governed each period's data.
+**Versioning Of Changes:** Any change to a field definition produces a new field specification version. The prior definition is retained in the specification record and remains accessible. A downstream consumer aggregating data across reporting periods must be able to access the definition that governed each period's data.
 
-**Comparability documentation:** Changes that affect comparability across reporting periods must be documented with the date of the change, the nature of the change, and its implications for prior data. If an option was added to a single-select field in a new reporting period, the documentation must state what applicants who selected the nearest equivalent option in prior periods were actually reporting, and whether the new option represents a previously unmeasured category or a refinement of an existing one.
+**Comparability Documentation:** Changes that affect comparability across reporting periods must be documented with the date of the change, the nature of the change, and its implications for prior data. If an option was added to a single-select field in a new reporting period, the documentation must state what applicants who selected the nearest equivalent option in prior periods were actually reporting, and whether the new option represents a previously unmeasured category or a refinement of an existing one.
 
 ### 7.3 Alignment with Output Standards
 
