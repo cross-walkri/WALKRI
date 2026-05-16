@@ -28,9 +28,9 @@ WALKRI (Working Architecture for Legible, Knowledge-Ready Intake) is a standard 
 
 ### The Problem
 
-Funders, organizations, and programs regularly publish intake fields without operationally defining them. A dropdown labeled "Contributions" offers single-select options with no definitions. A gate criterion labeled "Qualifies as DPG" appears without specifying which of the nine Digital Public Goods Standard indicators apply, which evidence satisfies each, what threshold constitutes passage, or whether registry membership is accepted as a proxy for current indicator qualification. Each of these gaps produces a different failure: one reviewer checks the registry; another assesses indicators directly; a third accepts a self-assessment; none of them are wrong given what the criterion actually says. These are not edge cases; they are the default condition of most structured data collection in the grant, program, and research evaluation space.
+Funders, organizations, and programs regularly publish intake fields without operationally defining them. A dropdown labeled "Contributions" offers single-select options with no definitions. A gate criterion labeled "Qualifies as DPG" appears without specifying which of the nine Digital Public Goods Standard indicators apply, which evidence satisfies each, what threshold constitutes passage, or whether registry membership is accepted as a proxy for current indicator qualification. Each gap produces a different failure: one reviewer checks the registry; another assesses indicators directly; a third accepts a self-assessment; none of them is wrong, given what the criterion actually says. These are not edge cases; they are the default condition of most structured data collection in the grant, program, and research evaluation space.
 
-The consequences are consistent and predictable. Applicants interpret underspecified fields differently from one another and from reviewer expectations. Reviewers apply inconsistent interpretations across a review cohort, producing outcomes that are not replicable. Downstream analysts inherit a dataset whose nominal consistency conceals definitional variance; analysis built on that data is suspect at the foundation, not because the analysis is wrong, but because the instrument was never precise enough to support it.
+The consequences are predictable. Applicants interpret underspecified fields differently from one another and from reviewer expectations. Reviewers apply inconsistent interpretations across a cohort, producing non-reproducible outcomes. Downstream analysts inherit a dataset whose nominal consistency conceals definitional variance; analysis built on that data is suspect at the foundation, not because the analysis is wrong, but because the instrument was never precise enough to support it.
 
 The same precision obligation that CROSS (Common Reporting Outcome Standards Schema) imposes on applicant indicators has not been applied to the fields and criteria funders use to collect data. WALKRI closes that gap. It operates at the instrumentation and collection layer: the point where a question is encoded as a field before any applicant ever sees it.
 
@@ -50,29 +50,33 @@ CROSS specifies what must be collected: the indicators, evidence requirements, a
 
 ## Part II: The Three Interfaces
 
-WALKRI has three relationships, each requiring a defined interface. The upward interface connects WALKRI to obligation standards. The lateral interface connects WALKRI to form rendering tools. The downstream interface connects WALKRI to data consumers.
+WALKRI has three relationships, each requiring a defined connection.
 
-### 2.1 Upward Interface: Obligation Standards
+### 2.1 Obligation Standards
 
-The upward interface describes how an obligation standard connects to WALKRI. An obligation standard specifies what must be collected: the indicators, criteria, and evidence requirements that constitute a complete response. WALKRI specifies how those fields must be defined so that collection produces the data the obligation standard requires.
+WALKRI connects to whatever framework specifies what must be collected. CROSS is the primary example; the connection is generic, so WALKRI works with any obligation standard.
 
-WALKRI's upward interface is designed to accept any conformant obligation standard. CROSS v0.2.4 is the primary obligation standard that formally references WALKRI, and WALKRI's field specification requirements, data quality standards, and external standard reference protocol are drawn from CROSS Part IV, Part V, and Part VIII. A conformant obligation standard provides: a named set of collection requirements; a version identifier that can serve as a reference anchor; and, optionally, a designated mapping to WALKRI's five criterion specification elements.
+An obligation standard specifies what must be collected: the indicators, criteria, and evidence requirements that constitute a complete response. WALKRI specifies how those fields must be defined so that the collection produces the data required by the obligation standard.
+
+CROSS v0.2.4 is the primary obligation standard that formally references WALKRI, and WALKRI's field specification requirements, data quality standards, and external standard reference protocol are drawn from CROSS Parts IV, V, and VIII. A conformant obligation standard provides: a named set of collection requirements; a version identifier that can serve as a reference anchor; and, optionally, a designated mapping to WALKRI's five criterion specification elements.
 
 An obligation standard that formally references WALKRI must specify, for each of its collection requirements, which WALKRI criterion specification elements it enforces and at what threshold. CROSS does this in its Gate Criterion Specification (Part IV). Other obligation standards may structure this mapping differently; WALKRI accepts any mapping that is explicit, versioned, and auditable.
 
 Organizations using WALKRI without any obligation standard use Part III of this document directly as their specification authority.
 
-### 2.2 Lateral Interface: Form Providers
+### 2.2 Form Rendering Tools
 
-The lateral interface describes how WALKRI connects to form rendering tools. WALKRI operates on JSON Schema as its native format. JSON Schema underlies all major form platforms and is the interchange format for WALKRI field specifications. A WALKRI-conformant field specification can be expressed as a JSON Schema object, reviewed by the WALKRI Audit Tool, and then passed to any form platform for rendering without loss of specification integrity.
+WALKRI works with form tools through JSON Schema, the format that underlies Fillout, Jotform, Typeform, REDCap, and others. WALKRI does not integrate with any specific tool's API; it operates on the shared format underneath them.
+
+A WALKRI-conformant field specification can be expressed as a JSON Schema object, reviewed by the WALKRI Audit Tool, and then passed to any form platform for rendering without loss of specification integrity.
 
 Two secondary compatible formats are recognized: REDCap data dictionaries and XLSForm. Both formats are widely used in research and humanitarian data collection contexts where JSON Schema tooling may not be available. WALKRI-compliant fields expressed in these formats must preserve all five criterion specification elements in structured metadata fields; the detailed mapping specifications for these formats are provided in WALKRI-interface-specification-0_1_0.md.
 
-WALKRI does not require any specific form platform and does not integrate with any platform's proprietary API. Form tools are rendering layers. WALKRI's quality guarantees are enforced at the specification stage, before any form is published.
+WALKRI's quality guarantees are enforced at the specification stage, before any form is published.
 
-### 2.3 Downstream Interface: Data Consumers
+### 2.3 Data Consumers
 
-The downstream interface describes how WALKRI-collected data connects to the analysts, AI pipelines, researchers, and evaluation systems that use it. The goal of WALKRI's downstream interface is to ensure that data collected under a WALKRI-conformant process is machine-readable, provenance-bearing, and reusable without requiring the consumer to reconstruct definitional context.
+Data collected through WALKRI-conformant fields produces output aligned with Croissant (ML-ready dataset metadata), FAIR principles, and W3C PROV (provenance tracking). This makes the data directly usable by analysts and AI pipelines without cleanup.
 
 WALKRI's enrichment layer produces output aligned with three external standards:
 
@@ -92,15 +96,15 @@ The five requirements are: criterion intent, operational definition, response fo
 
 ### 3.1 Criterion Intent
 
-**What it requires:** A written statement of what the field measures, distinct from its label. The criterion intent answers the question: what does a true response to this field tell us about the applicant or subject?
+**What it requires:** A written statement of what the field measures, distinct from its label. The criterion intent answers: what does a true response to this field tell us about the applicant or subject?
 
-**Why it is required:** A label is a name. An intent is a measurement claim. The label "Community Engagement" can mean the number of community members reached, the depth of co-design processes, the geographic distribution of engagement, or the frequency of contact. Each of these is a different measurement instrument. Without a written criterion intent, the field designer cannot assess whether the response form they chose is capable of capturing what they intended, and reviewers cannot assess responses against a consistent standard.
+**Why it is required:** A label is a name. An intent is a measurement claim. The label "Community Engagement" can mean the number of community members reached, the depth of co-design processes, the geographic distribution of engagement, or the frequency of contact. Each is a different measurement instrument. Without a written criterion intent, the field designer cannot assess whether the response form is capable of capturing what they intended, and reviewers cannot assess responses against a consistent standard.
 
 **Failure mode when absent:** Different reviewers interpret the same label differently. Applicants optimize for the interpretation they believe their reviewer holds, producing responses that are locally rational and globally inconsistent. Downstream analysis treats the field as if it measured a single thing when it measured several different things across the cohort.
 
 ### 3.2 Operational Definition
 
-**What it requires:** A complete definition of each option or response category in the field, with qualifying examples and non-qualifying examples for each. For binary fields: what conditions produce a "yes" and what conditions produce a "no," with at least one edge case determination. For numeric fields: the unit of measurement, the counting rule, and the boundary conditions (what counts as one instance and what does not). For text fields: the scope of acceptable response content and the minimum content that constitutes a complete response.
+**What it requires:** A complete definition of each option or response category in the field, with qualifying examples and non-qualifying examples for each. For binary fields: what conditions produce a "yes" and what conditions produce a "no," with at least one edge case determination. For numeric fields: the unit of measurement, the counting rule, and the boundary conditions. For text fields: the scope of acceptable response content and the minimum content that constitutes a complete response.
 
 **Why it is required:** An option without a definition delegates interpretation to applicants. Two applicants with identical circumstances will select different options if their interpretation of the option labels diverges. The resulting data is not comparable; it reflects applicant interpretation variance rather than actual differences in the applicant population.
 
@@ -114,7 +118,7 @@ For text fields and qualitative narrative responses, the operational definition 
 
 **Why it is required:** Response type is not a formatting decision; it is a measurement decision. A single-select response form assumes the construct is categorical with mutually exclusive categories. A numeric response form assumes the construct is quantifiable on a common scale. Using the wrong response form for a construct produces systematic measurement error that cannot be corrected in analysis.
 
-**Failure mode when absent:** Fields are designed for administrative convenience (single-select is easier to process than text) rather than measurement accuracy. The resulting data has bounded variance by construction, masking real differences in the population.
+**Failure mode when absent:** Fields are designed for administrative convenience rather than measurement accuracy. The resulting data has bounded variance by construction, masking real differences in the population.
 
 ### 3.4 Evidence Form
 
@@ -128,7 +132,7 @@ For text fields and qualitative narrative responses, the operational definition 
 
 **What it requires:** For any field or criterion that references an external standard, the referencing party must specify: which components of the external standard apply to this criterion; what evidence satisfies each component; and what the minimum threshold for passage is (e.g., all nine indicators must be met, or at least six of nine indicators must be met with the remaining three requiring documented mitigation plans).
 
-**Why it is required:** External standards are rarely binary. The Digital Public Goods Standard, for example, has nine indicators, each with multiple sub-requirements. A criterion that says "Qualifies as DPG" without a compliance threshold delegates interpretation to reviewers: one reviewer may require all nine indicators; another may require six; a third may accept a DPG nomination as sufficient evidence regardless of indicator status. The compliance threshold eliminates this variance by specifying what passage means before any application is reviewed.
+**Why it is required:** External standards are rarely binary. The Digital Public Goods Standard has nine indicators, each with multiple sub-requirements. A criterion that says "Qualifies as DPG" without a compliance threshold delegates interpretation to reviewers: one reviewer may require all nine indicators; another may require six; a third may accept a DPG nomination as sufficient evidence regardless of indicator status. The compliance threshold eliminates this variance by specifying what passage means before any application is reviewed.
 
 **Failure mode when absent:** Reviewer-level interpretation variance becomes the de facto standard. Outcomes are determined partly by which reviewer a given application receives. The data cannot support cross-cohort comparison because the threshold was not held constant.
 
@@ -142,13 +146,13 @@ WALKRI specifies a three-stage process for producing WALKRI-conformant fields. T
 
 ### 4.1 Stage 1: Ideation
 
-**What the stage produces:** An ideation record. The ideation record is a structured document that names each information need the form is intended to satisfy, the decision that each piece of information will inform, and the failure mode if that information is missing or imprecise. The ideation record is not published to applicants; it governs the field design process in Stage 2.
+**What the stage produces:** An ideation record: a structured document that names each information need the form is intended to satisfy, the decision that each piece of information will inform, and the failure mode if that information is missing or imprecise. The ideation record is not published to applicants; it governs the field design process in Stage 2.
 
 **Who performs it:** The question-holder: the funder, program, organization, or researcher who will use the collected data to make decisions.
 
 **How it connects to Stage 2:** Each information need in the ideation record becomes the input for one field specification in Stage 2. The criterion intent for each Stage 2 field is derived directly from the ideation record's description of what the information need actually is. If a Stage 2 field cannot be traced to an ideation record entry, that field lacks a documented rationale and cannot be certified.
 
-**Failure mode when skipped:** Fields created without an ideation record tend to be labels rather than instruments. The creator encodes what they assumed the question was rather than what they actually needed to know. The resulting form may cover the territory it was supposed to cover, but the mapping between the form's fields and the decisions it informs is implicit and unverifiable. When the data fails to support the decision it was collected for, there is no ideation record to diagnose where the design broke down.
+**Failure mode when skipped:** Fields created without an ideation record tend to be labels rather than instruments. The creator encodes what they assumed the question was rather than what they actually needed to know. When the data fails to support the decision it was collected for, there is no ideation record to diagnose where the design broke down.
 
 ### 4.2 Stage 2: Specification
 
@@ -158,9 +162,9 @@ WALKRI specifies a three-stage process for producing WALKRI-conformant fields. T
 
 **How it connects to Stage 3:** The operational definition and examples in the Stage 2 specification are the source material for Stage 3 applicant guidance. Stage 3 does not add new definitional content; it translates the Stage 2 specification into applicant-facing language. If the Stage 2 specification is incomplete, the Stage 3 guidance will be incomplete.
 
-**The pre-publishing quality gate:** Before any field is shown to applicants, it must pass an AI-assisted review that assesses the field specification against Parts III through VII of this standard. The review flags any of the five criterion specification requirements that are absent or insufficient. Flags are either resolved (the specification is revised to address the flag) or overridden. An override requires a documented justification explaining why the flag does not apply to this field's context. Overrides are recorded as conformance choices in the conformance record produced at certification; they are not failures, but they are disclosed. A field with unresolved and undocumented flags is not eligible for certification.
+**The pre-publishing quality gate:** Before any field is shown to applicants, it must pass an AI-assisted review that assesses the field specification against Parts III through VII of this standard. The review flags any of the five criterion specification requirements that are absent or insufficient. Flags are either resolved (the specification is revised to address the flag) or overridden. An override requires a documented justification explaining why the flag does not apply to this field's context. Overrides are recorded in the conformance record produced at certification; they are not failures, but they are disclosed. A field with unresolved and undocumented flags is not eligible for certification.
 
-**Failure mode when skipped:** Fields are built directly from the ideation record without passing through formal specification. The resulting form may reflect what the question-holder intended, but the intent is embedded in their head rather than in a document. Reviewer inconsistency emerges because there is no specification to adjudicate disputes. Downstream data consumers inherit a dataset with no machine-readable field definitions.
+**Failure mode when skipped:** Fields are built directly from the ideation record without passing through formal specification. The intent is embedded in the question-holder's head rather than in a document. Reviewer inconsistency emerges because there is no specification to adjudicate disputes. Downstream data consumers inherit a dataset with no machine-readable field definitions.
 
 ### 4.3 Stage 3: Applicant Guidance
 
@@ -170,7 +174,7 @@ WALKRI specifies a three-stage process for producing WALKRI-conformant fields. T
 
 **How it connects to Stage 2:** Stage 3 documentation is derived from Stage 2's operational definition and examples. No new definitional content is introduced in Stage 3. The translation from specification language (designed for precision) to applicant language (designed for comprehension) is the core work of this stage.
 
-**Failure mode when skipped:** Even a precisely specified field produces inconsistent responses if applicants cannot interpret it correctly. The failure mode of skipping Stage 3 is structurally identical to the failure mode of an underspecified field: interpretation variance in the applicant population produces nominally consistent data with hidden definitional variance. The difference is that the Stage 2 specification exists to diagnose the problem, whereas when Stage 2 was also skipped, there is no specification to diagnose against.
+**Failure mode when skipped:** Even a precisely specified field produces inconsistent responses if applicants cannot interpret it correctly. The failure mode is structurally identical to the failure mode of an underspecified field: interpretation variance in the applicant population produces nominally consistent data with hidden definitional variance.
 
 ---
 
@@ -178,7 +182,7 @@ WALKRI specifies a three-stage process for producing WALKRI-conformant fields. T
 
 Five data quality standards apply to all fields across all obligation modes. These standards were moved from CROSS Part VIII and are reproduced here as WALKRI's independent quality framework. They apply whether or not CROSS is the governing obligation standard.
 
-For each standard, the assessment question is the question an auditor asks when evaluating a field. The failure mode describes what happens to the data when the standard is not met. The connecting note identifies which criterion specification requirement from Part III the standard most directly enforces.
+For each standard, the assessment question is what an auditor asks when evaluating a field. The failure mode describes what happens to the data when the standard is not met. The connecting note identifies which criterion specification requirement from Part III the standard most directly enforces.
 
 ### 5.1 Validity
 
@@ -226,7 +230,7 @@ For each standard, the assessment question is the question an auditor asks when 
 
 **Failure mode:** Evidence that is technically present but outdated misleads decisions that depend on the current state of the applicant. A three-year-old impact assessment submitted as evidence of current reach produces a favorable data point for a decision that should have been made on current information. The decision is made on stale data and the failure is invisible because the evidence form did not specify a recency requirement.
 
-**Application across field types:** For quantitative indicators, timeliness requires that the evidence form specifies the time period the data must cover relative to the submission date. For binary completion criteria, timeliness requires that the artifact attesting to completion is recent enough to be probative (a license file dated before the program's start may not attest to the applicant's current practice). For qualitative narrative fields, timeliness requires that the scope in the operational definition specifies whether responses must reflect current practice or may reflect historical practice.
+**Application across field types:** For quantitative indicators, timeliness requires that the evidence form specifies the time period the data must cover relative to the submission date. For binary completion criteria, timeliness requires that the artifact attesting to completion is recent enough to be probative. For qualitative narrative fields, timeliness requires that the scope in the operational definition specifies whether responses must reflect current practice or may reflect historical practice.
 
 **Connection to Part III:** Timeliness most directly enforces the evidence form requirement (3.4), because the evidence form is where recency requirements and time-period specifications must appear.
 
@@ -266,9 +270,9 @@ A program that uses DPG qualification as a gate criterion must produce a complia
 
 3. States the minimum threshold for passage. For example: All nine indicators must be satisfied for gate passage. Indicators 1, 2, and 3 are non-waivable. For indicators 4 through 9, an applicant who cannot satisfy an indicator may submit a documented mitigation plan; a maximum of two indicators may be satisfied via mitigation plan.
 
-A reference that says "the project must meet the DPG Standard" without these elements is not a compliance threshold. It is a label. The reviewer who processes applications against this criterion will construct their own threshold, and that construction will not be consistent across the reviewer cohort.
+A reference that says "the project must meet the DPG Standard" without these elements is not a compliance threshold. It is a label.
 
-**The registry distinction.** The Digital Public Goods Alliance registry records past assessments. Registry membership confirms that a project was assessed at some prior point and met the standard at that time. It does not confirm current qualification: the project may have changed, its dependencies may have changed, or the standard itself may have been updated. A compliance threshold that accepts registry membership as evidence of current qualification must state this explicitly and accept the limitation that comes with it. A compliance threshold that requires current indicator assessment must specify which indicators apply and what evidence satisfies each, regardless of whether the project is registered. Leaving the registry question unstated is the most frequently observed DPG compliance threshold failure. It produces evaluators who treat registry membership as the gate, which is a different gate than indicator-level qualification and one the funder may not have intended to set.
+**The registry distinction.** The Digital Public Goods Alliance registry records past assessments. Registry membership confirms that a project was assessed at some prior point and met the standard at that time. It does not confirm current qualification: the project may have changed, its dependencies may have changed, or the standard itself may have been updated. A compliance threshold that accepts registry membership as evidence of current qualification must state this explicitly and accept the limitation that comes with it. A compliance threshold that requires current indicator assessment must specify which indicators apply and what evidence satisfies each, regardless of whether the project is registered. Leaving the registry question unstated is the most frequently observed DPG compliance threshold failure.
 
 ---
 
@@ -296,7 +300,7 @@ WALKRI imposes three schema requirements on organizations that collect data unde
 
 **Consistency across reporting periods:** Field names and their associated definitions must remain consistent across reporting periods unless a versioned change is documented. A field name that appears in two consecutive reporting periods is assumed to refer to the same construct; if the construct has changed, the field must be versioned rather than silently redefined.
 
-**Versioning of changes:** Any change to a field definition produces a new field specification version. The prior definition is retained in the specification record and remains accessible. A downstream consumer who is aggregating data across reporting periods must be able to access the definition that governed each period's data.
+**Versioning of changes:** Any change to a field definition produces a new field specification version. The prior definition is retained in the specification record and remains accessible. A downstream consumer aggregating data across reporting periods must be able to access the definition that governed each period's data.
 
 **Comparability documentation:** Changes that affect comparability across reporting periods must be documented with the date of the change, the nature of the change, and its implications for prior data. If an option was added to a single-select field in a new reporting period, the documentation must state what applicants who selected the nearest equivalent option in prior periods were actually reporting, and whether the new option represents a previously unmeasured category or a refinement of an existing one.
 
@@ -344,7 +348,7 @@ WALKRI is implemented through three product-layer tools. These tools are describ
 
 ### 9.1 WALKRI Ideation Tool
 
-The WALKRI Ideation Tool guides question-holders through Stage 1 of the three-stage process, producing an ideation record. It prompts the question-holder to name each information need, identify the decision it informs, and articulate the failure mode if the information is imprecise or absent. The output is a structured document formatted for direct use as input to the WALKRI Audit Tool in Stage 2.
+The WALKRI Ideation Tool guides question-holders through Stage 1, producing an ideation record. It prompts the question-holder to name each information need, identify the decision it informs, and articulate the failure mode if the information is imprecise or absent. The output is a structured document formatted for direct use as input to the WALKRI Audit Tool in Stage 2.
 
 ### 9.2 WALKRI Audit Tool
 
@@ -358,7 +362,7 @@ The WALKRI Enrichment Layer is a post-submission webhook processing system that 
 
 ## Part X: Companion Documents
 
-WALKRI v0.1.0 is accompanied by six companion documents. This Part briefly describes each.
+WALKRI v0.1.0 is accompanied by six companion documents.
 
 **WALKRI-guidance-0_1_0.md** provides practitioner guidance for traversing the three-stage process. It contains worked examples of ideation records, field specifications, and applicant guidance documents for common field types.
 
@@ -376,7 +380,7 @@ WALKRI v0.1.0 is accompanied by six companion documents. This Part briefly descr
 
 ## Appendix A: Open Design Questions (v0.1.0)
 
-The following questions are genuine open design problems as of v0.1.0. They are recorded here not because they are unimportant but because the right answer is not yet settled. The stakes for each question are stated alongside the question.
+The following questions are genuine open design problems as of v0.1.0. They are recorded here because the right answer is not yet settled. The stakes for each question are stated alongside the question.
 
 **Question 1: Tiered minimum conformance threshold.** The current specification requires all five criterion specification elements at Stage 2 certification. A plausible alternative is a tiered minimum: criterion intent and evidence form are required at Stage 1 (ideation audit), and all five elements are required at Stage 2 (publication certification). The rationale for the tier is that Stage 1 is an internal design document and imposing full specification requirements at that stage may slow down ideation in ways that reduce the quality of the ideation record rather than improving it. The risk is that organizations treat Stage 1 certification as sufficient and never complete Stage 2, producing fields that are partially specified and receiving credit for a partial pass. Resolution requires empirical evidence on how organizations actually use the tiered process.
 

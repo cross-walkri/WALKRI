@@ -17,7 +17,7 @@ Version 0.1.0 | 2026-05-15 | CC0
 
 These examples demonstrate what WALKRI failures look like in practice and what conformant specifications would have looked like in their place. They are drawn from the Octant Epoch 12 grant evaluation cycle. Octant is a web3 public goods funding program; in Epoch 12, 29 grant applications were evaluated using a form built in Fillout. Several fields in that form produced inconsistent applicant responses that complicated evaluation because those fields lacked precise operational definitions, compliance thresholds, or evidence forms. The cases documented here are real specification failures from that cycle, reconstructed in WALKRI's five-element format to show what the fields should have contained before any application was accepted.
 
-Each example follows the same structure: the field as published, a description of what happened in evaluation, and a WALKRI-conformant specification showing all five elements. The final example is a positive case, showing a field that would pass WALKRI audit without modification. The last two sections draw quantitative observations from the Epoch 12 experience and close with a summary written for practitioners who run grant evaluations.
+Each example follows the same structure: the field as published, a description of what happened in evaluation, and a WALKRI-conformant specification showing all five elements. The final example is a positive case, showing a field that would pass WALKRI audit without modification. The last two sections draw quantitative observations from the Epoch 12 experience and close with a summary for practitioners who run grant evaluations.
 
 The before/after blocks use structured comparison formatting throughout. Prose sections use prose. The goal is not to criticize the Octant team's execution; the goal is to make the failure modes concrete enough that they are recognizable and fixable in future cycles.
 
@@ -179,7 +179,7 @@ This example shows a field that passes WALKRI audit without modification. It is 
 
 **Field certified at Standard level without modification.**
 
-This field took more time to specify than typical form design. That time investment is recovered in evaluation: reviewers applying this field to 29 applications do not make a single discretionary judgment about what counts as prior funding. The operational definition makes those judgments once, in advance, for the entire cohort.
+This field took more time to specify than typical form design. That time investment is recovered in evaluation: reviewers applying this field to 29 applications make no discretionary judgments about what counts as prior funding. The operational definition makes those judgments once, in advance, for the entire cohort.
 
 ---
 

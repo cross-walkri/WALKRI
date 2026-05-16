@@ -14,21 +14,21 @@ Version 0.1.0 | 2026-05-15 | CC0
 
 ## Part 1: How to Use This Rubric
 
-This rubric is the assessment instrument for WALKRI (Working Architecture for Legible, Knowledge-Ready Intake). It translates the standard's requirements into specific questions with pass/fail/override logic. Three categories of users apply it: WALKRI auditors conducting formal certification assessments, self-assessment practitioners reviewing their own forms before seeking certification, and AI-assisted audit tools implementing the WALKRI Audit Tool described in Part IX of the standard.
+This rubric translates the standard's requirements into specific questions with pass/fail/override logic. Three categories of users apply it: WALKRI auditors conducting formal certification assessments, self-assessment practitioners reviewing their own forms before seeking certification, and AI-assisted audit tools implementing the WALKRI Audit Tool described in Part IX of the standard.
 
 The rubric is organized around two assessment contexts. The distinction between them determines what an auditor does with findings, not how the findings are generated.
 
-**Pre-publication audit** assesses fields before they are shown to applicants. This is the pre-publishing quality gate described in Part IV of the standard. The auditor applies Parts 2 and 3 of this rubric to each field specification before the form is published. Findings at this stage are actionable: a blocking failure must be resolved or overridden before the form is published. An advisory failure should be resolved but does not prevent publication if documented. Pre-publication audit is the primary use case for this rubric; it is when findings can still change the instrument.
+**Pre-publication audit** assesses fields before they are shown to applicants. This is the pre-publishing quality gate described in Part IV of the standard. Findings at this stage are actionable: a blocking failure must be resolved or overridden before the form is published. An advisory failure should be resolved but does not prevent publication if documented. Pre-publication audit is the primary use case for this rubric; it is when findings can still change the instrument.
 
 **Post-publication audit** assesses fields retrospectively to produce a conformance record. This is the audit conducted when seeking WALKRI certification for a form that was already published and used. The auditor applies the same questions, but the findings inform the conformance record rather than the form design. Blocking failures in a post-publication audit are recorded as unresolved conformance gaps; they downgrade or preclude certification at the relevant tier. The findings also feed the remediation plan for the next form version.
 
-In both contexts, the auditor works field by field. Each field receives an independent assessment. A field that passes all requirements does not carry any other field's failures; a field that fails does not contaminate the assessment of adjacent fields.
+In both contexts, the auditor works field by field. Each field receives an independent assessment.
 
 ---
 
 ## Part 2: Criterion Specification Assessment
 
-Part 2 covers the five criterion specification requirements from Part III of the standard. These requirements apply at the field design stage and are assessed by the auditor against the field specification document, not against applicant responses. The auditor is asking: is this field specification complete enough to support consistent interpretation by applicants and reviewers?
+Part 2 covers the five criterion specification requirements from Part III of the standard. These requirements apply at the field design stage and are assessed against the field specification document, not against applicant responses. The auditor is asking: is this field specification complete enough to support consistent interpretation by applicants and reviewers?
 
 The requirements must be assessed in the order presented. Criterion intent is assessed first because its absence makes all subsequent assessments meaningless: without a criterion intent, there is no basis for evaluating whether the operational definition, response form, evidence form, or compliance threshold are appropriate.
 
@@ -127,7 +127,7 @@ Edge case determination is advisory when the field has low ambiguity by design, 
 
 ## Part 3: Data Quality Standards Assessment
 
-Part 3 covers the five data quality standards from Part V of the standard. These standards apply at two moments: as design requirements (the field specification should satisfy them before publication) and as reviewer-facing assessment questions (applied during gate review of submitted data). The assessment questions in this Part are framed for gate reviewers assessing whether submitted data meets the quality level the field specification claimed to establish. Pre-publication auditors apply the same questions prospectively, asking whether the field specification as designed would produce data that could pass these assessments.
+Part 3 covers the five data quality standards from Part V of the standard. These standards apply at two moments: as design requirements (the field specification should satisfy them before publication) and as reviewer-facing assessment questions (applied during gate review of submitted data). Pre-publication auditors apply the same questions prospectively, asking whether the field specification as designed would produce data that could pass these assessments.
 
 A finding in Part 3 does not by itself fail a field at the specification stage, but recurring patterns across findings diagnose systematic gaps in the field specification. The connection between each data quality standard and the criterion specification requirement it most directly enforces is noted for each.
 
@@ -177,7 +177,7 @@ A finding in Part 3 does not by itself fail a field at the specification stage, 
 
 **Timeliness finding:** Evidence from a prior period is presented as current without a documented rationale for why prior-period evidence is representative of the current period. The field's evidence form specified a recency requirement and the submitted evidence does not meet it. Alternatively, the evidence form did not specify a recency requirement, and the submitted evidence is dated far enough before the assessment period that its currency is in reasonable doubt.
 
-**Connection to specification:** A timeliness finding traces back to evidence form (2.4). The evidence form is where recency requirements and time-period coverage must be specified; a timeliness failure at the data assessment stage is typically a design gap in the evidence form rather than a data submission error.
+**Connection to specification:** A timeliness finding traces back to evidence form (2.4). A timeliness failure at the data assessment stage is typically a design gap in the evidence form rather than a data submission error.
 
 ---
 

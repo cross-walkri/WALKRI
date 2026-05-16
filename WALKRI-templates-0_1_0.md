@@ -12,7 +12,7 @@ Version 0.1.0 | 2026-05-15 | CC0
 
 These templates correspond to the four artifacts produced by the WALKRI three-stage process: the Ideation Record (Stage 1), the WALKRI Field Specification (Stage 2), the Applicant Guidance Document (Stage 3), and the WALKRI Audit Report (conformance record). Each template includes a brief description and field-by-field instructions. Placeholder text appears in [brackets].
 
-These templates are companions to WALKRI-standard-0_1_0.md. Practitioners should read the standard before using the templates; the templates do not repeat the rationale for each requirement.
+Read the standard before using the templates; the templates do not repeat the rationale for each requirement.
 
 ---
 
@@ -20,7 +20,7 @@ These templates are companions to WALKRI-standard-0_1_0.md. Practitioners should
 
 ### What it is and when it is used
 
-The Ideation Record is the Stage 1 output. It is an internal document, not shared with applicants, that captures the question-holder's information needs before any field is designed. Each entry in the record names one information need, traces it to a specific decision, and states the failure mode if the data turns out to be missing or imprecise.
+The Ideation Record is the Stage 1 output. It is an internal document, not shared with applicants, that captures the question-holder's information needs before any field is designed. Each entry names one information need, traces it to a specific decision, and states the failure mode if the data turns out to be missing or imprecise.
 
 Each entry in the Ideation Record becomes the source for one field specification in Stage 2. A Stage 2 field that cannot be traced to an Ideation Record entry lacks a documented rationale and cannot be certified.
 
@@ -284,7 +284,7 @@ Incomplete response example: [One example of a common incomplete answer, with a
 
 The Applicant Guidance Document is the Stage 3 output. It is the applicant-facing document that accompanies the form. It is derived entirely from Section D of the WALKRI Field Specifications; no new definitional content is introduced here.
 
-The Applicant Guidance Document does not expose the Ideation Record, the criterion specification language, or the internal data quality notes from the Field Specification. Its purpose is to help applicants produce complete, verifiable responses. The document explains what each field is asking, what a complete response looks like, and what mistakes to avoid.
+The Applicant Guidance Document does not expose the Ideation Record, the criterion specification language, or the internal data quality notes from the Field Specification. Its purpose is to help applicants produce complete, verifiable responses.
 
 Produce one Applicant Guidance Document per form version. Update it whenever a Field Specification changes and the change affects what applicants need to know.
 
@@ -487,7 +487,7 @@ Certification expiry: [Date of next required re-audit. Re-audit is required at
 
 ## Notes on Using These Templates
 
-These templates are designed to be used in sequence. The Ideation Record produces the inputs for the Field Specification. The Field Specification Section D produces the inputs for the Applicant Guidance Document. The Field Specification Sections A through C produce the inputs for the Audit Report.
+These templates are designed to be used in sequence. The Ideation Record produces the inputs for the Field Specification. Field Specification Section D produces the inputs for the Applicant Guidance Document. Field Specification Sections A through C produce the inputs for the Audit Report.
 
 Information flows in one direction through the process: from ideation to specification to applicant guidance. No new definitional content is introduced in Stage 3. If the Applicant Guidance Document needs to say something that is not in the Field Specification, the specification is incomplete and should be revised before Stage 3 begins.
 

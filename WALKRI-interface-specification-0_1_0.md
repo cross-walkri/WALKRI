@@ -14,25 +14,25 @@ Version 0.1.0 | 2026-05-15 | CC0
 
 ## Part 1: Purpose
 
-This document is written for implementers building tools that connect to WALKRI: form builders, data collection platforms, obligation standard toolchains, and downstream data consumers. It provides the technical contracts for each of WALKRI's three interfaces.
+This document is for implementers building tools that connect to WALKRI: form builders, data collection platforms, obligation standard toolchains, and downstream data consumers. It provides the technical contracts for each of WALKRI's three interfaces.
 
-The relationship between this document and the standard is precise. The WALKRI standard (WALKRI-standard-0_1_0.md) defines *what* is required: the five criterion specification elements, the three-stage process, the data quality standards, and the certification model. This document defines *how* those requirements are communicated across system boundaries. Where the standard says "fields must carry provenance information," this document specifies the exact JSON structure that carries it. Where the standard says "secondary compatible formats are recognized," this document specifies the field-by-field mappings.
+The WALKRI standard defines *what* is required: the five criterion specification elements, the three-stage process, the data quality standards, and the certification model. This document defines *how* those requirements are communicated across system boundaries. Where the standard says "fields must carry provenance information," this document specifies the exact JSON structure that carries it. Where the standard says "secondary compatible formats are recognized," this document specifies the field-by-field mappings.
 
 Three separate interfaces are needed because WALKRI sits at a junction between three fundamentally different kinds of systems, each with its own data model and conformance expectations.
 
-The upward interface connects WALKRI to obligation standards, which are normative frameworks specifying what must be collected. These systems care about declared requirements, gate criteria, and certification tiers. They do not care about JSON Schema internals or webhook delivery.
+WALKRI connects to obligation standards, which are normative frameworks specifying what must be collected. These systems care about declared requirements, gate criteria, and certification tiers. They do not care about JSON Schema internals or webhook delivery.
 
-The lateral interface connects WALKRI to form rendering tools, which are software systems that encode questions as fields and collect responses. These systems care about field types, validation rules, and export formats. They have their own data models (XLSForm, REDCap data dictionaries, JSON Schema) that must be reconciled with WALKRI's field specification requirements.
+WALKRI connects to form rendering tools, which encode questions as fields and collect responses. These systems care about field types, validation rules, and export formats. They have their own data models (XLSForm, REDCap data dictionaries, JSON Schema) that must be reconciled with WALKRI's field specification requirements.
 
-The downstream interface connects WALKRI to data consumers: ML pipelines, researchers, evaluators, and automated analysis systems. These systems care about schema consistency, provenance metadata, and alignment with open data standards such as Croissant, FAIR, and W3C PROV.
+WALKRI connects to data consumers: ML pipelines, researchers, evaluators, and automated analysis systems. These systems care about schema consistency, provenance metadata, and alignment with open data standards such as Croissant, FAIR, and W3C PROV.
 
-Each interface requires a distinct technical contract. A single unified specification would obscure the distinctions and make implementation harder, not easier.
+Each interface requires a distinct technical contract. A single unified specification would obscure the distinctions and make implementation harder.
 
 ---
 
-## Part 2: Upward Interface - Obligation Standards
+## Part 2: Obligation Standards
 
-The upward interface defines how any obligation standard connects to WALKRI. CROSS v0.2.4 is the primary obligation standard that formally references WALKRI; the interface is designed to be generic enough to accommodate any conformant obligation standard.
+This section specifies how any obligation standard connects to WALKRI. CROSS v0.2.4 is the primary obligation standard that formally references WALKRI; the interface is designed to be generic enough to accommodate any conformant obligation standard.
 
 ### 2.1 What an Obligation Standard Provides to WALKRI
 
@@ -76,7 +76,7 @@ An obligation standard that takes this approach must include a version anchor fo
 
 ---
 
-## Part 3: Lateral Interface - Form Providers
+## Part 3: Form Rendering Tools
 
 WALKRI's native format is JSON Schema (draft-07 or later). This section specifies the WALKRI JSON Schema profile: the specific fields, extensions, and constraints that WALKRI adds to base JSON Schema to carry criterion specification information.
 
@@ -123,7 +123,7 @@ Each property maps directly to a WALKRI criterion specification requirement:
 
 The `x-walkri-compliance-threshold` object is required whenever the field references an external standard. When no external standard is referenced, the property must still be present but may carry `{"minimum-threshold": "none"}` to make the absence of a referenced standard explicit rather than leaving the property absent (which would be ambiguous between "no standard referenced" and "this property was not yet specified").
 
-The `x-walkri-operational-definition.exclusion` field accepts the string `"none"` as a valid documented value when there are genuinely no exclusion conditions. This is not the same as leaving the field blank; a blank field is an incomplete specification, while `"none"` is a positive assertion that the field designer has considered exclusions and found none applicable.
+The `x-walkri-operational-definition.exclusion` field accepts the string `"none"` as a valid documented value when there are genuinely no exclusion conditions. A blank field is an incomplete specification; `"none"` is a positive assertion that the field designer has considered exclusions and found none applicable.
 
 ### 3.2 Base JSON Schema Properties for Validation
 
@@ -159,7 +159,7 @@ The `bind::walkri:evidence` column follows XLSForm's bind namespace convention. 
 
 XLSForm import into a WALKRI tool produces a WALKRI field specification draft, not a complete specification. The draft populates available fields from the XLSForm columns above but leaves `x-walkri-operational-definition.unit-of-analysis` and `x-walkri-operational-definition.edge-case` for Stage 2 completion. Importing an XLSForm does not produce a WALKRI-conformant specification automatically; it produces the starting material for Stage 2 work.
 
-XLSForm export from a WALKRI tool must preserve all `x-walkri-` metadata columns. A WALKRI tool that strips these columns on export is not laterally compatible.
+XLSForm export from a WALKRI tool must preserve all `x-walkri-` metadata columns. A WALKRI tool that strips these columns on export is not compatible at this interface.
 
 ### 3.4 REDCap Data Dictionary Compatibility
 
@@ -180,10 +180,10 @@ REDCap import produces a WALKRI field specification draft requiring Stage 2 comp
 
 ### 3.5 Form Tool Compatibility Checklist
 
-A form tool must satisfy the following requirements to be WALKRI-compatible at the lateral interface:
+A form tool must satisfy the following requirements to be WALKRI-compatible:
 
 - Export form definitions as JSON Schema or XLSForm, with all `x-walkri-` properties preserved in the export.
-- Accept JSON Schema import with custom `x-walkri-` properties intact; a tool that strips unknown properties on import is not laterally compatible.
+- Accept JSON Schema import with custom `x-walkri-` properties intact; a tool that strips unknown properties on import is not compatible.
 - Support webhook delivery of form responses to the WALKRI Enrichment Layer. The webhook payload must include the field name, the response value, the form version, and a submission timestamp.
 - Support field-level metadata, not only form-level metadata. WALKRI's provenance and specification properties are per-field; a tool that only permits metadata at the form level cannot carry WALKRI field specifications correctly.
 
@@ -191,9 +191,9 @@ A tool that meets all four requirements is WALKRI-compatible. A tool that meets 
 
 ---
 
-## Part 4: Downstream Interface - Data Consumers
+## Part 4: Data Consumers
 
-The downstream interface specifies what WALKRI-enriched output must contain for each form response, and how that output aligns with the Croissant, FAIR, and W3C PROV standards.
+This section specifies what WALKRI-enriched output must contain for each form response, and how that output aligns with the Croissant, FAIR, and W3C PROV standards.
 
 ### 4.1 The Provenance Envelope
 
@@ -227,7 +227,7 @@ The `field-specification-version` may be either a single semver string (if all f
 }
 ```
 
-The `form-tool` value is the tool class identifier (the tool's product name or platform name), not the specific deployment URL. This is a deliberate design choice: the downstream consumer needs to know the class of tool to assess any known constraints it imposes on response capture; they do not need the instance URL, which changes across deployments and may expose internal infrastructure.
+The `form-tool` value is the tool class identifier (the tool's product name or platform name), not the specific deployment URL. The downstream consumer needs to know the class of tool to assess any known constraints it imposes on response capture; they do not need the instance URL, which changes across deployments and may expose internal infrastructure.
 
 The `certification-level` field reports the certification tier achieved by the form. A form that has never been audited by the WALKRI Audit Tool carries `"uncertified"`. A form that was audited but did not achieve the minimum conformance threshold also carries `"uncertified"`. Only forms that have passed audit carry `"standard"` or `"enhanced"`.
 
