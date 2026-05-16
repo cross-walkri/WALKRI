@@ -4,7 +4,7 @@ version: 0.1.0
 date: 2026-05-15
 license: CC0
 status: Working draft. Initial specification. Companion standard to CROSS v0.2.4.
-companion_standard: CROSS (github.com/durgadasji/CROSS)
+companion_standard: CROSS (github.com/cross-walkri/CROSS)
 brand: CROSS+WALKRI
 related_documents:
   - WALKRI-interface-specification-0_1_0.md
@@ -28,7 +28,7 @@ WALKRI (Working Architecture for Legible, Knowledge-Ready Intake) is a standard 
 
 ### The Problem
 
-Funders, organizations, and programs regularly publish intake fields without operationally defining them. A dropdown labeled "Contributions" offers single-select options with no definitions. A gate criterion labeled "Qualifies as DPG" appears without specifying which of the nine Digital Public Goods Standard indicators apply, which evidence satisfies each, or what threshold constitutes passage. These are not edge cases; they are the default condition of most structured data collection in the grant, program, and research evaluation space.
+Funders, organizations, and programs regularly publish intake fields without operationally defining them. A dropdown labeled "Contributions" offers single-select options with no definitions. A gate criterion labeled "Qualifies as DPG" appears without specifying which of the nine Digital Public Goods Standard indicators apply, which evidence satisfies each, what threshold constitutes passage, or whether registry membership is accepted as a proxy for current indicator qualification. Each of these gaps produces a different failure: one reviewer checks the registry; another assesses indicators directly; a third accepts a self-assessment; none of them are wrong given what the criterion actually says. These are not edge cases; they are the default condition of most structured data collection in the grant, program, and research evaluation space.
 
 The consequences are consistent and predictable. Applicants interpret underspecified fields differently from one another and from reviewer expectations. Reviewers apply inconsistent interpretations across a review cohort, producing outcomes that are not replicable. Downstream analysts inherit a dataset whose nominal consistency conceals definitional variance; analysis built on that data is suspect at the foundation, not because the analysis is wrong, but because the instrument was never precise enough to support it.
 
@@ -132,7 +132,7 @@ For text fields and qualitative narrative responses, the operational definition 
 
 **Failure mode when absent:** Reviewer-level interpretation variance becomes the de facto standard. Outcomes are determined partly by which reviewer a given application receives. The data cannot support cross-cohort comparison because the threshold was not held constant.
 
-**Worked illustration (DPG Standard):** A program requiring Digital Public Good status as a gate criterion must specify a compliance threshold that enumerates all nine indicators of the DPG Standard (relevance to a Sustainable Development Goal; use of approved open licenses; clear ownership; platform independence; documentation; non-extraction of data; adherence to privacy and applicable laws; adherence to standards and best practices; and responsible data use policies), states which evidence satisfies each indicator (e.g., "Indicator 2 requires a clearly stated SPDX license identifier in the project repository"), and names the minimum threshold for passage (e.g., "All nine indicators must be satisfied; indicators 1, 2, and 3 are non-waivable"). A reference that says "the project must meet the DPG Standard" without this compliance threshold is not a criterion specification; it is a label.
+**Worked illustration (DPG Standard):** A program requiring Digital Public Good status as a gate criterion must specify a compliance threshold that enumerates all nine indicators of the DPG Standard (relevance to a Sustainable Development Goal; use of approved open licenses; clear ownership; platform independence; documentation; non-extraction of data; adherence to privacy and applicable laws; adherence to standards and best practices; and responsible data use policies), states which evidence satisfies each indicator (e.g., "Indicator 2 requires a clearly stated SPDX license identifier in the project repository"), and names the minimum threshold for passage (e.g., "All nine indicators must be satisfied; indicators 1, 2, and 3 are non-waivable"). The compliance threshold must also address the registry question explicitly: the Digital Public Goods Alliance maintains a registry of projects that have previously been assessed against the standard. Registry membership is a record of past assessment, not a guarantee of current qualification. A project in the registry may have changed substantially since assessment; a project not in the registry may currently satisfy all nine indicators. The compliance threshold must state whether registry membership is accepted as sufficient evidence of current qualification, or whether independent indicator assessment is required regardless of registry status. Leaving this unstated produces the most common DPG evaluation failure: reviewers who check the registry as a proxy for indicator assessment, applying a standard the funder did not actually specify. A reference that says "the project must meet the DPG Standard" without this compliance threshold is not a criterion specification; it is a label.
 
 ---
 
@@ -267,6 +267,8 @@ A program that uses DPG qualification as a gate criterion must produce a complia
 3. States the minimum threshold for passage. For example: All nine indicators must be satisfied for gate passage. Indicators 1, 2, and 3 are non-waivable. For indicators 4 through 9, an applicant who cannot satisfy an indicator may submit a documented mitigation plan; a maximum of two indicators may be satisfied via mitigation plan.
 
 A reference that says "the project must meet the DPG Standard" without these elements is not a compliance threshold. It is a label. The reviewer who processes applications against this criterion will construct their own threshold, and that construction will not be consistent across the reviewer cohort.
+
+**The registry distinction.** The Digital Public Goods Alliance registry records past assessments. Registry membership confirms that a project was assessed at some prior point and met the standard at that time. It does not confirm current qualification: the project may have changed, its dependencies may have changed, or the standard itself may have been updated. A compliance threshold that accepts registry membership as evidence of current qualification must state this explicitly and accept the limitation that comes with it. A compliance threshold that requires current indicator assessment must specify which indicators apply and what evidence satisfies each, regardless of whether the project is registered. Leaving the registry question unstated is the most frequently observed DPG compliance threshold failure. It produces evaluators who treat registry membership as the gate, which is a different gate than indicator-level qualification and one the funder may not have intended to set.
 
 ---
 
