@@ -32,7 +32,7 @@ Funders, organizations, and programs regularly publish intake fields without ope
 
 The consequences are predictable. Applicants interpret underspecified fields differently from one another and from reviewer expectations. Reviewers apply inconsistent interpretations across a cohort, producing non-reproducible outcomes. Downstream analysts inherit a dataset whose nominal consistency conceals definitional variance; analysis built on that data is suspect at the foundation, not because the analysis is wrong, but because the instrument was never precise enough to support it.
 
-The same precision obligation that CROSS (Common Reporting Outcome Standards Schema) imposes on applicant indicators has not been applied to the fields and criteria funders use to collect data. WALKRI closes that gap. It operates at the instrumentation and collection layer: the point where a question is encoded as a field before any applicant ever sees it.
+The precision requirements that apply to what applicants must demonstrate have not been applied to the fields and criteria funders use to collect that demonstration. WALKRI closes that gap. It operates at the instrumentation and collection layer: the point where a question is encoded as a field before any applicant ever sees it.
 
 ### What WALKRI Does
 
