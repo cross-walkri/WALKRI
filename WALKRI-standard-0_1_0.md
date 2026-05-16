@@ -3,7 +3,7 @@ title: WALKRI - Working Architecture for Legible, Knowledge-Ready Intake
 version: 0.1.0
 date: 2026-05-15
 license: CC0
-status: Working draft. Initial specification. Companion standard to CROSS v0.2.4.
+status: Working draft. Initial specification.
 companion_standard: CROSS (github.com/cross-walkri/CROSS)
 brand: CROSS+WALKRI
 related_documents:
@@ -42,9 +42,9 @@ WALKRI is not a form builder. It does not render forms, generate user interfaces
 
 WALKRI is portable. It functions as a companion to any obligation standard that specifies what data must be collected, or it can be used independently by any organization that wants to improve its own data collection practices without reference to an external obligation framework.
 
-### The CROSS+WALKRI Relationship
+### CROSS and WALKRI
 
-CROSS specifies what must be collected: the indicators, evidence requirements, and gate criteria that programs and applicants must satisfy. WALKRI specifies how those fields must be defined so that what gets collected matches what was required. CROSS tells a program that applicants must demonstrate open licensing; WALKRI tells the program how to define the open licensing field precisely enough that all applicants interpret it consistently, all reviewers assess it by the same standard, and the resulting data can be trusted by downstream analysis. Together they are branded CROSS+WALKRI. The two standards are designed to be used together, but each is independently operable.
+CROSS (Common Reporting Outcome Standards Schema) is one obligation standard that formally references WALKRI. CROSS specifies what must be collected; WALKRI specifies how those fields must be defined so that what gets collected matches what was required. Other obligation standards may reference WALKRI in the same way. The two standards are each independently operable.
 
 ---
 
@@ -54,13 +54,11 @@ WALKRI has three relationships, each requiring a defined connection.
 
 ### 2.1 Obligation Standards
 
-WALKRI connects to whatever framework specifies what must be collected. CROSS is the primary example; the connection is generic, so WALKRI works with any obligation standard.
-
 An obligation standard specifies what must be collected: the indicators, criteria, and evidence requirements that constitute a complete response. WALKRI specifies how those fields must be defined so that the collection produces the data required by the obligation standard.
 
-CROSS references WALKRI for its field specification requirements, data quality standards, and external standard reference protocol. The boundary between the two standards is documented in WALKRI-CROSS-boundary-0_1_0.md. A conformant obligation standard provides: a named set of collection requirements; a version identifier that can serve as a reference anchor; and, optionally, a designated mapping to WALKRI's five criterion specification elements.
+A conformant obligation standard provides: a named set of collection requirements; a version identifier that can serve as a reference anchor; and, optionally, a designated mapping to WALKRI's five criterion specification elements.
 
-An obligation standard that formally references WALKRI must specify, for each of its collection requirements, which WALKRI criterion specification elements it enforces and at what threshold. CROSS does this in its Gate Criterion Specification (Part IV). Other obligation standards may structure this mapping differently; WALKRI accepts any mapping that is explicit, versioned, and auditable.
+An obligation standard that formally references WALKRI must specify, for each of its collection requirements, which WALKRI criterion specification elements it enforces and at what threshold. Obligation standards may structure this mapping differently; WALKRI accepts any mapping that is explicit, versioned, and auditable.
 
 Organizations using WALKRI without any obligation standard use Part III of this document directly as their specification authority.
 
@@ -180,7 +178,7 @@ WALKRI specifies a three-stage process for producing WALKRI-conformant fields. T
 
 ## Part V: Data Quality Standards
 
-Five data quality standards apply to all fields across all obligation modes. These standards were moved from CROSS Part VIII and are reproduced here as WALKRI's independent quality framework. They apply whether or not CROSS is the governing obligation standard.
+Five data quality standards apply to all fields across all obligation modes. They apply whether or not any external obligation standard governs the collection.
 
 For each standard, the assessment question is what an auditor asks when evaluating a field. The failure mode describes what happens to the data when the standard is not met. The connecting note identifies which criterion specification requirement from Part III the standard most directly enforces.
 

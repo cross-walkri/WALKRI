@@ -32,7 +32,7 @@ Each interface requires a distinct technical contract. A single unified specific
 
 ## Part 2: Obligation Standards
 
-This section specifies how any obligation standard connects to WALKRI. CROSS v0.2.4 is the primary obligation standard that formally references WALKRI; the interface is designed to be generic enough to accommodate any conformant obligation standard.
+This section specifies how any obligation standard connects to WALKRI. The interface is generic; any conformant obligation standard may use it.
 
 ### 2.1 What an Obligation Standard Provides to WALKRI
 
@@ -56,13 +56,11 @@ For each field in a WALKRI-certified form, WALKRI produces:
 
 **The field specification version governing each gate assessment.** Because field specifications evolve independently of the standard, the conformance record binds the assessment to a specific field specification version. This version anchor is the mechanism that ensures a downstream consumer can determine which definition governed the data collected in any given reporting period.
 
-### 2.3 The CROSS-Specific Connection
+### 2.3 CROSS Connection
 
-CROSS v0.2.4 references WALKRI in two places: Gate Criterion Specification (Part IV) and Data Quality Standards (Part VIII).
+CROSS references WALKRI for Gate Criterion Specification and Data Quality Standards. A CROSS-conformant program satisfies both references by running all gate criterion fields through WALKRI audit before the round opens. The enforcement mechanism is the Grant Configurator's field clarity gate: no field that fails WALKRI audit (with unresolved, undocumented flags) may be published to applicants.
 
-A CROSS-conformant program satisfies both references by running all gate criterion fields through WALKRI audit before the round opens. The mechanism is the Grant Configurator's field clarity gate: no field that fails WALKRI audit (with unresolved, undocumented flags) may be published to applicants. This is not an optional quality check; it is the enforcement mechanism for CROSS's data quality requirements.
-
-The CROSS-WALKRI boundary document (WALKRI-CROSS-boundary-0_1_0.md) specifies, for each CROSS requirement, whether CROSS or WALKRI is the governing authority. Implementers deploying both standards should consult that document before designing their toolchain.
+Implementers deploying CROSS and WALKRI together should consult WALKRI-CROSS-boundary-0_1_0.md, which specifies, for each CROSS requirement, whether CROSS or WALKRI is the governing authority.
 
 ### 2.4 Generic Connection for Non-CROSS Obligation Standards
 

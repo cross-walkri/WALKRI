@@ -124,17 +124,15 @@ When the Stage 2 specification is complete, Stage 3 should take significantly le
 
 ---
 
-## Part 5: Using WALKRI Without CROSS
+## Part 5: Using WALKRI Without an Obligation Standard
 
-WALKRI is designed as a companion to CROSS but operates independently. Organizations that want to improve data collection quality without adopting any external obligation framework can use WALKRI's three-stage process and five criterion specification requirements as their complete specification authority.
+Organizations that want to improve data collection quality without adopting any external obligation framework use WALKRI's three-stage process and five criterion specification requirements as their complete specification authority. Part III of the standard is the direct specification authority in this case. Nothing in the three-stage process or the five criterion specification requirements assumes that any external obligation standard governs what is being collected.
 
-The standard itself addresses this directly: organizations using WALKRI without any obligation standard use Part III of the standard directly as their specification authority. Nothing in the three-stage process or the five criterion specification requirements assumes that CROSS or any other obligation standard governs what is being collected.
+**The compliance threshold requirement without an external obligation standard.** When no external obligation standard is referenced, the compliance threshold requirement applies only to external standards the form itself references. A form that refers to DPG qualification, OSI-approved licenses, or any other external framework must specify a compliance threshold for that reference. A form that uses only its own operational definitions and does not reference any external standard does not need a compliance threshold for any field.
 
-**The only difference when operating without an external obligation standard.** When no external obligation standard is referenced, the compliance threshold requirement applies only to external standards the form itself references. A form that refers to DPG qualification, OSI-approved licenses, or any other external framework must specify a compliance threshold for that reference, regardless of whether CROSS governs the form. A form that uses only its own operational definitions and does not reference any external standard does not need a compliance threshold for any field.
+When an obligation standard such as CROSS governs the form, that standard's gate criteria may generate compliance threshold requirements for specific fields because the obligation standard specifies what external standards the program must enforce and how. The other four requirements, criterion intent, operational definition, response form, and evidence form, apply identically whether or not an obligation standard is present.
 
-When CROSS is the governing obligation standard, CROSS's gate criteria may generate compliance threshold requirements for specific fields because CROSS specifies what external standards the program must enforce and how. When CROSS is absent, the compliance threshold requirement is narrower: it applies only to external standards that the form designer chose to reference, not to CROSS gates. The other four requirements, criterion intent, operational definition, response form, and evidence form, apply identically whether CROSS is present or absent.
-
-**Practical starting point for independent adoption.** An organization adopting WALKRI without CROSS should begin with the ideation session described in Part 2. The diagnostic question, "what decision will this data inform, and what is the failure mode if the data is missing or imprecise?", applies regardless of what the form is for or what obligation standard, if any, governs it.
+**Starting point for independent adoption.** Begin with the ideation session described in Part 2. The diagnostic question, "what decision will this data inform, and what is the failure mode if the data is missing or imprecise?", applies regardless of what the form is for.
 
 ---
 
