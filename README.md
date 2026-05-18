@@ -6,7 +6,7 @@ Version 0.1.4 | 2026-05-18 | CC0
 
 Every intake form has questions. No standard has ever required those questions to function as measurement instruments before anyone answers them. WALKRI is the first.
 
-![GIGO pipeline: obligation never specified and questions not designed to measure enter a funnel, producing data that cannot be compared, aggregated, or trusted. No existing tool touches the source.](assets/gigo-pipeline.png)
+![GIGO pipeline: obligation never specified and questions not designed to measure enter a funnel, producing data that cannot be compared, aggregated, or trusted. No existing tool touches the source.](assets/cross-walkri-gigo-problem.png)
 
 A field that does not specify what it measures is a label. Labels produce responses. They do not produce data. The difference matters at every layer of the grants ecosystem: a reviewer cannot assess what was not defined, an analyst cannot aggregate what was not measured consistently, and a funder cannot verify what was never specified. WALKRI addresses this at the source, before any applicant sees the form.
 
@@ -16,7 +16,7 @@ WALKRI is a companion standard to CROSS (Common Reporting Outcome Standards Sche
 
 ## The label problem
 
-![Label vs measurement instrument: 'Is this project open source?' shown as a bare label on the left, and as a structured instrument with qualifying licenses, non-qualifying examples, and evidence requirements on the right. The same question. The difference is whether it measures anything.](assets/label-vs-instrument.png)
+![Label vs measurement instrument: 'Is this project open source?' shown as a bare label on the left, and as a structured instrument with qualifying licenses, non-qualifying examples, and evidence requirements on the right. The same question. The difference is whether it measures anything.](assets/walkri-label-vs-instrument.png)
 
 The same question can be a label or a measurement instrument depending on how it is specified. The difference determines whether the data it produces is trustworthy.
 
@@ -74,7 +74,7 @@ Field quality at the specification stage compounds upward through every layer of
 
 ## Where WALKRI sits in the stack
 
-![CROSS+WALKRI stack: any form builder or grants platform below, CROSS+WALKRI in the middle providing obligation architecture and field quality, Web3 and institutional standards above. One conformant round, both directions, no extra work.](assets/stack-diagram.png)
+![CROSS+WALKRI stack: any form builder or grants platform below, CROSS+WALKRI in the middle providing obligation architecture and field quality, Web3 and institutional standards above. One conformant round, both directions, no extra work.](assets/cross-walkri-compatibility-stack.png)
 
 WALKRI operates on JSON Schema, which underlies every major form builder. Fillout, Typeform, KoBoToolbox, REDCap, Charmverse, and any comparable tool already output JSON Schema. A WALKRI-conformant field specification produced in any of those tools is equally conformant as one produced in a dedicated audit instrument. Programs do not change their stack. They specify their fields correctly before the form goes live.
 
@@ -86,7 +86,7 @@ Both CROSS and WALKRI are published CC0. No licensing, no arrangements, no asks.
 
 ## Who this is built for
 
-![Cascade pyramid: Grantees and Reviewers at the base, Operators and Platform Providers, Analysts and Institutional Funders, Strategic Planners at the apex. Smaller decisions at the base; billions at stake at the top. Strategic level value requires ecosystem-wide adoption to materialise.](assets/for-all-pyramid.png)
+![Cascade pyramid: Grantees and Reviewers at the base, Operators and Platform Providers, Analysts and Institutional Funders, Strategic Planners at the apex. Smaller decisions at the base; billions at stake at the top. Strategic level value requires ecosystem-wide adoption to materialise.](assets/cross-walkri-value-cascade.png)
 
 WALKRI serves all six layers of the grants ecosystem without modification. The field quality it requires at the intake layer compounds upward: better specified fields produce better applicant responses, more consistent reviewer assessments, more defensible funding decisions, more trustworthy portfolio data, and eventually better strategic allocation decisions at the top of the stack.
 
