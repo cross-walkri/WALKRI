@@ -16,6 +16,8 @@ WALKRI is a companion standard to CROSS (Common Reporting Outcome Standards Sche
 
 ## The label problem
 
+![Label vs measurement instrument: 'Is this project open source?' shown as a bare label on the left, and as a structured instrument with qualifying licenses, non-qualifying examples, and evidence requirements on the right. The same question. The difference is whether it measures anything.](assets/label-vs-instrument.png)
+
 The same question can be a label or a measurement instrument depending on how it is specified. The difference determines whether the data it produces is trustworthy.
 
 **Label version:** "Is this project open source?"
