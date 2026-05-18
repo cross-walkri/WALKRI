@@ -2,6 +2,8 @@
 
 Version 0.1.4 | 2026-05-18 | CC0
 
+**Two standards. One problem.**
+
 Every intake form has questions. No standard has ever required those questions to function as measurement instruments before anyone answers them. WALKRI is the first.
 
 ![GIGO pipeline: obligation never specified and questions not designed to measure enter a funnel, producing data that cannot be compared, aggregated, or trusted. No existing tool touches the source.](assets/gigo-pipeline.png)
