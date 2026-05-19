@@ -12,6 +12,10 @@ A field that does not specify what it measures is a label. Labels produce respon
 
 WALKRI is a companion standard to CROSS (Common Reporting Outcome Standards Schema). Together they are published as CROSS+WALKRI. CROSS specifies the obligation architecture of a grants round: what grantees must demonstrate at each payment gate. WALKRI specifies the quality of the fields through which that demonstration is collected. The two are designed to be used together, but WALKRI is also portable: it works with any obligation standard, not only CROSS.
 
+Across the 95+ frameworks documented in the CROSS+WALKRI compatibility corpus, a consistent pattern emerges: data quality problems in grant programs trace to specification decisions made before the first application was submitted. Form field design is where the obligation architecture meets the applicant. A round that correctly specifies what grantees must demonstrate produces nothing usable if the fields that collect that demonstration are labels rather than instruments. WALKRI addresses this at the surface where it is most consequential and most consistently neglected: the individual field, before anyone answers it.
+
+Round design and form field design are governance. They determine who can legibly apply, what kinds of work get selected, whose theory of change is rewarded, and whether the data produced can ever be compared, aggregated, or trusted. A funder who treats these as administrative overhead is making governance decisions without acknowledging that governance decisions are being made. The field that does not specify what it measures is not neutral. It transfers interpretive power to whoever scores it, invisibly, after submission.
+
 ---
 
 ## The label problem
