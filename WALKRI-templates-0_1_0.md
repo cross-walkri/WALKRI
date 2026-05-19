@@ -1,14 +1,14 @@
 ---
 title: WALKRI Templates
-version: 0.1.0
-date: 2026-05-15
+version: 0.1.2
+date: 2026-05-18
 license: CC0
 status: Working draft. Companion to WALKRI-standard-0_1_0.md.
 ---
 
 # WALKRI Templates
 
-Version 0.1.0 | 2026-05-15 | CC0
+Version 0.1.2 | 2026-05-18 | CC0
 
 These templates correspond to the four artifacts produced by the WALKRI three-stage process: the Ideation Record (Stage 1), the WALKRI Field Specification (Stage 2), the Applicant Guidance Document (Stage 3), and the WALKRI Audit Report (conformance record). Each template includes a brief description and field-by-field instructions. Placeholder text appears in [brackets].
 
@@ -494,3 +494,170 @@ Information flows in one direction through the process: from ideation to specifi
 The Audit Report is a conformance record, not a quality judgment. A field with a documented override is not a worse field than one without; the override system exists precisely to allow context-specific decisions to be made transparently rather than forcing false conformance or leaving decisions undocumented. The distinction that matters for certification is between overrides (documented and authorized) and failures (unresolved and undisclosed).
 
 For worked examples of these templates applied to specific field types, see WALKRI-worked-examples-0_1_0.md.
+
+---
+
+## Template 5: Organizational Identity Declaration
+
+### What it is and when it is used
+
+The Organizational Identity Declaration is the Section 3.7 instrument package. It is required at all entry specification gates in CROSS-conformant programs regardless of obligation mode. It contains three instruments: the legal entity instrument, the display name instrument, and the prior entity relationship instrument. The third instrument is conditional: it activates only when prior work is cited in the application.
+
+This template is the applicant-facing form for the declaration. It is distinct from the WALKRI Field Specification for each instrument (which follows Template 2). The declaration is what the applicant completes; the field specification is the design document that governs how the declaration is assessed.
+
+Programs using this template should pair it with a WALKRI Field Specification (Template 2) for each instrument. The two documents together constitute a complete identity declaration implementation.
+
+---
+
+```
+ORGANIZATIONAL IDENTITY DECLARATION
+
+Program name: [Full program name]
+Round: [Round identifier or reporting period]
+Submission date: [YYYY-MM-DD]
+
+---
+
+INSTRUMENT 1: LEGAL ENTITY
+
+Legal entity name: [The name exactly as it appears in the jurisdiction of
+  registration. If a corporation: the registered corporate name. If a legal
+  partnership: the partnership name on the registration document. If applying
+  as a natural person with no legal entity: your full legal name and a statement
+  that no legal entity exists.
+
+  Do not enter: project names, brand names, GitHub organization names, pseudonyms,
+  or display names unless those names are also your legal name of record in the
+  stated jurisdiction.]
+
+Jurisdiction of registration: [Country and, where applicable, state/province.
+  Example: "United States - Delaware" or "Switzerland - Zug" or "United Kingdom -
+  England and Wales".]
+
+Registration number or equivalent identifier: [The number assigned by the
+  registering authority. For corporations: incorporation number. For nonprofits:
+  EIN or equivalent. For unregistered individuals: leave blank and explain why
+  no registration applies. Example: "Delaware entity number: 7023941"]
+
+If no legal entity exists, state the accountability mechanism: [If you are
+  applying as an individual with no legal entity, state your full legal name
+  and identify who is personally accountable for obligations under this grant.
+  Example: "Applying as Jane Smith, natural person. Jane Smith is personally
+  accountable for all obligations under this grant. No legal entity exists."]
+
+---
+
+INSTRUMENT 2: DISPLAY NAME
+
+Display name: [The name under which this project or organization is publicly
+  known, used consistently in prior communications, repositories, grant histories,
+  and publications. If the display name is identical to the legal entity name,
+  state that explicitly rather than repeating the name.
+
+  A name used only on this application with no prior public appearances is not a
+  display name. A display name requires prior public use.]
+
+Evidence of prior public use: [One or more URLs demonstrating that this display
+  name was in use before this application. Acceptable sources: a prior grant
+  application, a public GitHub organization or repository, a published
+  communication, or a program record. Example: "github.com/example-project
+  (established January 2024). Previous Octant application under this name:
+  [URL]."]
+
+Relationship between display name and legal entity: [Describe how the display
+  name relates to the legal entity name above. Examples: "The display name is
+  the project name maintained by the legal entity." / "The display name is an
+  informal abbreviation of the legal entity name." / "They are the same."]
+
+---
+
+INSTRUMENT 3: PRIOR ENTITY RELATIONSHIP
+(Complete this section only if you cite prior work anywhere in this application.
+If no prior work is cited, state "Not applicable" and stop.)
+
+Prior work citation: [Copy or summarize the prior work cited in this application
+  that activates this instrument. Example: "Application cites development of
+  [Protocol X] as evidence of technical capability."]
+
+Entity of performance: [Name the legal entity or organizational context under
+  which the cited prior work was performed. If the work was performed under an
+  employer: name the employer. If under a DAO: name the DAO and your role within
+  it. If under a prior legal entity that has since been restructured: name the
+  prior entity. Example: "Prior work was performed while employed at [Org Name]
+  from 2021 to 2023."]
+
+Applicant's relationship at the time of the work: [Your role in the entity at
+  the time. Example: "Lead engineer, employed full-time. Departed the organization
+  in November 2023."]
+
+Current status of the relationship: [Whether the relationship to the prior entity
+  is active, inactive, or restructured, and what that means for the cited work.
+  Example: "Departed in November 2023. The organization continues to operate
+  separately from the applying entity."]
+
+Current ownership and access: [Who currently holds intellectual property rights
+  to the cited work; who controls the deployment or codebase; who maintains the
+  user relationship with any users cited as evidence of the prior work's impact.
+  Be specific about what the applying entity controls and what it does not.
+  Example: "The codebase is open source under MIT license. The prior employer
+  holds no exclusive rights. The applying entity has forked the repository and
+  is the active maintainer of the fork. The original deployment is maintained
+  by the prior employer."]
+
+[Repeat this section for each distinct piece of prior work cited.]
+
+---
+
+SELF-REFERENCE CONSISTENCY CERTIFICATION
+
+By submitting this declaration, the applicant certifies that every reference to
+the applying entity, its team, and its work throughout this application resolves
+to either the legal entity name stated in Instrument 1 or the display name stated
+in Instrument 2. Any reference to a third name or organizational context that is
+not covered by Instrument 3 is a consistency flag and must be resolved before the
+gate assessment proceeds.
+```
+
+---
+
+## Template 6: Gate Declaration Fields (Section 3.8)
+
+**Revenue Architecture Declaration**
+Revenue architecture type (select one): [ ] Grant-only [ ] Fee-for-service [ ] Commercial [ ] Hybrid
+Named revenue sources: [list all active revenue sources, including grants, service contracts, product revenue, token appreciation, staking rewards]
+[If Commercial or Hybrid]: Additionality boundary: [specify what this grant funds that commercial revenue does not]
+
+**Disbursement Authority Declaration**
+Authority state (select one): [ ] Individual [ ] Governed [ ] Delegated
+[If Individual]: Full legal name of authority holder: ___
+[If Governed]: Mechanism name: ___ | Multisig or governance contract address: ___ | Current key holders: ___ | Quorum threshold: ___
+[If Delegated]: Receiving entity: ___ | Deploying entity: ___ | Delegation terms: ___ | Documentation: ___
+
+**Governance Resilience Declaration**
+Resilience state (select one): [ ] Single [ ] Partial [ ] Resilient
+Named primary contributor: ___
+[If Single or Partial]: Continuity explanation: [how would the project continue if the primary contributor were unavailable?]
+
+**Obligation Fulfillment Record** (activates for returning applicants and prior-work-citing applicants)
+[Repeat for each prior grant in scope]:
+- Granting program: ___
+- Grant period: ___
+- Committed deliverable or FROM-TO state: ___
+- Produced artifact or measured change: ___ [with publicly accessible link]
+- Fulfillment state (select one): [ ] Fulfilled [ ] Partially fulfilled [ ] Unfulfilled
+- Explanation [required if not Fulfilled]: ___
+
+**Development Stage Declaration**
+Stage (select one): [ ] Stage 1: Proof of concept [ ] Stage 2: Early adoption [ ] Stage 3: Growth [ ] Stage 4: Established infrastructure [ ] Stage 5: Retroactive recognition
+Explanation: [describe why this stage accurately characterizes the project]
+Independent evidence: [name a verifiable external source that corroborates the declared stage]
+
+---
+
+## Changelog
+
+| Version | Date | Summary |
+|---|---|---|
+| 0.1.2 | 2026-05-18 | Template 6 added: Gate Declaration Fields (Section 3.8). Covers revenue architecture, disbursement authority, governance resilience, obligation fulfillment record, and development stage declarations with structured sub-fields for each state. |
+| 0.1.1 | 2026-05-17 | Template 5 added: Organizational Identity Declaration. Three-instrument template covering the legal entity instrument, display name instrument, and conditional prior entity relationship instrument, plus a self-reference consistency certification. Annotated field instructions for each element. |
+| 0.1.0 | 2026-05-15 | Initial draft. Four templates: Ideation Record (Stage 1), WALKRI Field Specification (Stage 2), Applicant Guidance Document (Stage 3), and WALKRI Audit Report. |

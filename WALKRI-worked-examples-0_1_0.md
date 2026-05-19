@@ -1,7 +1,7 @@
 ---
 title: WALKRI Worked Examples
-version: 0.1.0
-date: 2026-05-15
+version: 0.1.2
+date: 2026-05-18
 license: CC0
 status: Working draft. Companion to WALKRI-standard-0_1_0.md.
 source: Octant Epoch 12 grant evaluation cycle, 2026.
@@ -9,13 +9,13 @@ source: Octant Epoch 12 grant evaluation cycle, 2026.
 
 # WALKRI Worked Examples
 
-Version 0.1.0 | 2026-05-15 | CC0
+Version 0.1.2 | 2026-05-18 | CC0
 
 ---
 
 ## Introduction
 
-These examples demonstrate what WALKRI failures look like in practice and what conformant specifications would have looked like in their place. They are drawn from the Octant Epoch 12 grant evaluation cycle. Octant is a web3 public goods funding program; in Epoch 12, 29 grant applications were evaluated using a form built in Fillout. Several fields in that form produced inconsistent applicant responses that complicated evaluation because those fields lacked precise operational definitions, compliance thresholds, or evidence forms. The cases documented here are real specification failures from that cycle, reconstructed in WALKRI's five-element format to show what the fields should have contained before any application was accepted.
+These examples demonstrate what WALKRI failures look like in practice and what conformant specifications would have looked like in their place. They are drawn from the Octant Epoch 12 grant evaluation cycle. Octant is a web3 public goods funding program; in Epoch 12, 52 grant applications were submitted using a form built in Fillout. Several fields in that form produced inconsistent applicant responses that complicated evaluation because those fields lacked precise operational definitions, compliance thresholds, or evidence forms. The cases documented here are real specification failures from that cycle, reconstructed in WALKRI's five-element format to show what the fields should have contained before any application was accepted.
 
 Each example follows the same structure: the field as published, a description of what happened in evaluation, and a WALKRI-conformant specification showing all five elements. The final example is a positive case, showing a field that would pass WALKRI audit without modification. The last two sections draw quantitative observations from the Epoch 12 experience and close with a summary for practitioners who run grant evaluations.
 
@@ -206,3 +206,171 @@ These numbers are drawn from the Epoch 12 evaluation record and are reported usi
 Epoch 12 demonstrated a pattern that is common in grant evaluation and predictable in its consequences. A form is built quickly, fields are labeled rather than defined, and eligibility criteria reference external standards without specifying what those standards require in practice. The form looks complete because it has all the right labels. The problems emerge in evaluation, when reviewers discover that the labels do not resolve the questions they need to answer. Evaluators spend time they should not have to spend reconstructing definitions that should have been in the form. Results are harder to defend because the standard was never written down. The dataset is harder to reuse because the fields cannot be trusted to mean the same thing across applications.
 
 WALKRI addresses this at the source: the point where a question becomes a field before any applicant sees it. Applying WALKRI to the two most consequential underspecified fields in Epoch 12 (the DPG eligibility field and the Contributions field) would have taken a few hours before the round opened and would have eliminated an estimated 8 to 12 hours of evaluation judgment work, produced a cleaner and more auditable dataset, and reduced the number of eligibility determinations that depended on individual evaluator interpretation. The investment is in specification. The return is in reliability.
+
+---
+
+## Example 5: The Organizational Identity Declaration
+
+### The field as published (Epoch 12)
+
+```
+Label:              "Are you:"
+Response form:      Single-select
+Options:            Solo contributor/applying as an individual
+                    A working group
+                    A registered organization/incorporated organization
+Evidence form:      Not specified
+No legal entity field: absent
+No display name field: absent
+No prior entity relationship instrument: absent
+```
+
+The form collected an organizational status classification but not an organizational identity. There was no field asking for the legal entity name, jurisdiction, or registration number. There was no field asking for the display name under which the project was publicly known. There was no field asking whether cited prior work was performed under a different organizational context.
+
+### What happened
+
+Three patterns from the Epoch 12 cohort illustrate what the absence of identity instruments produced.
+
+**Pattern 1: Unverifiable attribution.** Several applications cited prior technical work as evidence of capability without naming the organization under which that work was performed. Evaluators could not determine whether the cited work belonged to the applying entity, to a prior employer, or to a collaborative organization the applicant had since left. Attribution claims could not be assessed as accurate or inaccurate because the attribution was never made specific. The evaluator had to conduct organizational research to reconstruct the entity history that an identity declaration would have surfaced directly.
+
+**Pattern 2: Self-reference inconsistency.** Applications used three or four different names interchangeably: a GitHub organization name in one field, a project name in another, a legal entity name in a third, and a display name in a fourth, with no declared relationship between them. Evaluators could not determine whether these were the same entity viewed from different angles or distinct entities with different accountability structures. In one case, the "solo contributor" category was selected while the evidence field cited repositories owned by a different organization entirely.
+
+**Pattern 3: Prior work presented as current ownership.** Applications described technical work performed during employment at a previous organization as if it were the applicant's independent prior work. The cited codebase was owned and maintained by the prior employer; the applicant had departed. No disclosure was made. The evaluator could not assess whether the applicant had legal authority to represent the cited work as their own track record. The application passed initial review and the misrepresentation was discovered only during deep-dive verification of the GitHub repository history.
+
+### WALKRI-conformant specification
+
+**Legal entity instrument**
+
+Criterion intent: Identifies the legal person or registered organization legally accountable for delivering grant obligations and receiving disbursement.
+
+Operational definition:
+- Inclusion: the name exactly as it appears in the jurisdiction of registration. For a corporation: the registered corporate name. For a natural person with no entity: full legal name.
+- Exclusion: project names, brand names, GitHub organization names, pseudonyms, and display names that are not also the applicant's legal name of record.
+- Unit of analysis: the legal entity making the application.
+- Edge case: if the applying entity is a chapter or working group of a larger organization, the legal name of the parent organization must also be stated, with the relationship between the two described.
+
+Response form: Text (legal name) + text (jurisdiction) + text (registration number or "not applicable" with explanation).
+
+Evidence form: The legal entity name must be independently verifiable from a public registry within 60 days of submission. Acceptable sources: national business registries, state incorporation records, charity commission databases, or equivalent official registries. The applicant provides the registry name and URL in the evidence form response.
+
+**Display name instrument**
+
+Criterion intent: Identifies the publicly known name under which this project presents itself in grant histories, repositories, and public communications, enabling cross-program track record queries.
+
+Operational definition:
+- Inclusion: a name used in at least one publicly accessible communication, grant record, or repository prior to this application.
+- Exclusion: names created specifically for this application with no prior public use.
+- Unit of analysis: the project or organizational unit applying.
+- Edge case: if the project has changed its display name since a prior round, both the prior name and the current name must be stated with the date of transition.
+
+Response form: Text (display name) + URL (evidence of prior public use).
+
+Evidence form: One URL to a publicly accessible page where the display name appears in a context predating this application. A GitHub organization page, a prior grant application record, or a published article are all acceptable.
+
+**Prior entity relationship instrument** (conditional: activates when prior work is cited)
+
+Criterion intent: Identifies the organizational context under which cited prior work was performed, so that evaluators can assess whether the attribution claim is accurate and the applying entity has appropriate standing to represent the cited work.
+
+Trigger condition: this instrument is required in the entry specification for any application that cites prior work in any field. Activation is not at the applicant's discretion. An applicant who cites prior work and does not complete this instrument has submitted an incomplete entry.
+
+Operational definition: for each piece of cited prior work, three elements are required: the name of the entity under whose resources, governance, or employment the work was performed; the applicant's role in that entity at the time; and the current ownership and access status (who holds IP rights, controls the deployment, and has the user relationship with cited users).
+- Exclusion: "I did this work independently" without further specification is not a complete response if the work was funded by, performed within, or hosted by any organization. If the work was truly independent, that must be stated explicitly with evidence of independent funding and hosting.
+- Edge case: if the prior work was a collaborative project with no clear single owner, the applicant states the collaborative context, their specific contribution within it, and what rights the collaborative arrangement grants them to represent the work in this application.
+
+Response form: Structured text (three elements per cited work, each labeled).
+
+Evidence form: For the entity of performance: a public record confirming the applicant's association with that entity (LinkedIn profile, organizational team page, GitHub organization membership, or equivalent). For current ownership: a URL to the relevant repository, license file, or contract establishing the current ownership and access arrangement.
+
+### WALKRI audit result
+
+| Instrument | Published field | WALKRI-conformant specification |
+|---|---|---|
+| Legal entity | Absent | Pass |
+| Display name | Absent | Pass |
+| Prior entity relationship | Absent | Pass |
+| Self-reference consistency | Not checkable (no declared identities to check against) | Pass |
+
+**Published form:** Not certifiable for identity. No identity instruments present. Self-reference consistency check structurally impossible without declared identities.
+
+**Conformant specification:** Certified at Standard level for all four identity elements.
+
+### What the conformant specification would have changed
+
+The three patterns described above would have been surfaced at application time rather than during evaluator deep-dives.
+
+Pattern 1 (unverifiable attribution): the prior entity relationship instrument would have required applicants to name the organization under which cited work was performed, their role, and the current ownership. Evaluators would have received the attribution context with the application rather than having to reconstruct it during review.
+
+Pattern 2 (self-reference inconsistency): the self-reference consistency certification would have required applicants to certify that all names used throughout the application resolve to either the legal entity or the display name. Applications with inconsistent names would have self-identified the inconsistency rather than presenting it as an unmarked pattern for evaluators to discover.
+
+Pattern 3 (prior employer work presented as independent): the current ownership and access element of the prior entity relationship instrument would have required disclosure of who holds the IP and controls the deployment. An applicant who had departed their employer would have had to state that the prior employer maintains the codebase, surfacing the misrepresentation at application time.
+
+---
+
+## Example 6: Gate Declaration Fields (Section 3.8) - Three Epoch 12 Patterns
+
+### Pattern A: Grant-Only Revenue with Single Governance (Clean declaration)
+
+**Application context:** A two-person developer tooling project with no token, no fees, and no commercial revenue. First external grant application.
+
+**Revenue architecture instrument:**
+Revenue architecture type: Grant-only
+Named revenue sources: No revenue sources. This is the project's first external funding application.
+Additionality boundary: Not applicable (grant-only).
+
+**Assessment:** Conformant. Grant-only with no prior funding is a valid and complete declaration. The evaluator notes Stage 1 declaration and Single governance as expected co-occurring states.
+
+**Disbursement authority instrument:**
+Authority state: Individual
+Full legal name: [Named developer, jurisdiction stated]
+
+**Assessment:** Conformant. Individual disbursement authority for a sole contributor is consistent with the governance resilience declaration.
+
+**Governance resilience instrument:**
+Resilience state: Single
+Named primary contributor: [Named developer]
+Continuity explanation: The project is sole-authored. If unavailable, development would pause until a new contributor is onboarded. No succession mechanism exists at this stage.
+
+**Assessment:** Conformant and honest. Single state is a risk factor recorded in the evaluation, not a gate failure.
+
+---
+
+### Pattern B: Undisclosed Commercial Revenue (Non-conformant declaration)
+
+**Application context:** A project with a deployed governance token and active staking rewards. The revenue architecture declaration reads "Grant-only."
+
+**Revenue architecture instrument:**
+Revenue architecture type: Grant-only
+Named revenue sources: Community grants only.
+
+**Assessment:** Non-conformant. The evaluator discovers an active governance token contract with staking rewards. Staking rewards constitute commercial revenue under the revenue architecture primitive. The grant-only declaration is a material misclassification. This triggers a concurrent funding disclosure review and an additionality declaration requirement.
+
+**What a conformant declaration would have read:**
+Revenue architecture type: Commercial (staking rewards constitute commercial revenue)
+Named revenue sources: Staking rewards from governance token. Grant funding supplements staking revenue for development work outside the commercial scope.
+Additionality boundary: This grant funds [specific development scope] that staking revenue does not cover.
+
+---
+
+### Pattern C: Returning Applicant with Partially Fulfilled Prior Obligation (Conformant disclosure)
+
+**Application context:** A returning applicant with one prior grant from this program. Two of three milestones were completed. The third milestone was scoped down due to a market change documented in the continuation gate submission.
+
+**Obligation fulfillment record:**
+Granting program: [Program name]
+Grant period: [Prior epoch]
+Committed deliverable: [Three milestones as specified at entry gate]
+Produced artifact: [Links to two completed milestones. Third milestone: scope reduction documented at continuation gate submission, archived at [link].]
+Fulfillment state: Partially fulfilled
+Explanation: The third milestone was reduced in scope at the continuation gate due to [named market change]. The reduction was disclosed and accepted by the program committee. The reduced deliverable is published at [link].
+
+**Assessment:** Conformant and exemplary. Partially fulfilled with proactive disclosure and documented committee acceptance is treated as a positive track record signal. The evaluator confirms the continuation gate record exists and the reduced deliverable is accessible.
+
+---
+
+## Changelog
+
+| Version | Date | Summary |
+|---|---|---|
+| 0.1.2 | 2026-05-18 | Example 6 added: Gate Declaration Fields (Section 3.8). Three patterns: grant-only with single governance (clean), undisclosed commercial revenue (non-conformant with corrected version), returning applicant with partially fulfilled prior obligation (conformant disclosure). |
+| 0.1.1 | 2026-05-17 | Example 5 added: The Organizational Identity Declaration. Before/after from the Epoch 12 evaluation cycle. Three patterns from evaluation (unverifiable attribution, self-reference inconsistency, prior employer work as independent) with WALKRI-conformant specifications for all three identity instruments and a WALKRI audit result table. |
+| 0.1.0 | 2026-05-15 | Initial draft. Four examples from the Epoch 12 evaluation cycle: DPG eligibility field (Example 1), Contributions single-select field (Example 2), well-specified prior grant funding field as positive case (Example 3), and upstream value analysis (Example 4). |

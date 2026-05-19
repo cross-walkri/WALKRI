@@ -1,14 +1,14 @@
 ---
 title: WALKRI Guidance
-version: 0.1.0
-date: 2026-05-15
+version: 0.1.2
+date: 2026-05-18
 license: CC0
 status: Working draft. Companion to WALKRI-standard-0_1_0.md.
 ---
 
 # WALKRI Guidance
 
-Version 0.1.0 | 2026-05-15 | CC0
+Version 0.1.2 | 2026-05-18 | CC0
 
 ---
 
@@ -235,3 +235,65 @@ When resolving a fail finding, return to the Stage 2 specification for the affec
 **Stage 2 output: field specification.** Contents: all five criterion specification requirements for each field, in JSON Schema or a compatible format. Audience: question-holders, auditors, form rendering tools, and the WALKRI Audit Tool.
 
 **Stage 3 output: applicant guidance document.** Contents: plain-language explanation of what the field asks, a positive example of a complete answer, a negative example of a common incomplete answer, and a brief statement of why the field exists. Audience: applicants completing the form.
+
+---
+
+## Part 8: Working with Identity Fields (Section 3.7)
+
+WALKRI Section 3.7 introduces three applicant identity instrument types. Identity fields are different from other gate fields in one structural respect: they are required for all entry gates regardless of obligation mode, and they carry a cross-field consistency obligation that no other field type carries. This Part explains how to apply them in practice.
+
+### The Three Instrument Types
+
+**Legal entity instrument.** This field asks: who, legally, is accountable for delivering the obligations and receiving disbursement? The criterion intent is identifying the legal person or registered organization. The key design principle is that a legal entity instrument never accepts display names, project names, brand names, or GitHub organization names as satisfying answers unless those names are also the legal name of record. Many programs accept project names in a legal entity field and then find, at completion or continuation, that they have no clear accountability chain. The Stage 2 specification for this field must state the jurisdiction of registration as a required element alongside the legal name.
+
+The failure mode is accepting a display name as a legal entity answer. The Stage 2 specification must include an exclusion criterion stating explicitly: "The following do not satisfy this field: project names, brand names, GitHub organization names, pseudonyms, and display names that are not also the applicant's legal name in the stated jurisdiction."
+
+**Display name instrument.** This field asks: under what public-facing name does the applicant present this work? The criterion intent is continuity and recognition: a display name that a reviewer can query across prior grant histories, public repositories, and program records to establish a track record. The design principle is that a display name must have prior public use: it cannot be a name invented for this application. A display name used only on the current application with no prior public appearances is not a display name in the instrument sense; it is a new identity with no track record.
+
+The failure mode is accepting self-assigned names without requiring evidence of prior use. The evidence form for this field must require at least one public URL where the display name has been used in a prior communication, grant, repository, or publication.
+
+**Prior entity relationship instrument.** This field activates whenever an applicant cites prior work as evidence of capability, track record, or contribution. It asks: under whose governance, employment, or resources was that prior work performed? This instrument is not triggered by the applicant's current entity status; it is triggered by the citation of prior work. An application that does not cite any prior work does not activate this instrument.
+
+The three required elements are: the name of the entity under which the cited work was performed, the applicant's relationship to that entity at the time of the work (employed, contracted, co-founder, contributor), and the current status of that relationship. A departure from the entity is not a disqualifier, but it does generate additional questions: does the applying entity hold the IP, control the codebase, and maintain the user relationship with any users cited as evidence?
+
+The failure mode is allowing applicants to cite prior work without naming the entity under which it was performed. A citation like "I built X" that does not name an organizational context is an unsigned attribution: it makes a contribution claim without establishing where the applicant stood relative to the resources, governance, and decisions that produced X.
+
+### The Self-Reference Consistency Requirement
+
+Section 3.7 adds a cross-field consistency obligation that operates across the entire application, not just within the identity declaration fields. Every self-reference in every field must resolve to the declared legal entity or display name. A project name used in the progress section, a GitHub organization name in the evidence section, or a prior grant recipient name in the funding history section must match one of the two declared identities. Inconsistency between self-references and declared identities is a conformance flag.
+
+In practice, this requirement is a downstream audit step rather than a field-level specification requirement. Auditors applying this check do not assess individual fields for inconsistency; they assess the application as a whole after the field-level audit is complete. The Step 2 specification for the identity declaration fields should include a note that self-reference consistency will be checked as a post-specification audit step.
+
+The most common inconsistency pattern: an applicant lists a legal entity name in the legal entity field but then refers to their work throughout the application under a display name that they did not declare. A reviewer checking only the identity declaration fields would pass the application; a reviewer applying the self-reference consistency check would flag it. Both checks are required.
+
+### Design Notes
+
+Identity fields require more care than most fields because the stakes of getting them wrong compound over time. A form that collects imprecise project names in the first round cannot establish continuity of identity in the second round. The organizational identity declaration is the anchor point for all subsequent gate records, track record assessments, and cross-program queries. The investment in specifying it precisely in Stage 2 compounds across rounds and programs.
+
+When building the ideation record for a program that uses continuation gates, name "establishing cross-round identity continuity" as an explicit information need in Stage 1. This surfaces the continuity requirement at the design stage, where it can be built into the identity field specifications, rather than at the continuation gate, where it has to be reconstructed from inconsistent prior data.
+
+---
+
+## Part 9: Working with Gate Declaration Fields (Section 3.8)
+
+Section 3.8 adds five WALKRI instruments for the CROSS entry gate declarations. These differ from the identity instruments in Section 3.7 in one key respect: each instrument maps to a CROSS primitive that constrains what the applicant can validly claim elsewhere in the application. A revenue architecture declaration of "grant-only" makes a concurrent commercial revenue disclosure inconsistent. A governance resilience state of "single" makes a sustainability stance of "sustained" implausible at completion. The gate declaration instruments are not independent fields; they form a constraint network across the application.
+
+**Revenue architecture instrument:** Guide applicants to classify their revenue architecture honestly by asking them to name their revenue sources, not just their grant needs. The question "What would your project's budget look like if this grant were not awarded?" surfaces the architecture more reliably than "What is your revenue model?" Commercial revenue signals include: active token contracts, service agreements named in the application, product pricing pages, and prior investor disclosures. Grant-only declarations from entities with governance tokens require investigation.
+
+**Disbursement authority instrument:** The three-state structure (Individual, Governed, Delegated) exists because a text field asking "who receives funds" produces unverifiable narrative. The instrument requires naming specific mechanisms and individuals. For Governed state, require the multisig address or governance contract to be named explicitly so it can be resolved on-chain. For Delegated state, require both the receiving entity and the deploying entity to be named. The most common error is applicants selecting Individual when a multisig exists that is not named.
+
+**Governance resilience instrument:** The key diagnostic question is: if the named primary contributor stopped working tomorrow, would the project continue? Single state is not a disqualifier but it is a risk factor that affects the sustainability stance assessment. Programs should ask applicants to name their primary contributor explicitly, not just describe their governance structure generically.
+
+**Obligation fulfillment record instrument:** This instrument activates only for returning applicants and applicants citing prior work. The assessment procedure is sequential: check the KarmaGAP API for grants associated with the applicant's wallet address before reading the applicant's self-report. Discovering grants the applicant did not disclose is a material non-disclosure, treated more severely than a disclosed partial fulfillment.
+
+**Development stage instrument:** The five-stage scale anchors what evidence is plausible at each stage. Stage 1 applications with large usage claims are inconsistent. Stage 4 applications in Stage 1-3 rounds are a round configuration mismatch, not an application failure. The most useful diagnostic question is: does the evidence offered match the stage declared?
+
+---
+
+## Changelog
+
+| Version | Date | Summary |
+|---|---|---|
+| 0.1.2 | 2026-05-18 | Part 9 added: Working with Gate Declaration Fields (Section 3.8). Covers the five gate declaration instruments: revenue architecture, disbursement authority, governance resilience, obligation fulfillment record, development stage. Constraint network framing between instruments. Activation rule for obligation fulfillment record. Evidence plausibility by stage for development stage instrument. |
+| 0.1.1 | 2026-05-17 | Part 8 added: Working with Identity Fields (Section 3.7). Covers the three instrument types (legal entity, display name, prior entity relationship), design principles and failure modes for each, the self-reference consistency requirement, and design notes for programs using continuation gates. |
+| 0.1.0 | 2026-05-15 | Initial draft. Seven parts covering the three-stage process, field specification requirements, applicant guidance, common failure modes, and audit report reading. |

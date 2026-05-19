@@ -1,6 +1,6 @@
 # WALKRI: Working Architecture for Legible, Knowledge-Ready Intake
 
-Version 0.1.4 | 2026-05-18 | CC0
+Version 0.1.7 | 2026-05-19 | CC0
 
 **Two standards. One problem.**
 
@@ -98,12 +98,19 @@ The strategic planning benefit requires ecosystem-wide adoption to materialise. 
 
 | Tool / Standard | Layer | Obligation architecture | Field quality | Web3 output | Institutional output |
 |:--|:--|:--|:--|:--|:--|
-| **WALKRI** | Specification | n/a (see CROSS) | Five pre-publication field requirements | n/a | USAID DQA, FAIR, OECD DAC, IRIS+ |
-| **CROSS** | Specification | Three modes, four-gate sequence | n/a (see WALKRI) | DAOIP-5, W3C VCs, OpenGrants | OECD DAC, IRIS+, USAID PIRS |
+| **WALKRI** | Specification | n/a (see CROSS) | Five pre-publication field requirements | n/a | USAID DQA, FAIR, OECD DAC, IRIS+, Gates Open Access, NIH/NSF/Horizon/Wellcome DMP, SROI, PCORI, SAMHSA NOMs, HRSA UDS, WIOA, Head Start ELOF, and 90+ more |
+| **CROSS** | Specification | Three modes, four-gate sequence | n/a (see WALKRI) | DAOIP-5, W3C VCs, OpenGrants, Optimism Retro Funding 2025 | OECD DAC, IRIS+, USAID PIRS, World Bank RF, UNDP IRRF, IMP Five Dimensions, 95+ frameworks |
 | [USAID PIRS](https://2017-2020.usaid.gov/sites/default/files/documents/1861/Recommended_PIRS_for_USAID_indicators_0.pdf) | Compliance framework | n/a | Five data quality criteria (retrospective) | n/a | Required indicator documentation |
 | [IRIS+](https://iris.thegiin.org/standards/) | Vocabulary | n/a | n/a | n/a | Indicator reference library |
+| [Impact Management Norms](https://impactmanagementnorms.com) | Framework | n/a | n/a | n/a | Five Dimensions of Impact |
+| [Gates Open Access Policy](https://openaccess.gatesfoundation.org) | Funder requirement | n/a | Data Availability Statement, FAIR | n/a | Data sharing and open access |
+| [NIH/NSF/Horizon/Wellcome DMP Standards](https://oir.nih.gov/sourcebook/intramural-program-oversight/intramural-data-sharing/2023-nih-data-management-sharing-policy) | Research funder requirements | n/a | Data Management Plan content as structural output | n/a | Research data open access |
+| [SROI / Social Value International](https://www.betterevaluation.org/methods-approaches/approaches/social-return-investment) | Impact methodology | n/a | Principles 2, 4, 5, 6, 7 (materiality, no over-claim, transparency, verification) | n/a | Social value accounting |
+| [Core Humanitarian Standard (2024)](https://www.corehumanitarianstandard.org/the-standard) | Accountability framework | n/a | Commitment 9: evidence independence; Commitment 7: measurement precondition | n/a | Humanitarian accountability |
+| [ISEAL Code of Good Practice](https://isealcode.org/) | Standards governance | n/a | Part 5 MEL requirements (indicator definition, systematic collection, public disclosure) | n/a | Sustainability standards credibility |
 | [Logframe / LFA](https://www.oecd.org/en/topics/sub-issues/development-co-operation-evaluation-and-effectiveness/evaluation-criteria.html) | Methodology | ToC hierarchy only | n/a | n/a | OECD DAC (partial) |
 | [KarmaGAP](https://docs.gap.karmahq.xyz/) | Post-funding tracking | n/a | n/a | EAS milestone attestations | n/a |
+| [OSO oss-directory](https://docs.opensource.observer) | Impact measurement | n/a | n/a | On-chain and GitHub activity | n/a |
 | [DAOIP-5](https://github.com/metagov/daostar/blob/main/DAOIPs/daoip-5.md) | Interoperability | n/a | n/a | Grants data portability | n/a |
 | Form builders (Fillout, Typeform, KoBoToolbox, REDCap) | Collection layer | n/a | n/a | JSON Schema output | n/a |
 
@@ -113,7 +120,7 @@ Every tool either collects data after fields are defined, tracks outcomes after 
 
 ## Institutional alignment
 
-WALKRI's five requirements encode the same underlying measurement quality principles that institutional frameworks require, applied at specification time rather than assessed retrospectively.
+WALKRI's five requirements encode the same underlying measurement quality principles that dozens of institutional frameworks require, applied at specification time rather than assessed retrospectively. A WALKRI-conformant intake form produces data quality compliance across all of the following frameworks as a structural byproduct of correctly specifying its fields before publication.
 
 **USAID data quality criteria** (Validity, Reliability, Precision, Integrity, Timeliness) map directly to WALKRI's five requirements. USAID applies these as a Data Quality Assessment procedure after data is collected. WALKRI applies them at the field specification stage, before any applicant sees the form. A WALKRI-conformant field satisfies the USAID DQA without a separate assessment.
 
@@ -131,19 +138,38 @@ WALKRI's five requirements encode the same underlying measurement quality princi
 
 **IRIS+ metadata requirements** for indicator documentation are satisfied by the combination of WALKRI field specifications and CROSS indicator declarations. IRIS+-compatible indicator records are produced as structural outputs of a conformant round.
 
-The formal compatibility statement is in `statements/USAID-PIRS-CROSS-WALKRI-compatibility-0_1_0.md`.
+**Gates Foundation Open Access Policy** (January 2025) requires grantees to publish a Data Availability Statement specifying where primary data, metadata, software, and replication materials can be found, and for grants over $500,000 in global health to prepare a Data Access Plan before activities begin. WALKRI's evidence form requirement, applied at the field specification stage, produces the structural content of both documents: every field in a conformant form specifies its artifact type and access path before any applicant responds. The policy explicitly invokes FAIR principles, which WALKRI satisfies by construction.
+
+**Open Source Observer (OSO)** maintains the oss-directory schema (v7) as the primary registry for open source project identity in the Web3 ecosystem. CROSS Field 6 (on-chain identity anchor) maps directly to the OSO blockchain address registration fields. A WALKRI-conformant recipient profile that includes the on-chain identity anchor, GitHub URL, and npm package identifiers is directly importable as an OSO oss-directory entry. OSO metrics (commit activity, contributor count, on-chain transaction data) are also the natural evidence source for CROSS gate tests in Build and Change obligation programs, providing independent, reproducible verification that does not rely on applicant self-reporting.
+
+**Research funder data management standards** (NIH DMS Policy, NSF DMP Requirements, Horizon Europe Open Science, Wellcome Trust Data and Materials Policy) all require a Data Management Plan specifying data types, metadata standards, repositories, and access paths, prepared before data is collected or at application stage. WALKRI's five field specification requirements produce this DMP content as a structural byproduct: criterion intent documents data types, operational definition documents metadata standards and counting rules, response form justification documents data format, evidence form documents repository and access path, and compliance threshold documents any external classification or vocabulary standard. Programs running WALKRI audit before publishing their forms have produced a DMP before any applicant submits. Formal statement: `Research-Funder-DMP-Standards-WALKRI-compatibility-0_1_0.md`.
+
+**SROI (Social Return on Investment) / Social Value International** seven principles require verification and transparency in impact claims. WALKRI's evidence form requirement, which specifies the artifact type and independent access path for every intake field, structurally satisfies the verification principle by separating evidence from beneficiary self-report.
+
+**Core Humanitarian Standard (2024 revision)** Commitment 7 requires support to be continually adapted based on feedback and learning. WALKRI-conformant field specifications, because they declare what is being measured before collection, create the structural preconditions for Commitment 7 data to be comparable across rounds and adaptable based on what measurement surfaces.
+
+Formal compatibility statements are in the `statements/` directory. See the CROSS README for the full cross-referenced compatibility index covering all international development, impact investing, research funding, open data, and Web3 standards.
 
 ---
 
 ## Documents
 
-- `WALKRI-standard-0_1_4.md` - Main specification
+- `WALKRI-standard-0_1_0.md` - Main specification (current: v0.1.7)
 - `WALKRI-interface-specification-0_1_0.md` - Three-interface specification (upward, lateral, downstream)
 - `WALKRI-CROSS-boundary-0_1_0.md` - Formal boundary between WALKRI and CROSS
-- `WALKRI-guidance-0_1_2.md` - Practitioner guidance including gate declaration instrument guidance
-- `WALKRI-templates-0_1_2.md` - Field specification templates, worksheets, and gate declaration forms
-- `WALKRI-rubric-0_1_2.md` - Audit and certification rubric with gate declaration assessment
-- `WALKRI-worked-examples-0_1_2.md` - Worked examples from Epoch 12 and comparable programs
+- `WALKRI-guidance-0_1_0.md` - Practitioner guidance including gate declaration instrument guidance
+- `WALKRI-templates-0_1_0.md` - Field specification templates, worksheets, and gate declaration forms
+- `WALKRI-rubric-0_1_0.md` - Audit and certification rubric with gate declaration assessment
+- `WALKRI-worked-examples-0_1_0.md` - Worked examples from Epoch 12 and comparable programs
+
+**Cross-standard documents (in root of cross-walkri repository)**
+
+- `CROSS-WALKRI-audience-map-0_1_0.md` - Six-cohort audience guide: what each cohort gains from CROSS and WALKRI specifically
+- `CROSS-WALKRI-primitives-framework-index-0_1_0.md` - Maps measurement primitives to 95+ framework exemplars; use for classifying new frameworks
+
+**Program type bundles (bundles/ directory)**
+
+Ten documents combining CROSS runbooks, WALKRI field specifications, and compatibility maps for specific grant program types: Web3/public goods, international development, research grants, community foundation, corporate CSR/impact, challenge prizes, participatory/equity, Islamic/endowment, European philanthropy, and fiscal sponsorship.
 
 ---
 

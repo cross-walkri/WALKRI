@@ -1,14 +1,14 @@
 ---
 title: WALKRI Assessment Rubric
-version: 0.1.0
-date: 2026-05-15
+version: 0.1.2
+date: 2026-05-18
 license: CC0
 status: Working draft. Companion to WALKRI-standard-0_1_0.md.
 ---
 
 # WALKRI Assessment Rubric
 
-Version 0.1.0 | 2026-05-15 | CC0
+Version 0.1.2 | 2026-05-18 | CC0
 
 ---
 
@@ -226,3 +226,158 @@ Override documentation must contain four elements. If any element is absent, the
 **The name or role of the person or organization making the override decision.** The override is a decision, and decisions have authors. An override without an identified decision-maker cannot be held accountable and is treated as unsigned.
 
 Overrides are part of the conformance record and are visible to every party that receives the conformance record. A certifying organization that grants overrides liberally will produce a conformance record that reflects that pattern. Downstream data consumers and external auditors can assess the quality of a form's certification by reviewing the override record alongside the pass/fail record.
+
+---
+
+## Part 5: Identity Instrument Assessment (Section 3.7)
+
+Part 5 covers the three identity instrument types from WALKRI Section 3.7 and the self-reference consistency requirement. These are assessed separately from the general criterion specification requirements in Part 2 because they operate at two levels: field-level (the identity declaration fields themselves) and application-level (the self-reference consistency check across all fields).
+
+Identity instrument assessment applies only to programs using CROSS entry gates or any obligation standard that activates the organizational identity declaration requirement. Programs that do not activate this requirement do not need Part 5.
+
+---
+
+### 5.1 Legal Entity Instrument
+
+**Assessment Question:** Does the legal entity field's specification require the legal name as registered, the jurisdiction, and a registration number or equivalent identifier, and does the operational definition explicitly exclude non-legal names?
+
+| Outcome | Description |
+|---|---|
+| Pass | The criterion intent specifies that the field identifies the legal person or registered organization accountable for grant obligations. The operational definition includes: inclusion criteria requiring the name as it appears in the jurisdiction of registration, the jurisdiction itself, and a registration number or equivalent identifier where applicable. Exclusion criteria explicitly name the following as non-qualifying: project names, display names, brand names, GitHub organization names, and pseudonyms, unless any of these are also the applicant's legal name of record. |
+| Fail | The criterion intent does not distinguish legal name from display name. The operational definition lacks explicit exclusion of non-legal identifiers. The field can be satisfied by a project name or brand name without requiring evidence that the name corresponds to a registered entity. |
+
+**Override Condition:** Where no legal entity exists (individual applicants with no legal registration), the operational definition may be modified to require the individual's full legal name and a statement that no legal entity exists. The override must document what accountability mechanism substitutes for entity registration.
+
+**Status:** Blocking. A legal entity field that does not distinguish legal identity from display identity is structurally unable to establish the accountability chain that continuation and redress provisions require.
+
+---
+
+### 5.2 Display Name Instrument
+
+**Assessment Question:** Does the display name field require evidence of prior public use, and does the operational definition exclude names created specifically for the current application?
+
+| Outcome | Description |
+|---|---|
+| Pass | The criterion intent specifies that the field identifies the publicly known name used consistently in prior communications. The operational definition requires at least one URL demonstrating prior public use of the display name (a prior grant application, a public repository, a published communication, or a program record). The exclusion criteria explicitly state that a name chosen specifically for this application with no prior public appearances does not satisfy the display name instrument. |
+| Fail | The display name field accepts any self-assigned name without requiring evidence of prior use. No distinction is made between established public identities and names created for the current application. |
+
+**Override Condition:** For new projects at the inception round, a display name with no prior use is structurally possible: the organization is genuinely new. The override documents the first-round status and notes that continuity of the declared display name will be assessed at continuation. The override is not available for applicants who claim prior work under a different identity; that situation activates the prior entity relationship instrument.
+
+**Status:** Blocking when the program uses continuation gates or cross-round track record assessments. Advisory for inception-only rounds.
+
+---
+
+### 5.3 Prior Entity Relationship Instrument
+
+**Assessment Question:** Where the application cites prior work as evidence, does the field specification require the entity under which that work was performed, the applicant's relationship at the time, and the current status of that relationship?
+
+| Outcome | Description |
+|---|---|
+| Pass | The trigger condition is correctly specified: the instrument activates whenever prior work is cited, not only when an applicant voluntarily discloses a prior entity. The operational definition requires three elements for each cited prior work: the name of the entity under whose resources, governance, or employment the work was performed; the applicant's role in that entity at the time; and the current status of the relationship (active, departed, restructured). |
+| Fail | The instrument is absent from the form entirely, or is present but lacks a trigger condition linked to prior work citation. The most common failure: the instrument is listed as an optional field that activates only when the applicant self-identifies a prior entity, rather than being required whenever the applicant cites prior work in any field. This allows applicants to cite organizational prior work while implicitly presenting it as their own independent contribution. |
+
+**Override Condition:** Not available for blocking elements. The trigger condition (activates on citation of prior work) must be present.
+
+**Status:** Blocking for the trigger condition. The prior entity relationship instrument's fundamental purpose is to surface the organizational context of cited prior work; a field that can be skipped despite the presence of cited prior work does not satisfy this purpose.
+
+---
+
+### 5.4 Self-Reference Consistency Check
+
+The self-reference consistency check is an application-level audit step, not a field-level one. It is conducted after all field-level assessments are complete. The auditor scans the full application for every self-reference (every instance where the applicant names themselves, their organization, their project, or their prior work) and checks whether each self-reference resolves to one of the two declared identities: the legal entity or the display name.
+
+**Assessment Question:** Does every self-reference across all fields in the application resolve to the declared legal entity name or declared display name?
+
+| Outcome | Description |
+|---|---|
+| Pass | All self-references in the application resolve to one of the two declared identities. Variant forms (abbreviations, URL slugs, Twitter handles) that are clearly associated with the declared identities by cross-reference are acceptable. |
+| Fail | One or more self-references name an entity, project name, or identity that does not correspond to either declared identity and has not been explained in the prior entity relationship instrument. Common failure pattern: an applicant's progress section refers to work performed under "Project X" while the legal entity field names a different organization and the display name field names a third identity, with no prior entity relationship instrument filed. |
+
+**This check is always advisory at the field-specification stage** because inconsistency is an application-level pattern that cannot be detected from the field specification alone. It becomes blocking at the application review stage: a reviewer who finds unresolved self-reference inconsistencies must flag them before the gate assessment proceeds.
+
+**Connection to WALKRI Data Quality Standards:** Self-reference inconsistency is an integrity failure (data quality standard 3.2 in WALKRI Part V): evidence collection is not separated from the entity that benefits, because the applicant's identity itself is unclear. An application with unresolved self-reference inconsistencies cannot satisfy the integrity standard at any gate.
+
+---
+
+### Part 5 Summary Table
+
+| Instrument | Trigger | Key Specification Requirement | Status |
+|---|---|---|---|
+| Legal entity | Always required at entry gate | Explicit exclusion of non-legal identifiers; jurisdiction and registration ID required | Blocking |
+| Display name | Always required at entry gate | Evidence of prior public use required; exclusion of application-created names | Blocking (continuation programs); Advisory (inception-only) |
+| Prior entity relationship | Activated by citation of prior work in any field | Trigger condition linked to prior work citation, not self-disclosure; three elements per cited work | Blocking (trigger condition) |
+| Self-reference consistency | Application-level, post-field-audit | All self-references resolve to one of the two declared identities | Advisory at specification; Blocking at application review |
+
+---
+
+## Part 6: Gate Declaration Instrument Assessment Questions (Section 3.8)
+
+These assessment questions apply when evaluating field specifications that implement the five CROSS entry gate declaration instruments defined in WALKRI Section 3.8.
+
+### Revenue Architecture Instrument Assessment
+
+1. Does the field specification require the applicant to select from the four canonical types (grant-only, fee-for-service, commercial, hybrid) or does it accept free-text responses that cannot be consistently classified?
+
+2. For programs that configure the revenue architecture instrument: does the specification activate the additionality boundary sub-field for commercial and hybrid types, or does it allow commercial and hybrid applicants to omit the additionality boundary statement?
+
+3. Does the operational definition specify what evidence is required for commercial and hybrid declarations (named revenue sources, contracts, token contracts), or does it accept self-report without a verification path?
+
+4. Does the evidence form specify where a reviewer can independently check the declared architecture (on-chain contract explorers, public pricing pages, disclosed investor relations), or does the field rely solely on applicant attestation?
+
+5. Does the specification state what happens when a commercial or hybrid declaration is inconsistent with the applicant's concurrent funding disclosure, or does it leave that reconciliation undefined?
+
+### Disbursement Authority Instrument Assessment
+
+1. Does the field specification require one of the three canonical states (Individual, Governed, Delegated) or does it accept generic descriptions that cannot be consistently assessed?
+
+2. For Governed state: does the specification require the multisig or governance contract address to be named so it can be resolved on-chain, or does it accept a description of the governance mechanism without a verifiable address?
+
+3. For Delegated state: does the specification require both the receiving entity and the deploying entity to be named, or does it allow a single entity declaration that conceals the delegation?
+
+4. Does the evidence form specify where a reviewer can verify the declared authority (legal registration records, on-chain multisig resolution, organizational bylaws), or does the field rely solely on self-declaration?
+
+5. Does the specification state what is required when the disbursement authority address differs from the on-chain identity anchor declared in Field 6, or does it leave that reconciliation undefined?
+
+### Governance Resilience Instrument Assessment
+
+1. Does the field specification require the named primary contributor to be identified explicitly, or does it accept organizational descriptions that do not name an individual?
+
+2. Does the specification require an explanation for Single and Partial states (how would the project continue if the primary contributor were unavailable), or does it accept the state declaration without a continuity explanation?
+
+3. Is the evidence form specific enough that a reviewer can independently verify whether the named primary contributor is the sole author of the primary deliverable (GitHub contribution history, commit authorship), or does the specification rely on self-report?
+
+4. Does the specification note that Single governance resilience is a risk factor affecting the sustainability stance assessment, or does it present all three states as equivalent for evaluation purposes?
+
+### Obligation Fulfillment Record Instrument Assessment
+
+1. Does the field specification clearly state the activation conditions (returning applicants, prior-work-citing applicants), or does it leave activation ambiguous?
+
+2. Does the specification require a structured repeating unit per prior grant (granting program, grant period, committed deliverable, produced artifact with link, fulfillment state), or does it accept narrative that cannot be consistently assessed across the cohort?
+
+3. Does the evidence form require publicly accessible links from sources outside the applicant's control, or does it accept applicant-generated documentation as sufficient?
+
+4. Does the specification state what the evaluator does when the obligation fulfillment record does not mention a grant that the Attestation Corpus query reveals, or does it leave non-disclosure undiscussed?
+
+5. Does the specification cover the three fulfillment states (fulfilled, partially fulfilled, unfulfilled) and state that non-disclosure of an unfulfilled prior obligation is treated more seriously than disclosure of the same, or does it treat all non-disclosures as equivalent?
+
+### Development Stage Instrument Assessment
+
+1. Does the field specification use the five-stage classification (proof of concept through retroactive recognition) or does it allow free-text descriptions that cannot be consistently compared across the cohort?
+
+2. Does the specification require an explanation of why the declared stage is accurate, or does it accept the stage selection without justification?
+
+3. Does the specification require at least one piece of independently verifiable evidence consistent with the declared stage (GitHub activity for Stage 1-2, usage data for Stage 2-3, dependency records for Stage 4), or does it accept self-attestation?
+
+4. Does the specification include a consistency check between the declared stage and the obligation mode committed to (Stage 1-2 in a build-obligation round is consistent; Stage 4 in a build-obligation round requires explanation), or does it evaluate the stage declaration in isolation?
+
+5. Where the program configures a target stage range: does the specification state what happens when an applicant's declared stage falls outside the range (configuration mismatch requiring funder review, not automatic gate failure), or does it treat out-of-range declarations as automatic failures?
+
+---
+
+## Changelog
+
+| Version | Date | Summary |
+|---|---|---|
+| 0.1.2 | 2026-05-18 | Section 3.8 assessment questions added: five instrument rubrics covering revenue architecture, disbursement authority, governance resilience, obligation fulfillment record, and development stage. Five questions per instrument following the criterion specification element assessment structure. |
+| 0.1.1 | 2026-05-17 | Part 5 added: Identity Instrument Assessment. Assessment questions, pass/fail/override logic, and status for the legal entity instrument (5.1), display name instrument (5.2), prior entity relationship instrument (5.3), and self-reference consistency check (5.4). Summary table added. |
+| 0.1.0 | 2026-05-15 | Initial draft. Five criterion specification assessment questions with pass/fail/override logic. Five data quality standards assessment questions. Certification thresholds for Standard and Enhanced. Override documentation requirements. |
