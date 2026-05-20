@@ -179,6 +179,9 @@ Ten documents combining CROSS runbooks, WALKRI field specifications, and compati
 
 ## AI tools
 
+The standards website is at **[crosswalkri.github.io/CROSS](https://crosswalkri.github.io/CROSS/)** and **[crosswalkri.com](https://crosswalkri.com)**. It hosts documentation, examples, and AI-assisted tools built on these standards.
+
+
 The CROSS+WALKRI tools repository publishes an MCP server that exposes WALKRI and CROSS as callable tools in Claude Code, Cursor, and any MCP-compatible AI assistant. Install once; the tools are then available in any conversation without copy-pasting prompts or standard text.
 
 **Install:**
