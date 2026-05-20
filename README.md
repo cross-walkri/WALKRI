@@ -177,6 +177,42 @@ Ten documents combining CROSS runbooks, WALKRI field specifications, and compati
 
 ---
 
+## AI tools
+
+The CROSS+WALKRI tools repository publishes an MCP server that exposes WALKRI and CROSS as callable tools in Claude Code, Cursor, and any MCP-compatible AI assistant. Install once; the tools are then available in any conversation without copy-pasting prompts or standard text.
+
+**Install:**
+
+```bash
+git clone https://github.com/CrossWalkri/tools ~/cross-walkri
+```
+
+Then add to your MCP client configuration (Claude Code: `~/.claude/settings.json`; Cursor: `.cursor/mcp.json`):
+
+```json
+{
+  "mcpServers": {
+    "cross-walkri": {
+      "command": "node",
+      "args": ["/Users/yourname/cross-walkri/server.mjs"]
+    }
+  }
+}
+```
+
+Replace the path with wherever you cloned the repository. No build step required.
+
+**WALKRI tools available after install:**
+
+- `walkri_audit_field` - audits a field specification against all five WALKRI requirements; returns a binary verdict (instrument or label), per-criterion gap analysis, and a prompt template for revising the field with a language model
+- `walkri_generate_field` - generates a WALKRI-conformant field specification from a plain-language description of what the field should measure; returns a draft specification and a prompt template ready to pass to a language model
+
+The CROSS tools (`cross_check_gate`, `cross_configure_round`, `cross_classify_framework`, `cross_audit_round`) are also included. See the CROSS README for details.
+
+Source and full documentation: github.com/CrossWalkri/tools
+
+---
+
 ## License
 
 CC0: dedicated to the public domain under Creative Commons Zero v1.0 Universal. See `LICENSE` for the full dedication.
