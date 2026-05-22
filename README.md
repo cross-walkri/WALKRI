@@ -80,7 +80,9 @@ Field quality at the specification stage compounds upward through every layer of
 
 ![CROSS+WALKRI stack: any form builder or grants platform below, CROSS+WALKRI in the middle providing obligation architecture and field quality, Web3 and institutional standards above. One conformant round, both directions, no extra work.](assets/cross-walkri-compatibility-stack.png)
 
-WALKRI operates on JSON Schema, which underlies every major form builder. Fillout, Typeform, KoBoToolbox, REDCap, Charmverse, and any comparable tool already output JSON Schema. A WALKRI-conformant field specification produced in any of those tools is equally conformant as one produced in a dedicated audit instrument. Programs do not change their stack. They specify their fields correctly before the form goes live.
+Form builders are the communication layer. Their product is how questions look, how flows work, how data exports. Fillout, Typeform, KoBoToolbox, REDCap, and comparable tools are excellent at this. None of them ask what a field measures before publishing it, because that is a measurement design question, not a form design question. They are not built around it and cannot be retrofitted to require it without changing their foundation.
+
+WALKRI operates at the measurement design layer, which sits above the form builder and below the program's obligation architecture. It specifies what a field must contain before any form builder renders it. Because WALKRI operates on JSON Schema, which underlies every major form builder, a WALKRI-conformant field specification passes through any of those tools unchanged. Programs do not change their stack. They specify their fields correctly before the form goes live, and the form builder renders whatever is specified.
 
 Above the field level, a CROSS+WALKRI-conformant round produces data that is structurally comparable across programs and auditable after the fact. That position in the stack is why compatibility is the primary benefit: it does not require replacing what exists below, and it makes everything built above interoperable with everything else built on the same foundation.
 
@@ -178,9 +180,6 @@ Ten documents combining CROSS runbooks, WALKRI field specifications, and compati
 ---
 
 ## AI tools
-
-The standards website is at **[crosswalkri.github.io/CROSS](https://crosswalkri.github.io/CROSS/)** and **[crosswalkri.com](https://crosswalkri.com)**. It hosts documentation, examples, and AI-assisted tools built on these standards.
-
 
 The CROSS+WALKRI tools repository publishes an MCP server that exposes WALKRI and CROSS as callable tools in Claude Code, Cursor, and any MCP-compatible AI assistant. Install once; the tools are then available in any conversation without copy-pasting prompts or standard text.
 
