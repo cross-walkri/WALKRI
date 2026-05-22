@@ -4,7 +4,7 @@ version: 0.1.7
 date: 2026-05-18
 license: CC0
 status: Working draft. Initial specification.
-companion_standard: CROSS (github.com/cross-walkri/CROSS)
+companion_standard: CROSS (github.com/CrossWalkri/CROSS)
 brand: CROSS+WALKRI
 related_documents:
   - WALKRI-interface-specification-0_1_0.md
