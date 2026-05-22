@@ -4,7 +4,7 @@ version: 0.1.2
 date: 2026-05-18
 license: CC0
 status: Working draft. Companion to WALKRI-standard-0_1_0.md (v0.1.4).
-parent_standard: WALKRI v0.1.4 (github.com/cross-walkri/WALKRI)
+parent_standard: WALKRI v0.1.4 (github.com/CrossWalkri/WALKRI)
 companion_cross_document: CROSS-runbooks-0_1_0.md
 ---
 
